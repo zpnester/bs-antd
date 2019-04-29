@@ -22,5 +22,10 @@ let make = () => {
     <CommentExample />
     <DatePickerExample />
     <TimePickerExample />
+    <DividerExample />
+    <DrawerExample />
+    <DropdownExample />
+    <EmptyExample />
+    <FormExample />
   </>;
 }; 

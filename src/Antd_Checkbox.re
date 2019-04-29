@@ -27,7 +27,7 @@ external make: (
     ~disabled: bool=?,
     ~indeterminate: bool=?,
     ~onChange: changeEvent => unit=?,
-    // ~children: element=?,
+    ~children: element=?,
     unit
 ) => element = "antd/lib/checkbox";
 
@@ -51,6 +51,7 @@ external make: (
     ~value: array(string)=?,
     // actually array of ```string | number | boolean``` but should be safe
     ~onChange: array(string) => unit=?,
+    ~children: element=?,
     unit
 ) => element = "antd/lib/checkbox/Group";
 };
