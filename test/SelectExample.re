@@ -87,7 +87,7 @@ let make = () => {
       onClick={_ =>
         switch (ref1->React.Ref.current->Js.Nullable.toOption) {
         | None => ()
-        | Some(r) => r->Select.Ref.focus
+        | Some(r) => r->Select.focus
         }
       }>
       {string("focus")}
@@ -96,7 +96,7 @@ let make = () => {
       onClick={_ =>
         switch (ref1->React.Ref.current->Js.Nullable.toOption) {
         | None => ()
-        | Some(r) => r->Select.Ref.blur
+        | Some(r) => r->Select.blur
         }
       }>
       {string("blur")}

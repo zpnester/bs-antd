@@ -13,5 +13,14 @@ let make = () => {
     <BadgeExample />
     <BreadcrumbExample />
     <ButtonExample />
+    <CalendarExample />
+    <CardExample />
+    <CarouselExample />
+    <CascaderExample />
+    <CheckboxExample />
+    <CollapseExample />
+    <CommentExample />
+    <DatePickerExample />
+    <TimePickerExample />
   </>;
 }; 

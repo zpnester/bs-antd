@@ -36,7 +36,7 @@ let make = () => {
       onClick={_ =>
         switch (acRef->React.Ref.current->Js.Nullable.toOption) {
         | None => ()
-        | Some(ac) => ac->Ref.focus
+        | Some(ac) => ac->focus
         }
       }>
       {string("focus")}

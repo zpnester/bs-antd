@@ -17,7 +17,7 @@ let make = () => {
       onClick={e => Js.log("click")}
       shape=Shape.circle
       _type=Type.danger
-      loading=true
+      loading=Loading.bool(true)
       size=Size.large
     />
   </>;

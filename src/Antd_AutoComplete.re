@@ -30,8 +30,11 @@ open React;
 module Option = Antd_Select.Option;
 module OptGroup = Antd_Select.OptGroup;
 
-// not really equal, just same 2 methods
-module Ref = Antd_Select.Ref;
+type t;
+
+[@bs.send] external blur: t => unit = "blur";
+[@bs.send] external focus: t => unit = "focus";
+
 
 module Make = (M: {
     // type dataSourceItem;
@@ -39,7 +42,7 @@ module Make = (M: {
   [@react.component] [@bs.module]
   external make:
     (
-      ~ref: React.Ref.t(Js.Nullable.t(Ref.t))=?,
+      ~ref: Ref.t(Js.Nullable.t(t))=?,
       // ~prefixCls: string=?,
       ~className: string=?,
       ~allowClear: bool=?,

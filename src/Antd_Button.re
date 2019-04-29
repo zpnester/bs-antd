@@ -24,6 +24,15 @@ module Type = {
     [@bs.inline] let danger = "danger";
 };
 
+module Loading = {
+    type t;
+    external bool: bool => t = "%identity";
+    external object_: {
+        .
+        "delay": float
+    } => t = "%identity";
+}
+
 [@react.component] [@bs.module]
 external make: (
     ~disabled: bool=?,
@@ -31,7 +40,7 @@ external make: (
     ~href: string=?,
     ~htmlType: string=?,
     ~icon: Antd_Icon.Type.t=?,
-    ~loading: bool=?, // delay skipped
+    ~loading: Loading.t=?, 
     ~shape: Shape.t=?,
     ~size: Size.t=?,
     ~target: string=?,
