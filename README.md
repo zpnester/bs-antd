@@ -2,6 +2,8 @@
 
 Ant Design bindings for BuckleScript
 
+Work In Progress
+
 ## Install
 
 ```
