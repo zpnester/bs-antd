@@ -121,7 +121,7 @@ let make = () => {
       }}
       dropdownRender={(menu,props) => {
           expectElement(menu);
-          Js.log3("dropdownRender", menu, props);
+          // Js.log3("dropdownRender", menu, props);
           menu
       }}
       onChange={(value, option) => {

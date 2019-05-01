@@ -4,75 +4,45 @@ open Form;
 open React
 
 
- let normalLoginForm = props => {
-     open Decorated;
-      let form = props##form;
-      let getFieldDecorator = form->getFieldDecorator;
-    let usernameOpts =  GetFieldDecoratorOptions.make(
-       ~rules= [| 
-        //    ValidationRule.make(~required=true, ~message=string("Please input your username!"), ())
-        |]
-    , ());
-    let usernameInput = <Input placeholder="Username" />;
+[@react.component]
+let make = () => {
+  let (username, setUsername) = useState(() => "");
+  let (password, setPassword) = useState(() => "");
+  let (sub, setSub) = useState(() => false);
 
-    let passwordOpts = GetFieldDecoratorOptions.make(~rules=[|
-      ValidationRule.make(~required=true, ~message=string("Please input your Password!"), ())
-    |], ());
+   let (usernameHelp, usernameFeedback, usernameStatus) = if (sub && username->Js.String.length <= 3) {
+     (Some(string("Username is too short")), true, `error)
+   } else {
+      (None, false, `success)
+   };
 
-    // let usernameInput = <Input 
-    // prefix={<Icon type=Icon.Type.lock style={ReactDOMRe.Style.make(~color="rgba(0,0,0,.25)", ())}/>}
-    //  type="password" placeholder="Password" />;
-    let passwordInput = <Input placeholder="Password" />;
+  <>
+  <h1 id="form-example">{string("Form Example")}</h1>
+      <Form onSubmit={e => {
+        e->ReactEvent.Form.preventDefault;
+        setSub(_ => true);
+        Js.log("submit")
+      }}>
+        <Form.Item hasFeedback=usernameFeedback 
+        help=?usernameHelp 
+        validateStatus=usernameStatus>
+           <Input value=username onChange={e => {
+            let value = e->ReactEvent.Form.target##value;
 
-
-    let rememberOpts = GetFieldDecoratorOptions.make(
-        ~valuePropName="checked",
-        ~initialValue=true,
-        ()
-    );
-    let rememberCheck = <Checkbox>{string("Remember me")}</Checkbox>;
-
-    <Form onSubmit={e => {
-        Js.log("submit");
-       e->ReactEvent.Form.preventDefault;
-
-       form->validateFields1__((es, vs) => {
-          Js.log3("validateFields", es, vs);
-       });
-    }} 
-
-    >
-        <Form.Item>
-           {getFieldDecorator("userName", usernameOpts, usernameInput)}
+             setUsername(_ =>  value); 
+           }}/>
         </Form.Item>
 
        <Form.Item>
-          {getFieldDecorator( "password", passwordOpts, passwordInput)}
+          <Input value=password _type="password" onChange={e => {
+            let value = e->ReactEvent.Form.target##value;
+             setPassword(_ =>  value); 
+           }}/>
        </Form.Item>
-         <Form.Item>
-           {getFieldDecorator("remember", rememberOpts, rememberCheck)}
-        </Form.Item>
 
 
-      <button type_="submit">{string("Submit")}</button>
+      <Button htmlType="submit">{string("Submit")}</Button>
     </Form>
-  }; 
-
-module WrappedNormalLoginForm   = {
-  
-
-  let makeProps = Form.makeProps;
-  let make =Form.create(CreateOptions.make(), normalLoginForm);
-
+    </>
 };
 
-
-[@react.component]
-let make = () => {
-  
-  <>
-    <h1 id="form-example">{string("Form Example")}</h1>
-    // <Form />
-    <WrappedNormalLoginForm  />
-  </>
-};

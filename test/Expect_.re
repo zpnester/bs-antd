@@ -4,10 +4,18 @@
 [@bs.val] [@bs.module "./expect"] external isElement: 'a => bool = "isElement"; 
 [@bs.val] [@bs.module "./expect"] external isInt: 'a => bool = "isInt"; 
 [@bs.val] [@bs.module "./expect"] external isNull: 'a => bool = "isNull"; 
+[@bs.val] [@bs.module "./expect"] external isUndefined: 'a => bool = "isUndefined"; 
 [@bs.val] [@bs.module "./expect"] external hasLen: ('a, int) => bool = "hasLen"; 
 
 [@bs.module "moment"] external isMoment: 'a => bool = "isMoment";
 
+let isNumber = (x: 'a) => {
+  x->Js.typeof == "number";
+};
+
+let isString = (x: 'a) => {
+  x->Js.typeof == "string";
+};
 
 let expectMoment = (m: MomentRe.Moment.t) => {
   expectToEqual(m->isMoment, true);
@@ -17,6 +25,17 @@ let expectMomentOption = (m: option(MomentRe.Moment.t)) => {
   switch (m) {
     | None => ()
     | Some(m) => expectMoment(m);
+  }
+};
+
+let expectFloat = (f: float) => {
+  expectToEqual(f->Js.typeof, "number");
+};
+
+let expectMaybeFloat = (f: option(float)) => {
+  switch (f) {
+    | None => ()
+    | Some(f) => expectFloat(f)
   }
 };
 

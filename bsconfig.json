@@ -26,5 +26,5 @@
   "reason": {
     "react-jsx": 3
   },
-  "bsc-flags": ["-open Belt"]
+  "bsc-flags": ["-open Belt", "-bs-g"]
 }

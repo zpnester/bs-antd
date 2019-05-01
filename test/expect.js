@@ -20,6 +20,11 @@ function isNull(x) {
     return x === null;
 }
 
+function isUndefined(x) {
+    return x === undefined;
+}
+
+
 function hasLen(x, len) {
     return x.length === len;
 }
@@ -31,3 +36,5 @@ module.exports.isElement = isElement;
 module.exports.isInt = isInt;
 module.exports.isNull = isNull;
 module.exports.hasLen = hasLen;
+module.exports.isUndefined = isUndefined;
+

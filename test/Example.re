@@ -27,5 +27,18 @@ let make = () => {
     <DropdownExample />
     <EmptyExample />
     <FormExample />
+    <InputExample />
+    <GridExample />
+    <InputNumberExample />
+    <LayoutExample />
+    <MenuExample />
+    <MessageExample />
+    <ModalExample />
+    <NotificationExample />
+    <PageHeaderExample />
+    <PaginationExample />
+    <PopconfirmExample />
+    <PopoverExample />
+    <ProgressExample />
   </>;
 }; 
