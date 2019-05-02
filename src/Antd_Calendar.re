@@ -1,22 +1,27 @@
-
 open React;
 open MomentRe;
 
 module Mode = {
-    type t = string;
-    [@bs.inline] let month = "month";
-    [@bs.inline] let year = "year";
+  type t = string;
+  [@bs.inline]
+  let month = "month";
+  [@bs.inline]
+  let year = "year";
 };
 
 [@react.component] [@bs.module]
-external make: (
+external make:
+  (
     ~prefixCls: string=?,
     ~className: string=?,
     // ~value: Js.null(Moment.t)=?,
     ~value: Moment.t=?,
     // ~defaultValue: Js.null(Moment.t)=?,
     ~defaultValue: Moment.t=?,
-    ~mode: Mode.t=?,
+    ~mode: [@bs.string] [
+        | `month
+        | `year
+    ]=?,
     ~fullscreen: bool=?,
     ~dateCellRender: Moment.t => element=?,
     ~monthCellRender: Moment.t => element=?,
@@ -24,10 +29,12 @@ external make: (
     ~monthFullCellRender: Moment.t => element=?,
     ~locale: 'locale=?, // TODO
     ~style: ReactDOMRe.Style.t=?,
-    ~onPanelChange: (Moment.t, Mode.t)=>unit=?,
+    ~onPanelChange: (Moment.t, Mode.t) => unit=?,
     ~onSelect: Moment.t => unit=?,
     ~onChange: Moment.t => unit=?,
     ~disabledDate: Moment.t => bool=?,
     ~validRange: (Moment.t, Moment.t)=?,
     unit
-) => element = "antd/lib/calendar";
+  ) =>
+  element =
+  "antd/lib/calendar";

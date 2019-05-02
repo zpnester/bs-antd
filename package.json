@@ -20,7 +20,8 @@
     "next:dev": "next",
     "next:bsbdev": "concurrently --raw npm:watch next",
     "next:build": "next build",
-    "next:start": "next start"
+    "next:start": "next start",
+    "next:export": "next export"
   },
   "keywords": [
     "BuckleScript",

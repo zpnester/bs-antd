@@ -45,8 +45,8 @@ let make = () => {
     content |> Js.Array.push(<br key={"b" ++ i->string_of_int} />) |> ignore;
   };
 
-  <div >
-    <h1 id="affix-example">{string("Affix Example")}</h1>
+  <div>
+    <h1 id="affix-example"> {string("Affix Example")} </h1>
     // ref=affixRef
     <Affix
       offsetTop=150.0
@@ -57,18 +57,19 @@ let make = () => {
         Js.log2("affix changed", a);
         expectToEqual(a->Js.typeof, "boolean");
       }}>
-       <WithHooks /> </Affix>
-      // <button
-      //   onClick={_ => {
-      //     // Js.log(affixRef->Ref.current);
-      //     // expectToEqual(
-      //     //   affixRef->Ref.current->Js.Nullable.toOption->Option.getExn##props
-      //     //   ->Js.typeof,
-      //     //   "object",
-      //     // );
-      //   }}>
-      //   {string("affix")}
-      // </button>
-    // {array(content)}
+      <WithHooks />
+    </Affix>
   </div>;
+  // <button
+  //   onClick={_ => {
+  //     // Js.log(affixRef->Ref.current);
+  //     // expectToEqual(
+  //     //   affixRef->Ref.current->Js.Nullable.toOption->Option.getExn##props
+  //     //   ->Js.typeof,
+  //     //   "object",
+  //     // );
+  //   }}>
+  //   {string("affix")}
+  // </button>
+  // {array(content)}
 };

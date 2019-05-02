@@ -1,19 +1,12 @@
 open React;
 open Belt;
 
-
-
 [@react.component] [@bs.module]
+// ~children: element=?, // no need for children
+// ~ref: Ref.t(Js.Nullable.t(Js.t({..})))=?,
 external make:
-  // ~children: element=?, // no need for children
-  // ~ref: Ref.t(Js.Nullable.t(Js.t({..})))=?,
   (
-    ~_type: [@bs.string] [
-      | `success
-      | `info
-      | `warning
-      | `error
-    ]=?,
+    ~_type: [@bs.string] [ | `success | `info | `warning | `error]=?,
     ~closable: bool=?,
     ~closeText: element=?,
     ~message: element=?,

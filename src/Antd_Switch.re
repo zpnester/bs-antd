@@ -1,5 +1,3 @@
-
-
 open React;
 
 type t;
@@ -8,18 +6,16 @@ type t;
 [@bs.send] external focus: t => unit = "focus";
 
 [@react.component] [@bs.module]
-external make: (
-      ~ref: Ref.t(Js.nullable(t))=?,
+external make:
+  (
+    ~ref: Ref.t(Js.nullable(t))=?,
     ~autoFocus: bool=?,
     ~checked: bool=?,
     ~checkedChildren: element=?,
     ~defaultChecked: bool=?,
     ~disabled: bool=?,
     ~loading: bool=?,
-    ~size: [@bs.string] [
-        | `small
-        | `default
-    ]=?,
+    ~size: [@bs.string] [ | `small | `default]=?,
     ~unCheckedChildren: element=?,
     ~onChange: (bool, ReactEvent.Mouse.t) => unit=?, // react event, not dom
     ~onClick: (bool, ReactEvent.Mouse.t) => unit=?, // react event, not dom
@@ -27,4 +23,6 @@ external make: (
     ~prefixCls: string=?,
     ~style: ReactDOMRe.Style.t=?,
     unit
-) => element = "antd/lib/switch"
+  ) =>
+  element =
+  "antd/lib/switch";

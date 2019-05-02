@@ -76,8 +76,8 @@ let make = () => {
     <Cascader
       options
       size=Size.large
-      popupPlacement=PopupPlacement.topRight
-      expandTrigger=ExpandTrigger.hover
+      popupPlacement=`topRight
+      expandTrigger=`hover
       displayRender={(label, opts) => {
         Js.log3("displayRender", label, opts);
         expectStringArray(label);

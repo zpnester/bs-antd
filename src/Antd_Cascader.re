@@ -14,25 +14,25 @@ type cascaderOption = {
   "children": array(cascaderOption),
 };
 
-module ExpandTrigger = {
-  type t = string;
-  [@bs.inline]
-  let click = "click";
-  [@bs.inline]
-  let hover = "hover";
-};
+// module ExpandTrigger = {
+//   type t = string;
+//   [@bs.inline]
+//   let click = "click";
+//   [@bs.inline]
+//   let hover = "hover";
+// };
 
-module PopupPlacement = {
-  type t = string;
-  [@bs.inline]
-  let bottomLeft = "bottomLeft";
-  [@bs.inline]
-  let bottomRight = "bottomRight";
-  [@bs.inline]
-  let topLeft = "topLeft";
-  [@bs.inline]
-  let topRight = "topRight";
-};
+// module PopupPlacement = {
+//   type t = string;
+//   [@bs.inline]
+//   let bottomLeft = "bottomLeft";
+//   [@bs.inline]
+//   let bottomRight = "bottomRight";
+//   [@bs.inline]
+//   let topLeft = "topLeft";
+//   [@bs.inline]
+//   let topRight = "topRight";
+// };
 
 module ShowSearch = {
   type t;
@@ -89,7 +89,10 @@ external make:
     ~defaultValue: array(string)=?,
     ~disabled: bool=?,
     ~displayRender: (array(string), array(cascaderOption)) => element=?,
-    ~expandTrigger: ExpandTrigger.t=?,
+    ~expandTrigger: [@bs.string] [
+      | `click
+      | `hover
+    ]=?,
     ~fieldNames: {
                    .
                    "value": string,
@@ -103,7 +106,12 @@ external make:
     ~options: array(cascaderOption)=?,
     ~placeholder: string=?,
     ~popupClassName: string=?,
-    ~popupPlacement: PopupPlacement.t=?,
+    ~popupPlacement: [@bs.string] [
+      | `bottomLeft
+      | `bottomRight
+      | `topLeft
+      | `topRight
+    ]=?,
     ~popupVisible: bool=?,
     ~showSearch: ShowSearch.t=?,
     ~size: Size.t=?,

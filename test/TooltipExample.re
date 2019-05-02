@@ -14,4 +14,4 @@ let make = () => {
             <span>{string("Tooltip will show on mouse enter.")}</span>
         </Tooltip>
     </>
-};
+}; 
