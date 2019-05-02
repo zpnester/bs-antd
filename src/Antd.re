@@ -52,3 +52,7 @@ module Tag = Antd_Tag;
 module Timeline = Antd_Timeline;
 module Tooltip = Antd_Tooltip;
 module Transfer = Antd_Transfer;
+module Tree = Antd_Tree;
+module TreeSelect = Antd_TreeSelect;
+module Typography = Antd_Typography;
+module Upload = Antd_Upload;

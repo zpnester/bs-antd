@@ -1,3 +1,5 @@
+// fork of https://github.com/thangngoc89/bs-ant-design/blob/master/src/Antd_IconName.re
+
 type t = string;
 
 [@bs.inline]

@@ -53,6 +53,10 @@ let make = () => {
     <TimelineExample />
     <TooltipExample />
     <TransferExample />
+    <TreeExample />
+    <TreeSelectExample />
+    <TypographyExample />
+    <UploadExample />
   </>;
 
 }; 
