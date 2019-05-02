@@ -1,27 +1,19 @@
 open React;
 open Belt;
 
-type props;
 
-module Type = {
-  type t = string;
-
-  [@bs.inline]
-  let success = "success";
-  [@bs.inline]
-  let info = "info";
-  [@bs.inline]
-  let warning = "warning";
-  [@bs.inline]
-  let error = "error";
-};
 
 [@react.component] [@bs.module]
 external make:
   // ~children: element=?, // no need for children
   // ~ref: Ref.t(Js.Nullable.t(Js.t({..})))=?,
   (
-    ~_type: Type.t=?,
+    ~_type: [@bs.string] [
+      | `success
+      | `info
+      | `warning
+      | `error
+    ]=?,
     ~closable: bool=?,
     ~closeText: element=?,
     ~message: element=?,

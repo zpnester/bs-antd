@@ -40,5 +40,19 @@ let make = () => {
     <PopconfirmExample />
     <PopoverExample />
     <ProgressExample />
+    <RadioExample />
+    <RateExample />
+    <SkeletonExample />
+    <SliderExample />
+    <SpinExample />
+    <StatisticExample />
+    <StepsExample />
+    <SwitchExample />
+    <TableExample />
+    <TagExample />
+    <TimelineExample />
+    <TooltipExample />
+    <TransferExample />
   </>;
+
 }; 

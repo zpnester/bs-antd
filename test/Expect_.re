@@ -21,6 +21,15 @@ let expectMoment = (m: MomentRe.Moment.t) => {
   expectToEqual(m->isMoment, true);
 };
 
+let expectNumber = (f: float) => {
+  expectToEqual(f->Js.typeof, "number");
+};
+
+
+let expectBool = (b: bool) => {
+  expectToEqual(b->Js.typeof, "boolean");
+};
+
 let expectMomentOption = (m: option(MomentRe.Moment.t)) => {
   switch (m) {
     | None => ()
@@ -124,6 +133,14 @@ let expectStringTuple2 = (t: (string, string)) => {
   expectString(fst(t));
   expectString(snd(t));
 };
+
+let expectNumberTuple2 = (t: (float, float)) => {
+  expectArrayAny(t);
+  expectToEqual(t->hasLen(2), true)
+  expectNumber(fst(t));
+  expectNumber(snd(t));
+};
+
 
 let expectMaybeString = (s: option(string)) => {
     switch (s) {
