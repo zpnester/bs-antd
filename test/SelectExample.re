@@ -74,10 +74,13 @@ let make = () => {
   let value1Str =
     value1->Option.map(x => x##label)->Option.getWithDefault(null);
 
-  <div>
+  <>
+    <h1 id="select-example">{string("Select Example")}</h1>
     value1Str
     <br />
     <Select.Default style 
+    mode=Select.Mode.default
+    labelInValue=Select.LabelInValue.true_
     showSearch=false
     value=value1 onChange={(v, _) => setValue1(_ => v)}>
       <Select.Option value="f"> {string("first")} </Select.Option>
@@ -103,10 +106,12 @@ let make = () => {
     </button>
     <Select.Default
     // disabled=true
+      mode=Select.Mode.default
+    labelInValue=Select.LabelInValue.true_
       ref=ref1
       style
       placeholder={string("Please select")}
-      defaultValue={"key": "2", "label": null}
+      defaultValue=Some({"key": "2", "label": null})
       onDropdownVisibleChange={v => {
           Js.log2("onDropdownVisibleChange", v);
           expectToEqual(v->Js.typeof, "boolean");
@@ -115,7 +120,7 @@ let make = () => {
       allowClear=true
       filterOption={(s, opt) => {
           Js.log3("filterOption", s, opt);
-          expectElement(opt);
+          expectReactElement(opt);
           expectString(s);
           true;
       }}
@@ -164,9 +169,11 @@ let make = () => {
        loading=true
       maxTagCount=1
       clearIcon={string("XxX")}
+      mode=Select.Mode.multiple
+    labelInValue=Select.LabelInValue.true_
        filterOption={(s, opt) => {
           Js.log3("filterOption", s, opt);
-          expectElement(opt);
+          expectReactElement(opt);
           expectString(s);
           false;
       }}
@@ -211,6 +218,8 @@ let make = () => {
       firstActiveValue="2"
       allowClear=true
       maxTagCount=2
+      mode=Select.Mode.tags
+    labelInValue=Select.LabelInValue.true_
       autoClearSearchValue=false
       maxTagPlaceholder={omitted => {
         Js.log2("omitted", omitted);
@@ -255,5 +264,5 @@ let make = () => {
       </Select.Option>
       <Select.Option value="5"> {string("Option 6")} </Select.Option>
     </Select.Tags>
-  </div>;
+  </>;
 };

@@ -1,173 +1,180 @@
 open React;
+open Antd__;
 
 type t;
 
 [@bs.send] external blur: t => unit = "blur";
 [@bs.send] external focus: t => unit = "focus";
 
+
 module Option = {
-  [@react.component] [@bs.module "antd/lib/select"]
-  external make:
-    (
-      ~disabled: bool=?,
-      ~key: string=?,
-      ~value: string=?,
-      ~className: string=?,
-      ~title: string=?,
-      ~children: React.element,
-      unit
-    ) =>
-    React.element =
-    "Option";
+  [@bs.deriving abstract]
+  type makeProps = {
+    [@bs.optional]
+    disabled: bool,
+    [@bs.optional]
+    key: string,
+    [@bs.optional]
+    value: string,
+    [@bs.optional]
+    className: string,
+    [@bs.optional]
+    title: string,
+    [@bs.optional]
+    children: React.element
+  };
+
+  [@bs.module "antd/lib/select"] external make: component(makeProps) = "Option";
+
 };
+
+
+module Mode = {
+  type default;
+  type multiple;
+  type tags;
+
+  let default: default = [%raw {| ("default") |}];
+  let multiple: multiple = [%raw {| ("multiple") |}];
+  let tags: tags = [%raw {| ("tags") |}];
+};
+
+module LabelInValue = {
+  type true_;
+
+  let true_: true_ = [%raw {| (true) |}];
+};
+
+////////////////////
 
 module Make =
        (
          M: {
            type selectValue;
-           type selectValueNotNull;
            type selectValueSingle;
            type optionElement;
-         },
+           type optionElementSingle;
+           type labelInValue;
+           type mode;
+         }
        ) => {
-  [@react.component] [@bs.module]
+
+[@react.component] [@bs.module]
   external make:
     (
-      ~ref: Ref.t(Js.nullable(t))=?,
-      ~allowClear: bool=?,
-      ~autoClearSearchValue: bool=?,
-      ~autoFocus: bool=?,
-      ~defaultActiveFirstOption: bool=?,
-      ~defaultValue: M.selectValueNotNull=?,
-      ~disabled: bool=?,
-      ~dropdownClassName: string=?,
-      ~dropdownMatchSelectWidth: bool=?,
-      ~dropdownRender: (element, Js.t({..})) => element=?,
-      ~dropdownStyle: ReactDOMRe.Style.t=?,
-      ~filterOption: (string, element) => bool=?, // TODO exampe not working
-      ~firstActiveValue: string=?, // doc says string[], fails at runtime
-      ~getPopupContainer: Dom.element => Dom.htmlElement=?,
-      ~labelInValue: bool=?,
-      ~maxTagCount: int=?,
-      ~maxTagPlaceholder: M.selectValue => element=?, // only for multiple/tags
-      ~mode: string=?,
+      // ***** BEGIN ABSTRACT SELECT *****
+      ~prefixCls: string=?,
+      ~className: string=?,
+      ~showAction: array(string)=?, // single string skipped
+      ~size: [@bs.string] [
+          | `default
+          | `large
+          | `small
+      ]=?, 
       ~notFoundContent: Js.null(element)=?,
-      ~optionFilterProp: string=?, // TODO test, probably remove
-      ~optionLabelProp: string=?, // TODO test
-      ~placeholder: element=?,
-      ~showArrow: bool=?,
+      ~transitionName: string=?,
+      ~choiceTransitionName: string=?,
       ~showSearch: bool=?,
-      ~size: string=?, // TODO
+      ~allowClear: bool=?,
+      ~disabled: bool=?,
+      ~showArrow: bool=?,
+      ~style: ReactDOMRe.Style.t=?,
+      ~tabIndex: int=?,
+      ~placeholder: element=?,
+      ~defaultActiveFirstOption: bool=?,
+      ~dropdownClassName: string=?,
+      ~dropdownStyle: ReactDOMRe.Style.t=?,
+      ~dropdownMenuStyle: ReactDOMRe.Style.t=?,
+      ~dropdownMatchSelectWidth: bool=?,
+      ~onSearch: string => unit=?, // return any skipped
+      ~getPopupContainer: Dom.element => Dom.htmlElement=?, // TODO test input null
+      ~filterOption: (string, reactElement(Option.makeProps)) => bool=?, // TODO test
+      ~id: string=?,
+      ~defaultOpen: bool=?,
+      ~_open: bool=?,
+      ~onDropdownVisibleChange: bool => unit=?,
+      ~autoClearSearchValue: bool=?,
+      ~dropdownRender: (element, Js.t({..})) => element=?, // select props as obj
+      ~loading: bool=?,
+      // ***** END ABSTRACT SELECT *****
+      // ***** BEGIN SELECT *****
+      ~value: M.selectValue=?,
+      ~defaultValue: M.selectValue=?,
+      ~mode: M.mode, // required
+      ~optionLabelProp: string=?, // TODO test
+      ~firstActiveValue: string=?, // doc says string[], fails at runtime
+      ~onChange: (M.selectValue, M.optionElement) => unit=?,
+      ~onSelect: (M.selectValueSingle, M.optionElementSingle) => unit=?, // TODO tst
+      ~onDeselect: M.selectValueSingle => unit=?, // return any skipped
+      ~onBlur: M.selectValue => unit=?,
+      ~onFocus: unit => unit=?,
+      ~onPopupScroll: ReactEvent.Synthetic.t => unit=?,
+      ~onInputKeyDown: ReactEvent.Keyboard.t => unit=?,
+      ~onMouseEnter: ReactEvent.Mouse.t => unit=?,
+      ~onMouseLeave: ReactEvent.Mouse.t => unit=?,
+      ~maxTagCount: int=?, // only for multiple/tags
+      ~maxTagPlaceholder: M.selectValue => element=?, // only for multiple/tags
+      ~optionFilterProp: string=?, // TODO test, probably remove
+      ~labelInValue: M.labelInValue, // required
+      ~tokenSeparators: array(string)=?,
+      ~getInputElement: unit => element=?,
+      ~autoFocus: bool=?,
       ~suffixIcon: element=?,
       ~removeIcon: element=?,
       ~clearIcon: element=?,
       ~menuItemSelectedIcon: element=?,
-      ~tokenSeparators: array(string)=?,
-      ~value: M.selectValue=?,
-      ~onBlur: M.selectValue => unit=?,
-      ~onChange: (M.selectValue, M.optionElement) => unit=?,
-      ~onSelect: (M.selectValueSingle, element) => unit=?,
-      ~onDeselect: M.selectValueSingle => unit=?,
-      ~onFocus: unit => unit=?,
-      ~onInputKeyDown: ReactEvent.Keyboard.t => unit=?,
-      ~onMouseEnter: ReactEvent.Mouse.t => unit=?,
-      ~onMouseLeave: ReactEvent.Mouse.t => unit=?,
-      ~onPopupScroll: ReactEvent.Synthetic.t => unit=?,
-      ~onSearch: string => unit=?,
-      ~defaultOpen: bool=?,
-      ~_open: bool=?,
-      ~onDropdownVisibleChange: bool => unit=?,
-      ~loading: bool=?,
+      // ***** END SELECT *****
       ~children: element=?,
-      ~style: ReactDOMRe.Style.t=?,
+      ~ref: Ref.t(Js.nullable(t))=?,
       unit
     ) =>
     element =
     "antd/lib/select";
+
+};
+////////////////////
+
+
+type labeledValue = {
+  .
+  "key": string,
+  "label": element,
 };
 
 module Default = {
   include Make({
-    type selectValue =
-      option({
-        .
-        "key": string,
-        "label": element,
-      });
+    type selectValue = option(labeledValue);
+    type selectValueSingle = labeledValue;
     type optionElement = option(element);
-    type selectValueNotNull = {
-      .
-      "key": string,
-      "label": element,
-    };
-    type selectValueSingle = {
-      .
-      "key": string,
-      "label": element,
-    };
+    type optionElementSingle = element;
+    type mode = Mode.default;
+    type labelInValue = LabelInValue.true_;
   });
-  let makeProps =
-    makeProps(
-      ~mode="default",
-      ~labelInValue=true,
-      ~maxTagPlaceholder=?None,
-      ~maxTagCount=?None,
-      ~onDeselect=?None,
-      ~tokenSeparators=?None,
-      ~autoClearSearchValue=?None,
-    );
+  
 };
 
 module Multiple = {
   include Make({
-    type selectValue =
-      array({
-        .
-        "key": string,
-        "label": element,
-      });
-    type selectValueSingle = {
-      .
-      "key": string,
-      "label": element,
-    };
+    type selectValue = array(labeledValue);
+    type selectValueSingle = labeledValue;
     type optionElement = array(element);
-    type selectValueNotNull =
-      array({
-        .
-        "key": string,
-        "label": element,
-      });
+    type optionElementSingle = element;
+    type mode = Mode.multiple;
+    type labelInValue = LabelInValue.true_;
   });
 
-  let makeProps =
-    makeProps(~mode="multiple", ~labelInValue=true, ~showSearch=?None);
 };
 
 module Tags = {
   include Make({
-    type selectValue =
-      array({
-        .
-        "key": string,
-        "label": element,
-      });
-    type selectValueSingle = {
-      .
-      "key": string,
-      "label": element,
-    };
+    type selectValue = array(labeledValue);
+    type selectValueSingle = labeledValue;
     type optionElement = array(element);
-    type selectValueNotNull =
-      array({
-        .
-        "key": string,
-        "label": element,
-      });
+    type optionElementSingle = element;
+    type mode = Mode.tags;
+    type labelInValue = LabelInValue.true_;
   });
 
-  let makeProps =
-    makeProps(~mode="tags", ~labelInValue=true, ~showSearch=?None);
 };
 
 module OptGroup = {
@@ -176,31 +183,3 @@ module OptGroup = {
     (~label: element=?, ~key: string=?, ~children: element=?, unit) => element =
     "OptGroup";
 };
-
-// module Value = {
-//   type t;
-//   type labeledValue = {
-//     .
-//     "key": string,
-//     "label": element,
-//   };
-
-//   external makeString: string => t = "%identity";
-//   external asStringUnsafe: t => t = "%identity";
-
-//   external makeStrings: array(string) => t = "%identity";
-//   external asStringsUnsafe: t => array(string) = "%identity";
-
-//   external makeNumber: float => t = "%identity";
-//   external asNumberUnsafe: t => float = "%identity";
-
-//   external makeNumbers: array(float) => t = "%identity";
-//   external asNumbersUnsafe: t => array(float) = "%identity";
-
-//   external makeLabeledValue: labeledValue => t = "%identity";
-
-//   external asLabeledValueUnsafe: t => labeledValue = "%identity";
-
-//   external makeLabeledValues: array(labeledValue) => t = "%identity";
-//   external asLabeledValuesUnsafe: t => array(labeledValue) = "%identity";
-// };

@@ -1,8 +1,8 @@
 [@bs.val] [@bs.module "./expect"] external expectToEqual: ('a, 'a) => unit = "expectToEqual";
 [@bs.val] [@bs.module "./expect"] external expectToEqualAny: ('a, 'b) => unit = "expectToEqual"; 
 [@bs.val] [@bs.module "./expect"] external isArray: 'a => bool = "isArray"; 
-[@bs.val] [@bs.module "./expect"] external isElement: 'a => bool = "isElement"; 
 [@bs.val] [@bs.module "./expect"] external isInt: 'a => bool = "isInt"; 
+[@bs.val] [@bs.module "./expect"] external isElement: React.element => bool = "isElement"; 
 [@bs.val] [@bs.module "./expect"] external isNull: 'a => bool = "isNull"; 
 [@bs.val] [@bs.module "./expect"] external isUndefined: 'a => bool = "isUndefined"; 
 [@bs.val] [@bs.module "./expect"] external hasLen: ('a, int) => bool = "hasLen"; 
@@ -153,10 +153,22 @@ let expectElement = (el: React.element) => {
   expectToEqual(el->isElement, true);
 };
 
+open Antd__;
+
+let expectReactElement = (el: reactElement('a)) => {
+  expectToEqual(el##props->Js.typeof, "object");
+};
+
 let expectElementAny = (el: 'a) => {
   expectToEqual(el->isElement, true);
 };
 
+let expectMaybeReactElement = (el: option(reactElement('a))) => {
+  switch (el) {
+  | None => () // ok
+  | Some(el) => expectReactElement(el)
+  };
+};
 
 let expectMaybeElement = (el: option(React.element)) => {
   switch (el) {

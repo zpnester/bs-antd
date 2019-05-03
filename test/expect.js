@@ -9,7 +9,14 @@ function isArray(arr) {
 }
 
 function isElement(x) {
-    return typeof(x) == "string" || typeof(x) == "object";
+    if (typeof(x) == "string") {
+        return true;
+    }
+    if (typeof(x) == "object" && typeof(x.props) == "object") {
+        return true;
+    }
+        return false;
+    
 }
 
 function isInt(x) {

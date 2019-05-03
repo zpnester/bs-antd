@@ -3,14 +3,13 @@
 [@react.component]
 let make = () => {
   <> 
-    <div string="" crossorigin=true/>
     <AnchorExample />
+    <SelectExample />
     <BackTopExample />  
     <AlertExample />
     <IconExample />
     <AffixExample /> 
     <AutoCompleteExample />
-    <SelectExample />
     <AvatarExample />
     <BadgeExample />
     <BreadcrumbExample />

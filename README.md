@@ -12,6 +12,16 @@ npm i bs-moment
 npm i git+https://git@github.com/zpnester/bs-antd.git
 ```
 
+bsconfig.json
+```json
+"bs-dev-dependencies": [
+  "reason-react",
+  "bs-moment",
+  "@zpnester/bs-antd"
+]
+```
+
+
 ## Notes
 Input, Input.TextArea, InputSearch includes `ReactDOMRe.props` properties excluding SVG
 
@@ -21,12 +31,4 @@ Separate modules are used for string enums when `[@bs.deriving abstract]` is use
 
 `[@bs.deriving abstract]` is required to rename properties when DOM properties are copy pasted
 
-bsconfig.json
-```json
-"bs-dev-dependencies": [
-  "reason-react",
-  "bs-moment",
-  "@zpnester/bs-antd"
-]
-```
 
