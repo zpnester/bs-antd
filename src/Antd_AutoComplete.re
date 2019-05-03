@@ -1,31 +1,11 @@
 open React;
 
-// export interface DataSourceItemObject {
-//     value: string;
-//     text: string;
-// }
-// export declare type DataSourceItemType = string | DataSourceItemObject |
-// React.ReactElement<OptionProps> | React.ReactElement<OptGroupProps>;
-
-// module DataSourceItem = {
-//     type t;
-//     external makeString: string => t = "%identity";
-//     external makeObject: {
-//         .
-//         "value": string,
-//         "text": string
-//     } => t = "%identity";
-
-//     // React.ReactElement<OptionProps> | React.ReactElement<OptGroupProps>
-//     external makeElement: element => t = "%identity";
-// };
-
-// module FitlerOption = {
-//     type t;
-
-//     external makeBool: bool => t = "%identity";
-//     external makeFn: ((string, 'todo) => bool) => t = "%identity";
-// };
+type optionElement('o) = {
+  ..
+  "key": option(string),
+  "value": option(string),
+  "text": option(string)
+} as 'o;
 
 module Option = Antd_Select.Option;
 module OptGroup = Antd_Select.OptGroup;
@@ -36,19 +16,17 @@ type t;
 [@bs.send] external focus: t => unit = "focus";
 
 
-module Make = (M: {
-    // type dataSourceItem;
-}) => {
+
   [@react.component] [@bs.module]
   external make:
     (
       ~ref: Ref.t(Js.Nullable.t(t))=?,
-      // ~prefixCls: string=?,
+      ~prefixCls: string=?,
       ~className: string=?,
       ~allowClear: bool=?,
       ~defaultActiveFirstOption: bool=?,
       ~disabled: bool=?,
-      ~filterOption: (string, element) => bool=?,
+      ~filterOption: (string, optionElement('o)) => bool=?,
       ~placeholder: element=?,
       ~onSearch: string => unit=?,
       ~value: string=?,
@@ -65,14 +43,9 @@ module Make = (M: {
       ~defaultOpen: bool=?,
       ~_open: bool=?,
       ~onDropdownVisibleChange: bool => unit=?,
-      // HTMLInputElement | HTMLTextAreaElement | React.ReactElement<AutoCompleteInputProps> | ...
-      ~children: 'children=?,
+      ~children: element=?,
       unit
     ) =>
     element =
     "antd/lib/auto-complete";
-};
 
-include Make({
-    
-});

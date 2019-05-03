@@ -1,7 +1,9 @@
 
+
 [@react.component]
 let make = () => {
   <> 
+    <div string="" crossorigin=true/>
     <AnchorExample />
     <BackTopExample />  
     <AlertExample />

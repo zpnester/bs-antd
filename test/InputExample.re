@@ -17,5 +17,7 @@ let make = () => {
         Js.log("on search " ++ s);  
     }}/>
     <Input.Password />
+
+    <Input.TextArea />
     </>
 };

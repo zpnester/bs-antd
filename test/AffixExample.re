@@ -29,47 +29,31 @@ function(unit) {
 
 [@react.component]
 let make = () => {
-  // let affixRef = useRef(Js.Nullable.undefined);
+  let affixRef = useRef(Js.Nullable.undefined);
 
-  // let style = ReactDOMRe.Style.make(~height="300px", ~overflow="scroll", ());
-
-  let content = [||];
-  for (i in 0 to 50) {
-    content
-    |> Js.Array.push(
-         <span key={"t" ++ i->string_of_int}>
-           {string("text #" ++ i->string_of_int)}
-         </span>,
-       )
-    |> ignore;
-    content |> Js.Array.push(<br key={"b" ++ i->string_of_int} />) |> ignore;
-  };
-
-  <div>
+ 
+  <>
     <h1 id="affix-example"> {string("Affix Example")} </h1>
-    // ref=affixRef
     <Affix
+      ref=affixRef
       offsetTop=150.0
       offsetBottom=50.0
       className="myaffixclassname"
-      // target={getDocumentBody}
+      target={getDocumentBody}
       onChange={a => {
         Js.log2("affix changed", a);
         expectToEqual(a->Js.typeof, "boolean");
       }}>
       <WithHooks />
     </Affix>
-  </div>;
-  // <button
-  //   onClick={_ => {
-  //     // Js.log(affixRef->Ref.current);
-  //     // expectToEqual(
-  //     //   affixRef->Ref.current->Js.Nullable.toOption->Option.getExn##props
-  //     //   ->Js.typeof,
-  //     //   "object",
-  //     // );
-  //   }}>
-  //   {string("affix")}
-  // </button>
-  // {array(content)}
+      <button
+        onClick={_ => {
+        Js.log(affixRef->Ref.current);
+        let r = affixRef->Ref.current->Js.Nullable.toOption->Option.getExn;
+        expectObject(r);
+      }}>
+      {string("test ref")}
+    </button>
+  </>
+  
 };

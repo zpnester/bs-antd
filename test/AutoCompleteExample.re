@@ -24,14 +24,21 @@ let make = () => {
   |];
 
   let filterOption = (value, opt) => {
+    let  key = opt##key->Belt.Option.getWithDefault("");
+
     Js.log3("filterOption", value, opt);
     expectString(value);
-    expectElement(opt);
-    true;
+    expectElementAny(opt);
+    
+    key |> Js.String.indexOf(value) >= 0
   };
 
-  <>
-    <h1> {string("AutoComplete Example")} </h1>
+  let a = ReactDOMRe.props(~ariaLabel="322", ());
+  let x = a->ReactDOMRe.ariaRoledescription;
+  Js.log2("___________________________", x);
+
+  <> 
+    <h1 id="autocomplete-example"> {string("AutoComplete Example")} </h1>
     <button
       onClick={_ =>
         switch (acRef->React.Ref.current->Js.Nullable.toOption) {
@@ -42,7 +49,7 @@ let make = () => {
       {string("focus")}
     </button>
     <AutoComplete
-    allowClear=true
+      allowClear=true
       ref=acRef
       backfill=true
       dataSource
@@ -69,5 +76,50 @@ let make = () => {
           expectElement(e);
       }}
     />
+  
+
+  <br />
+  {string("------------")}
+  <AutoComplete
+      allowClear=true
+      ref=acRef
+      backfill=true
+      dataSource
+      filterOption
+      defaultValue=value
+      defaultActiveFirstOption=false
+      onChange={v => {
+          Js.log2("onChange", v);
+          expectMaybeString(v);
+      }}    
+      onBlur={v => {
+          Js.log2("onBlur", v);
+          expectMaybeString(v);
+      
+      }}
+      onSearch={s => {
+          Js.log2("onSearch", s);
+          expectString(s);
+      }}
+      onSelect={(s, e) => {
+          Js.log3("onSelect", s, e);
+          expectString(s);
+          expectElement(e);
+      }}
+    >
+     <Input.TextArea
+          placeholder="input here"
+          className="custom"
+          style=ReactDOMRe.Style.make(~height="50", ())
+          onKeyPress={e => {
+            Js.log2("onKeyPress", e);
+          }}
+          onPressEnter={e => {
+            Js.log2("onPressEnter", e);
+          }}
+        />
+    </AutoComplete>
+
+
   </>;
 };

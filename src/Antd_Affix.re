@@ -1,15 +1,5 @@
 open React;
 
-// TODO target
-
-// module Target = {
-//   type t;
-
-//   external window: Dom.window => t = "%identity";
-//   external htmlElement: Dom.htmlElement => t = "%identity";
-//   let null: t = [%bs.raw {|(null)|}];
-// }
-
 [@react.component] [@bs.module]
 external make:
   (
@@ -17,10 +7,10 @@ external make:
     ~ref: Ref.t(Js.Nullable.t(Js.t({..})))=?,
     ~offsetTop: float=?,
     ~offsetBottom: float=?,
-    // ~offset: float=?, // not on website, only in TS
+    ~offset: float=?,
     ~style: ReactDOMRe.Style.t=?,
-    ~onChange: bool => unit=?, // TS says optional boolean
-    ~target: unit => Dom.htmlElement=?,
+    ~onChange: bool => unit=?,
+    ~target: unit => Dom.htmlElement=?, // null and window skipped, window is default
     ~prefixCls: string=?,
     ~className: string=?,
     unit

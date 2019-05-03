@@ -39,7 +39,7 @@ let make = () => {
       <Form.Item>
         <Input
           value=password
-          _type="password"
+          type_="password"
           onChange={e => {
             let value = e->ReactEvent.Form.target##value;
             setPassword(_ => value);

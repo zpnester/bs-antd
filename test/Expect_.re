@@ -153,6 +153,11 @@ let expectElement = (el: React.element) => {
   expectToEqual(el->isElement, true);
 };
 
+let expectElementAny = (el: 'a) => {
+  expectToEqual(el->isElement, true);
+};
+
+
 let expectMaybeElement = (el: option(React.element)) => {
   switch (el) {
   | None => () // ok
