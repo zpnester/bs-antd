@@ -3,12 +3,12 @@
 open React;
 
 
-module Theme = {
-    type t = string;
-    [@bs.inline] let filled = "filled";
-    [@bs.inline] let outlined = "outlined";
-    [@bs.inline] let twoTone = "twoTone";
-};
+// module Theme = {
+//     type t = string;
+//     [@bs.inline] let filled = "filled";
+//     [@bs.inline] let outlined = "outlined";
+//     [@bs.inline] let twoTone = "twoTone";
+// };
 
 module Type = Antd_IconType;
 
@@ -21,7 +21,11 @@ external make:
     ~tabIndex: int=?,
     ~_type: string=?,
     ~className: string=?,
-    ~theme: Theme.t=?,
+    ~theme: [@bs.string] [
+        | `filled
+        | `outlined
+        | `twoTone
+    ]=?,
     ~title: string=?,
     ~onKeyUp: ReactEvent.Keyboard.t => unit=?,
     ~onClick: ReactEvent.Mouse.t => unit=?,

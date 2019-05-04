@@ -37,7 +37,7 @@ let make = () => {
     <Affix
       ref=affixRef
       offsetTop=150.0
-      offsetBottom=50.0
+      // offsetBottom=50.0
       className="myaffixclassname"
       target={getDocumentBody}
       onChange={a => {

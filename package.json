@@ -17,6 +17,7 @@
     "watch": "bsb -make-world -w",
     "dev-server": "webpack-dev-server",
     "dev": "concurrently --raw npm:watch npm:dev-server",
+    "webpack": "webpack",
     "next:dev": "next",
     "next:bsbdev": "concurrently --raw npm:watch next",
     "next:build": "next build",
@@ -29,6 +30,8 @@
   ],
   "license": "MIT",
   "devDependencies": {
+    "@zeit/next-css": "^1.0.1",
+    "antd": "^3.16.6",
     "bs-moment": "^0.4.4",
     "bs-platform": "^5.0.2",
     "concurrently": "^4.1.0",
@@ -41,8 +44,6 @@
     "style-loader": "^0.23.1",
     "webpack": "^4.28.1",
     "webpack-cli": "^3.1.2",
-    "webpack-dev-server": "^3.1.14",
-    "@zeit/next-css": "^1.0.1",
-    "antd": "^3.16.6"
+    "webpack-dev-server": "^3.1.14"
   }
 }

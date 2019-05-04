@@ -10,11 +10,11 @@ let customIcon = () => {
 let make = () => {
   <>
     <h1>{string("Icon Example")}</h1>
-    <Icon _type=Icon.Type.copy theme=Icon.Theme.filled rotate=45.0 tabIndex=3 />
-    <Icon _type=Icon.Type.copy theme=Icon.Theme.outlined spin=true tabIndex=3 />
+    <Icon _type=Icon.Type.copy theme=`filled rotate=45.0 tabIndex=3 />
+    <Icon _type=Icon.Type.copy theme=`outlined spin=true tabIndex=3 />
     <Icon
       _type=Icon.Type.copy
-      theme=Icon.Theme.twoTone
+      theme=`twoTone
       title="icon title"
       twoToneColor="red"
       tabIndex=3

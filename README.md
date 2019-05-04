@@ -36,17 +36,37 @@ Or with LESS
 {| require("antd/dist/antd.less");  |};
 ```
 
-## Notes
+Appropriate CSS/LESS setup is required (see `webpack.config.js` or `next.config.js` for CSS example)
+
+
+`babel-plugin-import` recommended in [https://ant.design/docs/react/getting-started](https://ant.design/docs/react/getting-started) is not supported
+
+
+## Usage
+
+### ES6
+
+These bindings work with both ES6 and CommonJS although have been tested primarily with CommonJS
+
+## Next.js
+
+These bindings work with Next.js although CommonJS is required
+
+[BuckleScript configuration](https://bucklescript.github.io/docs/en/build-configuration.html#package-specs)
+
+To avoid certain Next.js issues it is recommended to to add minimal `.babel.rc` or `babel.config.js` if you don't have one
 
 ### Change Antd version
 
-Changing Antd version should be done with care, sometimes imports break
+Changing Antd version is generally not recommended as imports sometimes break
+
+## Implementation Details
 
 ### Input
 
-Input, Input.TextArea, InputSearch, Input.Password includes `ReactDOMRe.props` properties excluding SVG
+Input, Input.TextArea, InputSearch, Input.Password includes `ReactDOMRe.props` properties (except SVG)
 
-## String enums
+### String enums
 
 Polymorphic variants are used for string enums when `[@bs.obj]` or `[@react.component]` is used for makeProps
 
