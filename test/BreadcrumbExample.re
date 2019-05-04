@@ -34,7 +34,7 @@ let make = () => {
 
         <Breadcrumb.Routes routes separator=string("|") params={"a": 1}
          itemRender={(route, b, c, d) => {
-            Js.log4(route, b, c, d);
+            // Js.log4(route, b, c, d);
             string(route##path);
         }} />
     </>

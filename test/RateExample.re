@@ -14,7 +14,7 @@ let make = () => {
         <Rate 
         allowHalf=true
         onChange={f => {
-            Js.log2("onChange", f);
+            // Js.log2("onChange", f);
             expectNumber(f);
         }}
         tooltips=[|

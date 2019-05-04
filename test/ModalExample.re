@@ -45,12 +45,12 @@ let make = () => {
 
         <Modal visible=m1 
         onOk={(e) => {
-            Js.log2("onOk", e);
+            // Js.log2("onOk", e);
             setM1(_ => false);
             Js.Promise.resolve();
         }}
         onCancel={(e) => {
-            Js.log2("onCancel", e);
+            // Js.log2("onCancel", e);
             setM1(_ => false);
 
             Js.Promise.resolve();

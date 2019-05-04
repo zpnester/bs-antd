@@ -10,7 +10,7 @@ let make = () => {
 
         <PageHeader title=string("Title") subTitle=string("Subtitle") 
          onBack={e => {
-             Js.log2("onBack", 2);
+             Js.log2("onBack", e);
          }}
         />
     </>

@@ -16,7 +16,8 @@ let make = () => {
             onChange={info => {
                 expectString(info##file##status);
                 expectString(info##file##name);
-                Js.log2("onChange", info);
+                
+                // Js.log2("onChange", info);
                 if (info##file##status != "uploading") {
                     Js.log2(info##file, info##fileList);
                 }

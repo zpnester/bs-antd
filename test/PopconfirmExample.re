@@ -3,7 +3,7 @@
 open React;
 open Antd;
 open Popconfirm;
-
+open Expect_;
 
 [@react.component]
 let make = () => {
@@ -23,7 +23,8 @@ let make = () => {
              okText={string("Yes")}
               cancelText={string("No")}
               onVisibleChange={visible => {
-                  Js.log2("onVisibleChange", visible);
+                  expectBool(visible);
+                //   Js.log2("onVisibleChange", visible);
               }}
             >
             <a href="#">{string("Delete")}</a>

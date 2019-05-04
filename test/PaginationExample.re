@@ -14,12 +14,12 @@ let make = () => {
 
         <Pagination defaultCurrent=1 total=50
         onChange={(~page, ~pageSize) => {
-            Js.log3("onChange", page, pageSize);
+            // Js.log3("onChange", page, pageSize);
             expectInt(page);
             expectInt(pageSize);
         }}
         itemRender={(page, t, el) => {
-            Js.log4("itemRender", page, t, el);
+            // Js.log4("itemRender", page, t, el);
             expectString(t);
             expectInt(page);
             expectElement(el);

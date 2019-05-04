@@ -17,7 +17,7 @@ let make = () => {
 
         <RadioGroup 
         onChange={e => {
-            Js.log2("onChange", e);
+            // Js.log2("onChange", e);
             expectBool(e##target##checked);
             expectMaybeString(e##target##value);
             setV1(_ => e##target##value->Belt.Option.getWithDefault(""))

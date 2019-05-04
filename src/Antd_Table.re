@@ -1,6 +1,7 @@
 
 
 open React;
+open Antd__;
 
 type filterItem = {
     .
@@ -16,22 +17,13 @@ module SortOrder = {
     [@bs.inline] let ascend: t = "ascend";
 };
 
-module SortOrderProp = {
-    type t = string;
-
-    // input only
-    external bool: bool => t = "%identity";
-
-    [@bs.inline] let descend: t = "descend";
-    [@bs.inline] let ascend: t = "ascend";
-};
 
 module Sorter = {
     type t('a);
 
     external bool: bool => t('a) = "%identity";
 
-    external make: (('a, 'a, SortOrder.t) => float) => t('a) = "%identity"; // TODO test
+    external make: (('a, 'a, SortOrder.t) => float) => t('a) = "%identity"; 
 };
 
 module Width = {
@@ -42,7 +34,7 @@ module Width = {
 };
 
 module Column = {
-    type t('c);
+    type t('record);
 
     [@bs.obj] external make: (
         ~align: [@bs.string] [
@@ -57,11 +49,11 @@ module Column = {
             | `descend
             | `ascend
         ]=?,
-        ~filterDropdown: Js.t({..}) => element=?, // TODO stricter props if possible, TODO test
+        ~filterDropdown: Js.t({..}) => element=?, 
         ~filterDropdownVisible: bool=?,
         ~filtered: bool=?,
         ~filteredValue: array(string)=?,
-        ~filterIcon: bool => element=?, // TODO test
+        ~filterIcon: bool => element=?,
         ~filterMultiple: bool=?,
         ~filters: array(filterItem)=?,
         // bool skipped
@@ -70,76 +62,47 @@ module Column = {
             | `right
         ]=?,
         ~key: string=?,
-        ~render: (Js.t({..}), 'c, int) => element=?, // TODO test, do  types  1,2
-        ~sorter: Sorter.t('c)=?,  
-        ~sortOrder: SortOrderProp.t=?,
+        // assumed 1st as 'record after testing, change if not correct
+        ~render: ('record, 'record, int) => element=?,
+        ~sorter: Sorter.t('record)=?,  
+        ~sortOrder: SortOrder.t=?, // bool skipped
         ~sortDirections: array(SortOrder.t)=?,
-        // TODO test
         ~title: {
             .
             "filters": Js.Dict.t(array(string)),
-            "sortOrder": SortOrder.t
+            "sortOrder": Js.null(SortOrder.t)
         } => element=?,
         ~width: Width.t=?,
-        ~onCell: ('c, int) => unit=?, // TODO ret any, TODO test
-        ~onFilter: ('todo, 'c) => bool=?, // TODO test, TODO types
-        ~onFilterDropdownVisibleChange: bool => unit=?, // TODO test
-        ~onHeaderCell: t('c) => unit=?, // TODO any ret, TODO test
+        ~onCell: ('record, int) => Js.t({..})=?,
+         // assumed string after testing (got filter .value), change if not correct
+        ~onFilter: (string, 'record) => bool=?,
+        ~onFilterDropdownVisibleChange: bool => unit=?,
+        ~onHeaderCell: t('record) => Js.t({..})=?, // abstract atm, not useful
         ~children: element=?,
         unit
-    ) => t('c) = "";
+    ) => t('record) = "";
 };
 
-type components = {
-    .
-    "table": option(element),
-    "header": option({
-        .
-        "wrapper": option(element),
-        "row": option(element),
-        "cell": option(element)
-    }),
-    "body": option({
-        .
-        "wrapper": option(element),
-        "row": option(element),
-        "cell": option(element)
-    })
-};
+type components;
 
-// TODO test
-type expandIconProps('c) = {
+
+type expandIconProps('record) = {
     .
-    "prefixCls": string, // TODO opt?
+    "prefixCls": string, 
     "expanded": bool,
-    "record": 'c,
+    "record": 'record,
     "needIndentSpaced": bool,
     "expandable": bool,
-    "onExpand": ('c, ReactEvent.Mouse.t) => unit // TODO dom vs react
+    "onExpand": ('record, Dom.mouseEvent) => unit 
 };
+
+
 
 module Loading = {
     type t;
 
     external bool: bool => t = "%identity";
-
-    // possible to reuse real spin props
-    // but do copy paste instead
-    [@bs.obj] external make: (
-        ~delay: float=?,
-        ~indicator: element=?,
-        ~size: [@bs.string] [
-            | `small
-            | `default
-            | `large
-        ]=?,
-        ~spinning: bool=?,
-        ~tip: string=?,
-        ~wrapperClassName: string=?,
-        ~prefixCls: string=?,
-        ~className: string=?,
-        ~style: ReactDOMRe.Style.t=?,
-    ) => t = "";
+    external make: Antd_Spin.makeProps => t = "%identity";
 }
 
 module Locale = {
@@ -173,27 +136,28 @@ module Pagination = {
         ~defaultCurrent: int=?,
         ~defaultPageSize: int=?,
         ~hideOnSinglePage: bool=?,
-        ~itemRender: (int, Antd_Pagination.ItemRenderType.t, element) => element=?,
+        ~itemRender: (int, Antd_Pagination.ItemRenderType.t, reactElement(Js.t({..}))) => element=?,
         ~pageSize: int=?,
         ~pageSizeOptions: array(string)=?,
         ~showLessItems: bool=?,
         ~showQuickJumper: Antd_Pagination.ShowQuickJumper.t=?,
         ~showSizeChanger: bool=?,
-        ~showTotal: (~total: int, ~range: (int, int)) => element=?, // TODO test 
+        ~showTotal: (~total: int, ~range: (int, int)) => element=?,
         ~simple: bool=?,
         ~size: string=?,
         ~total: int=?,
-        ~onChange: (~page: int, ~pageSize: int) => unit=?, // TODO test second type
+        ~onChange: (~page: int, ~pageSize: option(int)) => unit=?,
         ~style: ReactDOMRe.Style.t=?,
         ~className: string=?,
         ~prefixCls: string=?,
         ~selectPrefixCls: string=?,
         ~role: string=?,
+        unit
     ) => t = "";
 };
 
 module RowSelection = {
-    type t('c);
+    type t('record);
 
     [@bs.obj] external make: (
         ~_type: [@bs.string] [
@@ -201,11 +165,11 @@ module RowSelection = {
             | `radio
         ]=?,
         ~selectedRowKeys: array(string)=?, // number[] skipped
-        ~onChange: (array(string), array('c)) => unit=?,
-        ~getCheckboxProps: 'c => Js.t({..})=?, // TODO
-        ~onSelect: ('c, bool, array('todo), ReactEvent.Synthetic.t) => 'todo2=?, // TODO
-        ~onSelectMultiple: (bool, ~selectedRows: array('c), ~changeRows: array('c)) => unit=?,
-        ~onSelectAll: (bool, ~selectedRows: array('c), ~changeRows: array('c)) => unit=?,
+        ~onChange: (array(string), array('record)) => unit=?,
+        ~getCheckboxProps: 'record => Js.t({..})=?, 
+        ~onSelect: ('record, bool, array('record), Dom.event) => Js.t({..})=?, // TODO validate ret works
+        ~onSelectMultiple: (bool, ~selectedRows: array('record), ~changeRows: array('record)) => unit=?,
+        ~onSelectAll: (bool, ~selectedRows: array('record), ~changeRows: array('record)) => unit=?,
         ~onSelectInvert: array(string) => unit=?, // number[] skipped
         // bool skipped
         ~selections: array({
@@ -225,7 +189,7 @@ module RowSelection = {
         ]=?,
         ~columnTitle: element=?,
         unit
-    ) => t('c) = "";
+    ) => t('record) = "";
 };
 
 module Scroll = {
@@ -242,28 +206,28 @@ type onChange;
 [@react.component] [@bs.module]
 external make: (
     ~bordered: bool=?,
-    ~childrenColumnName: array(string)=?, // TODO test, str vs str[]
-    ~columns: array(Column.t('c)),  // TODO make optional if needed
+    ~childrenColumnName: string=?, // array fails at runtime
+    ~columns: array(Column.t('record)), // TODO optional?
 
     ~className: string=?,
     ~style: ReactDOMRe.Style.t=?,
     ~children: element=?,
-    ~components: components=?, // TODO test
-    ~dataSource: array('c), // TODO make optional if needed
+    ~components: components=?, // TODO later
+    ~dataSource: array('record), // required
     ~defaultExpandAllRows: bool=?,
     ~defaultExpandedRowKeys: array(string)=?, // skipped: TS: string[] | number[]
     ~expandedRowKeys: array(string)=?, // skipped: TS: string[] | number[]
-    ~expandedRowRender: (~record: 'c, ~index: int, ~indent: int, ~expanded: bool) => element=?, // TODO test
-    ~expandIcon: expandIconProps('c) => element=?,
+    ~expandedRowRender: (~record: 'record, ~index: int, ~indent: int, ~expanded: bool) => element=?,
+    ~expandIcon: expandIconProps('record) => element=?,
     ~expandRowByClick: bool=?,
-    ~footer: Js.t({..}) => element=?, // TODO
+    ~footer: array('record) => element=?, 
     ~indentSize: float=?,
     ~loading: Loading.t=?,
     ~locale: Locale.t=?,
     ~pagination: Pagination.t=?,
-    ~rowClassName: ('c, int) => string=?, // TODO test
-    ~rowKey: ('c, int) => string=?, // TODO tes
-    ~rowSelection: RowSelection.t('c)=?,
+    ~rowClassName: ('record, int) => string=?,
+    ~rowKey: ('record, int) => string=?, 
+    ~rowSelection: RowSelection.t('record)=?,
     ~scroll: {
         .
         "x": option(Scroll.t),
@@ -275,11 +239,11 @@ external make: (
         | `middle
         | `small
     ]=?,
-    ~title: array(Js.t({..})) => element=?, // TODO
-    ~onChange: onChange=?, // TODO
-    ~onExpand: (bool, 'c) => unit=?,
+    ~title: array('record) => element=?,
+    ~onChange: onChange=?, // TODO later
+    ~onExpand: (bool, 'record) => unit=?,
     ~onExpandedRowsChange: array(string) => unit=?, // num[] skipped
-    ~onHeaderRow: (Column.t('c), int) => Js.t({..})=?, // TODO
-    ~onRow: ('c, int) => Js.t({..})=?, // TODO
+    ~onHeaderRow: (array(Column.t('record)), int) => Js.t({..})=?, 
+    ~onRow: ('record, int) => Js.t({..})=?, 
     unit
 ) => element = "antd/lib/table"

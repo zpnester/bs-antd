@@ -63,3 +63,8 @@ let make = () => {
   </>;
 
 }; 
+
+ [@react.component]
+  let make = () => {
+    <TableExample />
+  };

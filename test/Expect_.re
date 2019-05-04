@@ -7,6 +7,8 @@
 [@bs.val] [@bs.module "./expect"] external isUndefined: 'a => bool = "isUndefined"; 
 [@bs.val] [@bs.module "./expect"] external hasLen: ('a, int) => bool = "hasLen"; 
 
+let expect = expectToEqual;
+
 [@bs.module "moment"] external isMoment: 'a => bool = "isMoment";
 
 let isNumber = (x: 'a) => {
@@ -50,6 +52,13 @@ let expectMaybeFloat = (f: option(float)) => {
 
 let expectInt = (i: int) => {
   expectToEqual(i->isInt, true);
+};
+
+let expectMaybeInt = x => {
+  switch (x) {
+    | None => ()
+    | Some(x) => expectInt(x)
+  }
 };
 
 let expectNull = (x: 'a) => {
@@ -155,6 +164,20 @@ let expectElement = (el: React.element) => {
 
 open Antd__;
 
+let expectEnum = (arr: array(string), x: string) => {
+  expectToEqual(arr->Array.length > 0, true);
+
+  let res = ref(false);
+
+  arr->Array.forEach(s => {
+    if (x == s) {
+      res := true;
+    }
+  })
+
+  expect(res^, true);
+};
+
 let expectReactElement = (el: reactElement('a)) => {
   expectToEqual(el##props->Js.typeof, "object");
 };
@@ -187,7 +210,7 @@ let expectObject = (x: 'a) => {
 };
 
 let expectLocale = (x: Antd_LocaleProvider.locale) => {
-  Js.log("EXPECT LOCALE NOT IMPLEMENTED YET");
+  // Js.log("EXPECT LOCALE NOT IMPLEMENTED YET");
 };
 
 let expectNotNullUndefined = (x: 'a) => {

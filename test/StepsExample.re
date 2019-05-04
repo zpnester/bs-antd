@@ -28,7 +28,7 @@ let make = () => {
         let status = o##status;
         let title = o##title;
         let description = o##description;
-        Js.log3("progressDot", dot, o);
+        // Js.log3("progressDot", dot, o);
 
         expectInt(index);
         let content =

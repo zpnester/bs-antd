@@ -27,7 +27,7 @@ let make = () => {
         }}
         format="HH_mm_ss"
         onChange={(m, s) => {
-            Js.log3("onChange", m, s);
+            // Js.log3("onChange", m, s);
             expectNullMoment(m);
             expectString(s);
         }}

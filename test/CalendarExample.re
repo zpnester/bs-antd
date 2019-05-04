@@ -3,6 +3,7 @@ open React;
 open Antd;
 open Calendar;
 open MomentRe;
+open Expect_;
 
 [@react.component]
 let make = () => {
@@ -12,10 +13,14 @@ let make = () => {
 
         <Calendar 
         onChange={m => {
-            Js.log2("onChange", m);
+            // TODO m
+            // Js.log2("onChange", m);
+            ()
         }}
         onPanelChange={(m, mode) => {
-            Js.log3("onPanelChange", m, mode);
+            // TODO m
+            expectEnum([|Mode.month, Mode.year|], mode);
+            // Js.log3("onPanelChange", m, mode);
         }}
         // dateFullCellRender={m => {
         //     string(m |> Moment.format("(MMM Do YY)"))

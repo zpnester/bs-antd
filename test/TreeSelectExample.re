@@ -24,7 +24,7 @@ let make = () => {
             allowClear=true
             treeDefaultExpandAll=true
             onChange={(value, b, c) => {
-                Js.log4("onChange", value, b, c);
+                // Js.log4("onChange", value, b, c);
                 
                 // TODO
                 setValue(_ => value)

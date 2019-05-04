@@ -31,7 +31,7 @@ let make = () => {
         <h1 id="checkbox-example">{string("Checkbox Example")}</h1>
 
         <Checkbox checked=c onChange={e => {
-            Js.log2("onChange", e);
+            // Js.log2("onChange", e);
             setC(_ => e##target##checked)  
         }}/>
         <br />
@@ -39,7 +39,7 @@ let make = () => {
         {string("group: " ++ (g|>Js.Array.joinWith(",")))}
         <br />
         <Checkbox.Group options  onChange={os => {
-            Js.log2("group change", os);  
+            // Js.log2("group change", os);  
             expectStringArray(os);
             setG(_ => os);
         }}/>

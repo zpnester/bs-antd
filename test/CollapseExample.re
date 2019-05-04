@@ -18,7 +18,7 @@ let make = () => {
         activeKey=keys  
         // defaultActiveKey=[|"1"|]
         onChange={value => {
-            Js.log2("onChange", value);
+            // Js.log2("onChange", value);
             expectStringArray(value);
             setKeys(_ => value);
         }}>
@@ -38,7 +38,7 @@ let make = () => {
         activeKey=key
         // defaultActiveKey=Some("0")
         onChange={value => {
-            Js.log2("onChange", value);
+            // Js.log2("onChange", value);
             expectMaybeString(value);
             setKey(_ => value);
         }}>

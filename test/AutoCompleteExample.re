@@ -62,7 +62,7 @@ let make = () => {
   let filterOption = (s, opt) => {
     let  key = opt##props->Option.keyGet->Belt.Option.getWithDefault("");
 
-    Js.log3("filterOption", value, opt);
+    // Js.log3("filterOption", value, opt);
     expectString(s);
     expectReactElement(opt);
     
@@ -93,20 +93,20 @@ let make = () => {
       defaultActiveFirstOption=false
       placeholder={<h3>{string("...")}</h3>}
       onChange={v => {
-          Js.log2("onChange", v);
+          // Js.log2("onChange", v);
           expectMaybeValue(v);
       }}    
       onBlur={v => {
-          Js.log2("onBlur", v);
+          // Js.log2("onBlur", v);
           expectMaybeValue(v);
       
       }}
       onSearch={s => {
-          Js.log2("onSearch", s);
+          // Js.log2("onSearch", s);
           expectString(s);
       }}
       onSelect={(v, e) => {
-          Js.log3("onSelect", v, e);
+          // Js.log3("onSelect", v, e);
           expectValue(v);
           expectReactElement(e);
       }}
@@ -125,20 +125,20 @@ let make = () => {
       defaultValue=value
       defaultActiveFirstOption=false
       onChange={v => {
-          Js.log2("onChange", v);
+          // Js.log2("onChange", v);
           expectMaybeValue(v);
       }}    
       onBlur={v => {
-          Js.log2("onBlur", v);
+          // Js.log2("onBlur", v);
           expectMaybeValue(v);
       
       }}
       onSearch={s => {
-          Js.log2("onSearch", s);
+          // Js.log2("onSearch", s);
           expectString(s);
       }}
       onSelect={(s, e) => {
-          Js.log3("onSelect", s, e);
+          // Js.log3("onSelect", s, e);
           expectValue(s);
           expectReactElement(e);
       }}

@@ -9,9 +9,11 @@ let make = () => {
     <>
         <h1 id="menu-example">{string("Menu Example")}</h1>
 
-        <Menu mode=`horizontal onClick={e => {
-            Js.log2("menu click", e)
-        }}>
+        <Menu mode=`horizontal
+        //  onClick={e => {
+        //     // Js.log2("menu click", e)
+        // }}
+        >
             <Menu.Item>
                 <Icon _type={Icon.Type.mail}/>
                 {string("Navigation One")}

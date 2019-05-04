@@ -21,7 +21,7 @@ let make = () => {
       onSubmit={e => {
         e->ReactEvent.Form.preventDefault;
         setSub(_ => true);
-        Js.log("submit");
+        // Js.log("submit");
       }}>
       <Form.Item
         hasFeedback=usernameFeedback

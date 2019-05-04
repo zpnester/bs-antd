@@ -26,7 +26,8 @@ let make = () => {
          title=string("Countdown")
          value={Countdown.Value.moment(deadline)} 
          onFinish={() => {
-            Js.log("onFinish")
+            // Js.log("onFinish")
+            ()
         }} 
         />
     </>

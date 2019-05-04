@@ -19,7 +19,7 @@ let make = () => {
           title=string("Drawer title")
           placement=`right
           onClose={e => {
-              Js.log2("onClose", e);
+              // Js.log2("onClose", e);
               setDrawerOpen(_ => false);
           }}
           visible=drawerOpen

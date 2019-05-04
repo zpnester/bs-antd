@@ -114,44 +114,47 @@ let make = () => {
       placeholder={string("Please select")}
       defaultValue=Some({"key": "2", "label": null})
       onDropdownVisibleChange={v => {
-          Js.log2("onDropdownVisibleChange", v);
+          // Js.log2("onDropdownVisibleChange", v);
           expectToEqual(v->Js.typeof, "boolean");
       }}
       showSearch=true
       allowClear=true
       getPopupContainer={e => {
-        Js.log2("getPopupContainer", e);
+        // Js.log2("getPopupContainer", e);
         expectNotNullUndefined(e);
         getDocumentBody();
 
       }}
       filterOption={(s, opt) => {
-          Js.log3("filterOption", s, opt);
+          // Js.log3("filterOption", s, opt);
           expectReactElement(opt);
           expectString(s);
           true;
       }}
       dropdownRender={(menu,props) => {
           expectElement(menu);
-          // Js.log3("dropdownRender", menu, props);
+          // // Js.log3("dropdownRender", menu, props);
           menu
       }}
       onChange={(value, option) => {
-        Js.log3("on change", value, option);
+        // Js.log3("on change", value, option);
         expectMaybeValue(value);
         expectMaybeReactElement(option);
       }}
       onSelect={(value, option) => {
-        Js.log3("on select", value, option);
+        // Js.log3("on select", value, option);
         expectValue(value);
         expectReactElement(option);
       }}
       onBlur={value => {
-        Js.log2("on blur", value);
+        // Js.log2("on blur", value);
 
         expectMaybeValue(value);
       }}
-      onFocus={() => Js.log("on focus")}>
+      // onFocus={() => {
+      //   // Js.log("on focus")
+      //   }}
+        >
       <Select.Option value="1"> {string("Option 1")} </Select.Option>
       <Select.Option value="2" title="Title 2">
         <h2> {string("Option 2")} </h2>
@@ -164,7 +167,7 @@ let make = () => {
 
     <Select
     onSearch={str => {
-        Js.log2("onSearch", str);
+        // Js.log2("onSearch", str);
         expectString(str);
 
     }}
@@ -181,32 +184,32 @@ let make = () => {
       mode=Select.Mode.multiple
     labelInValue=Select.LabelInValue.true_
        filterOption={(s, opt) => {
-          Js.log3("filterOption", s, opt);
+          // Js.log3("filterOption", s, opt);
           expectReactElement(opt);
           expectString(s);
           false;
       }}
       maxTagPlaceholder={omitted => {
-        Js.log2("omitted", omitted);
+        // Js.log2("omitted", omitted);
         expectValueArray(omitted);
         string("+" ++ omitted->Js.Array.length->string_of_int);
       }}
       onChange={(value, option) => {
-        Js.log3("on change", value, option);
+        // Js.log3("on change", value, option);
         expectValueArray(value);
         expectReactElementArray(option);
       }}
       onBlur={value => {
-        Js.log2("on blur", value);
+        // Js.log2("on blur", value);
         expectValueArray(value);
       }}
       onSelect={(value, option) => {
-        Js.log3("on select", value, option);
+        // Js.log3("on select", value, option);
         expectValue(value);
         expectReactElement(option);
       }}
       onDeselect={value => {
-        Js.log2("on deselect", value);
+        // Js.log2("on deselect", value);
         expectValue(value);
       }}
       tokenSeparators=[|","|]>
@@ -233,32 +236,32 @@ let make = () => {
     labelInValue=Select.LabelInValue.true_
       autoClearSearchValue=false
       maxTagPlaceholder={omitted => {
-        Js.log2("omitted", omitted);
+        // Js.log2("omitted", omitted);
         expectValueArray(omitted);
 
         string("+" ++ omitted->Js.Array.length->string_of_int);
       }}
-      onPopupScroll={e => Js.log2("onPopupScroll", e)}
-      onInputKeyDown={e => Js.log2("onInputKeyDown", e)}
-      onMouseEnter={e => Js.log2("onMouseEnter", e)}
-      onMouseLeave={e => Js.log2("onMouseLeave", e)}
+      // onPopupScroll={e => // Js.log2("onPopupScroll", e)}
+      // onInputKeyDown={e => // Js.log2("onInputKeyDown", e)}
+      // onMouseEnter={e => // Js.log2("onMouseEnter", e)}
+      // onMouseLeave={e => // Js.log2("onMouseLeave", e)}
       onChange={(values, options) => {
         expectValueArray(values);
         expectReactElementArray(options);
 
-        Js.log3("on change", values, options);
+        // Js.log3("on change", values, options);
       }}
       onBlur={value => {
-        Js.log2("on blur", value);
+        // Js.log2("on blur", value);
         expectValueArray(value);
       }}
       onSelect={(value, option) => {
-        Js.log3("on select", value, option);
+        // Js.log3("on select", value, option);
         expectValue(value);
         expectReactElement(option);
       }}
       onDeselect={value => {
-        Js.log2("on deselect", value);
+        // Js.log2("on deselect", value);
         expectValue(value);
       }}>
       <Select.Option value="1" title="Title 1">

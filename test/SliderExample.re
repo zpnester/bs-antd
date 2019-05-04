@@ -12,11 +12,11 @@ let make = () => {
         
         <Slider range=Range.false_ 
         onChange={v => {
-            Js.log2("conChange", v)
+            // Js.log2("conChange", v)
             expectNumber(v);
         }}
         onAfterChange={v => {
-            Js.log2("onAfterChange", v)
+            // Js.log2("onAfterChange", v)
             expectNumber(v);
         }}
         />
@@ -24,11 +24,11 @@ let make = () => {
         <Slider range=Range.true_ 
         step=Js.Null.return(0.3)
         onChange={v => {
-            Js.log2("conChange", v);
+            // Js.log2("conChange", v);
             expectNumberTuple2(v);
         }}
         onAfterChange={v => {
-            Js.log2("onAfterChange", v)
+            // Js.log2("onAfterChange", v)
             expectNumberTuple2(v);
         }}
         />

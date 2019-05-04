@@ -21,7 +21,7 @@ let make = () => {
             let m = Message.success(string("This is success"))
             m##promise
             |> then_(() => {
-                Js.log("after close promise");
+                // Js.log("after close promise");
                 resolve();
             })  
             |> ignore;
@@ -31,20 +31,20 @@ let make = () => {
         <button onClick={_ => {
             let m = Message.open_(Message.Config.make(
                 ~content=string("This is custom icon"),
-                ~onClose={() => {
-                    Js.log("onClose");
-                }},
+                // ~onClose={() => {
+                //     // Js.log("onClose");
+                // }},
                 ~_type=`warning,
                 ~duration=Js.Null.return(5.0),
                 ~icon={<Icon _type=Icon.Type.user />},
                 ()
             ));
-            Js.log2("m", m);
+            // Js.log2("m", m);
                 
               
             m##promise
             |> then_(() => {
-                Js.log("after close promise");
+                // Js.log("after close promise");
                 resolve();
             })  
             |> ignore;

@@ -62,15 +62,20 @@ Changing Antd version is generally not recommended as imports sometimes break
 
 ## Limitations
 
+### Form
+
+`Form.create` (built-in validation) is not implemented
+
+
 ### Select
 
 `mode` property is required
 
-`labelInValue` property is required to be LabelInValue.true_
+`labelInValue` property is required to be `LabelInValue.true_`
 
 ### AutoComplete
 
-`labelInValue` property is required to be LabelInValue.true_
+`labelInValue` property is required to be `LabelInValue.true_`
 
 ### Collapse
 

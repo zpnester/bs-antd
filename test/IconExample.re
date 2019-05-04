@@ -19,8 +19,12 @@ let make = () => {
       twoToneColor="red"
       tabIndex=3
       role="custom-role"
-      onKeyUp={e => Js.log2("icon key up", e->ReactEvent.Keyboard.keyCode)}
-      onClick={e => Js.log2("icon click", e)}
+      // onKeyUp={e => {
+      //   // Js.log2("icon key up", e->ReactEvent.Keyboard.keyCode)
+      //   }}
+      // onClick={e => {
+      //   // Js.log2("icon click", e)
+      //   }}p
     />
     <Icon component=customIcon />
   </>;

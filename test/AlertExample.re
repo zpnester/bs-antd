@@ -13,9 +13,11 @@ let make = () => {
       closeText={string("CLOSE")}
       onClose={event => {
         expectToEqual(event->ReactEvent.Mouse.clientX->Js.typeof, "number");
-        Js.log("on close");
+        // Js.log("on close");
       }}
-      afterClose={() => Js.log("after close")}
+      // afterClose={() => {
+      //   // Js.log("after close")
+      //   }}
     />
     <Alert
       message={string("Alert 2")}

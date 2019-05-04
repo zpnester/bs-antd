@@ -13,7 +13,7 @@ let make = () => {
         
          <Switch checkedChildren=string("1") unCheckedChildren=string("0") 
          onChange={(v, e) => {
-             Js.log3("onChange", v, e);
+             // Js.log3("onChange", v, e);
              expectBool(v);
          }}
          />

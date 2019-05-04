@@ -7,4 +7,4 @@ open React;
 let app = <Example />;
 ReactDOMRe.renderToElementWithId(app, "app");
  
-Js.log("OK");
+// Js.log("OK");

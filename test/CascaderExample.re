@@ -79,27 +79,27 @@ let make = () => {
       popupPlacement=`topRight
       expandTrigger=`hover
       displayRender={(label, opts) => {
-        Js.log3("displayRender", label, opts);
+        // Js.log3("displayRender", label, opts);
         expectStringArray(label);
         expectCascaderOptionArray(opts);
         string(label |> Js.Array.joinWith("/"));
       }}
       onChange={(value, selectedOpts) => {
-        Js.log3("onChange", value, selectedOpts);
+        // Js.log3("onChange", value, selectedOpts);
         expectStringArray(value);
         expectCascaderOptionArray(selectedOpts);
       }}
       showSearch={ShowSearch.make(~limit=Limit.false_, 
         ~filter={(inputValue, path, names) => {
-            Js.log4("filter", inputValue, path, names);
+            // Js.log4("filter", inputValue, path, names);
             expectString(inputValue);
             expectCascaderOptionArray(path);
             expectFilledFieldNames(names);
             true
         }},
         ~render={(inputValue, path, prefixCls, names) => {
-                Js.log("render");
-            Js.log4(inputValue, path, prefixCls, names);
+                // Js.log("render");
+            // Js.log4(inputValue, path, prefixCls, names);
 
             expectString(inputValue);
             expectCascaderOptionArray(path);
@@ -109,8 +109,8 @@ let make = () => {
             path->Array.getExn(0)##label;
         }},
         ~sort={(a, b, inputValue, names) => {
-            Js.log("sort");
-            Js.log4(a, b, inputValue, names);
+            // Js.log("sort");
+            // Js.log4(a, b, inputValue, names);
             expectCascaderOptionArray(a);
             expectCascaderOptionArray(b);
             expectString(inputValue);

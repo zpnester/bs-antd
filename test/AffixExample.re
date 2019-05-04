@@ -36,14 +36,14 @@ let make = () => {
       className="myaffixclassname"
       target={getDocumentBody}
       onChange={a => {
-        Js.log2("affix changed", a);
+        // Js.log2("affix changed", a);
         expectToEqual(a->Js.typeof, "boolean");
       }}>
       <WithHooks />
     </Affix>
       <button
         onClick={_ => {
-        Js.log(affixRef->Ref.current);
+        // Js.log(affixRef->Ref.current);
         let r = affixRef->Ref.current->Js.Nullable.toOption->Option.getExn;
         expectObject(r);
       }}>

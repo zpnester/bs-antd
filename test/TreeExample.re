@@ -21,10 +21,14 @@ let t = <span style={ReactDOMRe.Style.make(~color="#1890ff", ())}>
             defaultSelectedKeys={[|"0-0-0", "0-0-1"|]}
             defaultCheckedKeys={[|"0-0-0", "0-0-1"|]}
             onSelect={(selectedKeys, info) => {
-                Js.log3("onSelect", selectedKeys, info);
+                expectStringArray(selectedKeys);
+                // TODO
+                // Js.log3("onSelect", selectedKeys, info);
             }}
             onCheck={(checkedKeys, info) => {
-                Js.log3("onCheck", checkedKeys, info);
+                expectStringArray(checkedKeys);
+                // TODO
+                // Js.log3("onCheck", checkedKeys, info);
             }}
         >
             <TreeNode title=string("parent 1") key="0-0">

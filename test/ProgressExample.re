@@ -17,7 +17,7 @@ let make = () => {
         successPercent=50
 
         format={(~percent, ~successPercent) => {
-            Js.log3("format", percent, successPercent);
+            // Js.log3("format", percent, successPercent);
             expectInt(percent);
             expectInt(successPercent);
             string(percent->string_of_int ++ " Days");
@@ -25,7 +25,7 @@ let make = () => {
         />
         <Progress _type=`circle percent={100} 
         format={(~percent, ~successPercent) => {
-            Js.log3("format", percent, successPercent);
+            // Js.log3("format", percent, successPercent);
 
             string("Done")
         }} />
