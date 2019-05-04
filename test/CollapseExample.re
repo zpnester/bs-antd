@@ -14,6 +14,7 @@ let make = () => {
         <h1 id="collapse-example">{string("Collapse Example")}</h1>
 
         <Collapse 
+        accordion=Accordion.false_
         activeKey=keys  
         // defaultActiveKey=[|"1"|]
         onChange={value => {
@@ -32,9 +33,10 @@ let make = () => {
         </Collapse>
 
         <h2>{string("Accordion")}</h2>
-        <Collapse.Accordion
+        <Collapse
+        accordion=Accordion.true_
         activeKey=key
-        // defaultActiveKey=[|"1"|]
+        // defaultActiveKey=Some("0")
         onChange={value => {
             Js.log2("onChange", value);
             expectMaybeString(value);
@@ -48,6 +50,6 @@ let make = () => {
                 {string("Panel 2")}
             </Collapse.Panel>
 
-        </Collapse.Accordion>
+        </Collapse>
     </>
 };

@@ -22,8 +22,8 @@ module Marks = {
 
 [@react.component] [@bs.module]
 external make: (
-    // not optional to ensure type safety
-    ~range: Range.t('value),
+   
+    ~range: Range.t('value), // required
     ~ref: Ref.t(Js.nullable(t))=?,
     ~autoFocus: bool=?,
     ~defaultValue: 'value=?,
@@ -48,13 +48,3 @@ external make: (
     unit
 ) => element = "antd/lib/slider";
 
-
-// module Uncontrolled = {
-//     [@react.component] [@bs.module]
-//     external make: (
-//         ~ref: Ref.t(Js.nullable(t))=?,
-//         ~autoFocus: bool=?,
-
-
-//     ) => element = "antd/lib/slider";
-// };

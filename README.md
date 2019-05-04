@@ -36,12 +36,17 @@ Or with LESS
 {| require("antd/dist/antd.less");  |};
 ```
 
-## Usage
+## Notes
+
+### Change Antd version
 
 Changing Antd version should be done with care, sometimes imports break
 
-## Notes
+### Input
+
 Input, Input.TextArea, InputSearch, Input.Password includes `ReactDOMRe.props` properties excluding SVG
+
+## String enums
 
 Polymorphic variants are used for string enums when `[@bs.obj]` or `[@react.component]` is used for makeProps
 
