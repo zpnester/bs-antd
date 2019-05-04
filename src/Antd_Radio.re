@@ -12,13 +12,6 @@ type changeEvent = {
   "nativeEvent": Dom.mouseEvent,
 };
 
-// module Value = {
-//     type t;
-
-//     external string: string => t = "%identity";
-//     external bool: bool => t = "%identity";
-//     external number: float => t = "%identity";
-// };
 
 type t;
 

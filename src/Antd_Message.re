@@ -1,25 +1,24 @@
 open React;
 
-// [@bs.module "antd/lib/message"] external
-// success: (element, ~duration: float=?, ~onClose: unit => unit, unit) => unit = "success";
-
-// onClose skipped, returned promise should cover onClose use cases
 
 // promise field is not documented on website but keep it anyway
 type message = {. "promise": Js.Promise.t(unit)};
 
+// duration and onClose skipped, use open_ for those
+// returned promise should cover onClose use cases
+
 [@bs.module "antd/lib/message"]
-external success: (element, ~duration: option(float)) => message = "success";
+external success: (element) => message = "success";
 [@bs.module "antd/lib/message"]
-external error: (element, ~duration: option(float)) => message = "error";
+external error: (element) => message = "error";
 [@bs.module "antd/lib/message"]
-external info: (element, ~duration: option(float)) => message = "info";
+external info: (element) => message = "info";
 [@bs.module "antd/lib/message"]
-external warning: (element, ~duration: option(float)) => message = "warning";
+external warning: (element) => message = "warning";
 [@bs.module "antd/lib/message"]
-external warn: (element, ~duration: option(float)) => message = "warn";
+external warn: (element) => message = "warn";
 [@bs.module "antd/lib/message"]
-external loading: (element, ~duration: option(float)) => message = "loading";
+external loading: (element) => message = "loading";
 
 // TODO
 module GlobalConfig = {

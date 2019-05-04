@@ -5,7 +5,7 @@ open React;
 module Copyable = {
     type t;
 
-    external fromBool: bool => t = "%identity";
+    external bool: bool => t = "%identity";
 
     [@bs.obj] external make: (
         ~text: string=?,
@@ -17,7 +17,7 @@ module Copyable = {
 module Editable = {
     type t;
 
-    external fromBool: bool => t = "%identity";
+    external bool: bool => t = "%identity";
 
     [@bs.obj] external make: (
         ~editing: bool=?,
@@ -30,7 +30,7 @@ module Editable = {
 module Ellipsis = {
     type t;
 
-    external fromBool: bool => t = "%identity";
+    external bool: bool => t = "%identity";
 
     [@bs.obj] external make: (
         ~rows: int=?,

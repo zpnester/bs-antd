@@ -6,11 +6,11 @@ module AdjustOverflow = {
 
     external bool: bool => t = "%identity";
     // TODO test
-    external make: { 
-        .
-        "adjustX": option(int),
-        "adjustY": option(int)
-    } => t = "%identity";
+    [@bs.obj] external make: (
+        ~adjustX: int=?,
+        ~adjustY: int=?,
+        unit
+    ) => t = "";
 };
 
 module Offset = {

@@ -12,7 +12,7 @@ let make = () => {
         
         <Upload
             name="file"
-            action=Action.fromString("https://www.mocky.io/v2/5cc8019d300000980a055e76")
+            action=Action.string("https://www.mocky.io/v2/5cc8019d300000980a055e76")
             onChange={info => {
                 expectString(info##file##status);
                 expectString(info##file##name);
@@ -21,16 +21,14 @@ let make = () => {
                     Js.log2(info##file, info##fileList);
                 }
                 if (info##file##status == "done") {
-                    Message.success(string(info##file##name ++ " file uploaded successfully"),
-                    ~duration=None) |> ignore;
+                    Message.success(string(info##file##name ++ " file uploaded successfully")) |> ignore;
                 } else if (info##file##status == "error") {
                     Message.error(
-                        string(info##file##name ++ " file upload failed."),
-                        ~duration=None) |> ignore;
+                        string(info##file##name ++ " file upload failed.")) |> ignore;
                 }
             }}
             headers={Js.Dict.fromList([
-                ("authorization","authorization-text")
+                ("authorization","authorization-text") 
             ])}
             >
             <Button>

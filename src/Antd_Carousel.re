@@ -21,7 +21,10 @@ external make: (
     ~beforeChange: (int, int) => unit=?,
     ~dots: bool=?,
     ~easing: string=?,
-    ~effect: Effect.t=?,
+    ~effect: [@bs.string] [
+        | `scrollx
+        | `fade
+    ]=?,
     ~vertical: bool=?,
     ~children: element=?,
     unit

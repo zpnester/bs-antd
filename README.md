@@ -48,7 +48,7 @@ Appropriate CSS/LESS setup is required (see `webpack.config.js` or `next.config.
 
 These bindings work with both ES6 and CommonJS although have been tested primarily with CommonJS
 
-## Next.js
+### Next.js
 
 These bindings work with Next.js although CommonJS is required
 
@@ -59,6 +59,25 @@ To avoid certain Next.js issues it is recommended to to add minimal `.babel.rc` 
 ### Change Antd version
 
 Changing Antd version is generally not recommended as imports sometimes break
+
+## Limitations
+
+### Form
+
+Validation not implemented
+
+### Select
+
+`labelInValue` and `mode` properties are required
+
+`labelInValue: false` is not supported
+
+### Collapse
+
+`accordion` property is required
+
+### Slider
+`range` property is required
 
 ## Implementation Details
 

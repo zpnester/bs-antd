@@ -1,7 +1,7 @@
 
 open React;
 
-
+// cannot be replaced with polyvar
 module Size = {
   type t = string;
   [@bs.inline] let large = "large";

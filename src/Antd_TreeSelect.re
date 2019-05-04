@@ -33,7 +33,7 @@ type treeNodeNormal = {
 module TreeDataSimpleMode = {
     type t;
 
-    external fromBool: bool => t = "%identity";
+    external bool: bool => t = "%identity";
 
     [@bs.obj] external make: (
         ~id: string=?,

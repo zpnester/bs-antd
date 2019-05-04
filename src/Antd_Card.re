@@ -1,10 +1,5 @@
 open React;
 
-module Size = {
-    type t = string;
-    [@bs.inline] let default = "default";
-    [@bs.inline] let small = "small";
-};
 
 [@react.component] [@bs.module]
 external make: 
@@ -22,7 +17,10 @@ external make:
     ~children: element=?,
     ~id: string=?,
     ~className: string=?,
-    ~size: Size.t=?,
+    ~size: [@bs.string] [
+        | `default
+        | `small
+    ]=?,
     // ~_type
     ~cover: element=?,
     ~actions: array(element)=?,

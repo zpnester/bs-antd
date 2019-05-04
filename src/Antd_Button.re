@@ -3,7 +3,10 @@ open React;
 module Loading = {
   type t;
   external bool: bool => t = "%identity";
-  external make: {. "delay": float} => t = "%identity";
+  
+  [@bs.obj] external make: (
+    ~delay: float
+  ) => t = "";
 };
 
 module NativeProps = {

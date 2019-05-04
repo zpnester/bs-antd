@@ -78,14 +78,14 @@ let make = () => {
     <h1 id="select-example">{string("Select Example")}</h1>
     value1Str
     <br />
-    <Select.Default style 
+    <Select style 
     mode=Select.Mode.default
     labelInValue=Select.LabelInValue.true_
     showSearch=false
     value=value1 onChange={(v, _) => setValue1(_ => v)}>
       <Select.Option value="f"> {string("first")} </Select.Option>
       <Select.Option value="s"> {string("second")} </Select.Option>
-    </Select.Default>
+    </Select>
     <button
       onClick={_ =>
         switch (ref1->React.Ref.current->Js.Nullable.toOption) {
@@ -104,7 +104,7 @@ let make = () => {
       }>
       {string("blur")}
     </button>
-    <Select.Default
+    <Select
     // disabled=true
       mode=Select.Mode.default
     labelInValue=Select.LabelInValue.true_
@@ -152,8 +152,8 @@ let make = () => {
       <Select.Option value="3" disabled=true>
         {string("Option 3")}
       </Select.Option>
-    </Select.Default>
-    <Select.Multiple
+    </Select>
+    <Select
     onSearch={str => {
         Js.log2("onSearch", str);
         expectString(str);
@@ -207,8 +207,8 @@ let make = () => {
       <Select.Option value="2" title="Title 2">
         {string("Option 2")}
       </Select.Option>
-    </Select.Multiple>
-    <Select.Tags
+    </Select>
+    <Select
       style
       placeholder={string("Please select")}
       defaultValue=[|
@@ -263,6 +263,6 @@ let make = () => {
         {string("Option 4")}
       </Select.Option>
       <Select.Option value="5"> {string("Option 6")} </Select.Option>
-    </Select.Tags>
+    </Select>
   </>;
 };

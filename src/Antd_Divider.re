@@ -2,27 +2,19 @@
 
 open React;
 
-
-module Orientation = {
-    type t = string;
-    [@bs.inline] let left = "left";
-    [@bs.inline] let right = "right";
-};
-
-module Type = {
-    type t = string;
-    [@bs.inline] let horizontal = "horizontal";
-    [@bs.inline] let vertical = "vertical";
-
-};
-
 [@react.component] [@bs.module]
 external make: (
     ~className: string=?,
     ~dashed: bool=?,
-    ~orientation: Orientation.t=?,
+    ~orientation: [@bs.string] [
+        | `left
+        | `right
+    ]=?,
     ~style: ReactDOMRe.Style.t=?,
-    ~_type: Type.t=?,
+    ~_type: [@bs.string] [
+        | `horizontal
+        | `vertical
+    ]=?,
     ~prefixCls: string=?,
     ~children: element=?,
     unit 

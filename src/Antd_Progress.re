@@ -15,7 +15,7 @@ module StrokeColor = {
 
     // TODO test
     // ProgressGradient (StringGradients)
-    external make: Js.t({
+    external makeUnsafe: Js.t({
         ..
         direction: string,
     }) => t = "%identity";

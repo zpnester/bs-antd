@@ -18,12 +18,7 @@ let make = () => {
         <h1 id="message-example">{string("Message Example")}</h1>
 
         <button onClick={_ => {
-            let m = Message.success(string("This is success")
-            , ~duration=None
-            )
-
-            Js.log2("m", m);
-            Js.log2("m##promise", m##promise);
+            let m = Message.success(string("This is success"))
             m##promise
             |> then_(() => {
                 Js.log("after close promise");
@@ -56,7 +51,7 @@ let make = () => {
         }}>{string("open")}</button>
 
         <button onClick={_ => {
-            Message.loading(string("Something is loading"), ~duration=None) |> ignore;
+            Message.loading(string("Something is loading")) |> ignore;
         }}>{string("loading")}</button>
 
         <button onClick={_ => {

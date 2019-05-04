@@ -29,35 +29,43 @@ module Option = {
 };
 
 
-module Mode = {
-  type default;
-  type multiple;
-  type tags;
+type labeledValue = {
+  .
+  "key": string,
+  "label": element,
+};
 
-  let default: default = [%raw {| ("default") |}];
-  let multiple: multiple = [%raw {| ("multiple") |}];
-  let tags: tags = [%raw {| ("tags") |}];
+
+module Mode = {
+  type t('value, 'valueSingle, 'optionElement, 'optionElementSingle);
+
+  let default: t(
+    option(labeledValue), 
+    labeledValue,
+    option(element),
+    element
+    ) = [%raw {| ("default") |}];
+  let multiple: t(
+    array(labeledValue),
+    labeledValue,
+    array(element),
+    element
+  ) = [%raw {| ("multiple") |}];
+  let tags: t(
+    array(labeledValue),
+    labeledValue,
+    array(element),
+    element
+  ) = [%raw {| ("tags") |}];
 };
 
 module LabelInValue = {
-  type true_;
+  type t;
 
-  let true_: true_ = [%raw {| (true) |}];
+  let true_: t = [%raw {| (true) |}];
 };
 
-////////////////////
 
-module Make =
-       (
-         M: {
-           type selectValue;
-           type selectValueSingle;
-           type optionElement;
-           type optionElementSingle;
-           type labelInValue;
-           type mode;
-         }
-       ) => {
 
 [@react.component] [@bs.module]
   external make:
@@ -98,24 +106,24 @@ module Make =
       ~loading: bool=?,
       // ***** END ABSTRACT SELECT *****
       // ***** BEGIN SELECT *****
-      ~value: M.selectValue=?,
-      ~defaultValue: M.selectValue=?,
-      ~mode: M.mode, // required
+      ~value: 'selectValue=?,
+      ~defaultValue: 'selectValue=?,
+      ~mode: Mode.t('selectValue, 'selectValueSingle, 'optionElement, 'optionElementSingle), // required
       ~optionLabelProp: string=?, // TODO test
       ~firstActiveValue: string=?, // doc says string[], fails at runtime
-      ~onChange: (M.selectValue, M.optionElement) => unit=?,
-      ~onSelect: (M.selectValueSingle, M.optionElementSingle) => unit=?, // TODO tst
-      ~onDeselect: M.selectValueSingle => unit=?, // return any skipped
-      ~onBlur: M.selectValue => unit=?,
+      ~onChange: ('selectValue, 'optionElement) => unit=?,
+      ~onSelect: ('selectValueSingle, 'optionElementSingle) => unit=?, // TODO tst
+      ~onDeselect: 'selectValueSingle => unit=?, // return any skipped
+      ~onBlur: 'selectValue => unit=?,
       ~onFocus: unit => unit=?,
       ~onPopupScroll: ReactEvent.Synthetic.t => unit=?,
       ~onInputKeyDown: ReactEvent.Keyboard.t => unit=?,
       ~onMouseEnter: ReactEvent.Mouse.t => unit=?,
       ~onMouseLeave: ReactEvent.Mouse.t => unit=?,
       ~maxTagCount: int=?, // only for multiple/tags
-      ~maxTagPlaceholder: M.selectValue => element=?, // only for multiple/tags
+      ~maxTagPlaceholder: 'selectValue => element=?, // only for multiple/tags
       ~optionFilterProp: string=?, // TODO test, probably remove
-      ~labelInValue: M.labelInValue, // required
+      ~labelInValue: LabelInValue.t, // required
       ~tokenSeparators: array(string)=?,
       ~getInputElement: unit => element=?,
       ~autoFocus: bool=?,
@@ -131,51 +139,6 @@ module Make =
     element =
     "antd/lib/select";
 
-};
-////////////////////
-
-
-type labeledValue = {
-  .
-  "key": string,
-  "label": element,
-};
-
-module Default = {
-  include Make({
-    type selectValue = option(labeledValue);
-    type selectValueSingle = labeledValue;
-    type optionElement = option(element);
-    type optionElementSingle = element;
-    type mode = Mode.default;
-    type labelInValue = LabelInValue.true_;
-  });
-  
-};
-
-module Multiple = {
-  include Make({
-    type selectValue = array(labeledValue);
-    type selectValueSingle = labeledValue;
-    type optionElement = array(element);
-    type optionElementSingle = element;
-    type mode = Mode.multiple;
-    type labelInValue = LabelInValue.true_;
-  });
-
-};
-
-module Tags = {
-  include Make({
-    type selectValue = array(labeledValue);
-    type selectValueSingle = labeledValue;
-    type optionElement = array(element);
-    type optionElementSingle = element;
-    type mode = Mode.tags;
-    type labelInValue = LabelInValue.true_;
-  });
-
-};
 
 module OptGroup = {
   [@react.component] [@bs.module "antd/lib/select"]

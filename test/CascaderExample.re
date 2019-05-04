@@ -75,7 +75,7 @@ let make = () => {
     <h1 id="cascader-example"> {string("Cascader Example")} </h1>
     <Cascader
       options
-      size=Size.large
+      size=`large
       popupPlacement=`topRight
       expandTrigger=`hover
       displayRender={(label, opts) => {
@@ -89,7 +89,7 @@ let make = () => {
         expectStringArray(value);
         expectCascaderOptionArray(selectedOpts);
       }}
-      showSearch={ShowSearch.object_(~limit=ShowSearch.Limit.false_, 
+      showSearch={ShowSearch.make(~limit=Limit.false_, 
         ~filter={(inputValue, path, names) => {
             Js.log4("filter", inputValue, path, names);
             expectString(inputValue);

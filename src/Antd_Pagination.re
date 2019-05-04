@@ -16,10 +16,9 @@ module ShowQuickJumper = {
     type t;
 
     external bool: bool => t = "%identity";
-    external make: {
-        .
-        "goButton": element
-    } => t = "%identity";
+    [@bs.obj] external make: (
+        ~goButton: element
+    ) => t = "";
 };
 
 [@react.component] [@bs.module]

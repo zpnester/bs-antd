@@ -28,9 +28,9 @@ let make = () => {
         style={ReactDOMRe.Style.make(~backgroundColor="#52c41a", ())}
       />
       <br />
-      <Badge status=Status.processing text={string("...")} />
+      <Badge status=`processing text={string("...")} />
       <br />
-      <Badge status=Status.error text={string("!")} />
+      <Badge status=`error text={string("!")} />
       <br />
     </div>
   </>;

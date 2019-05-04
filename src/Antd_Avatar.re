@@ -1,12 +1,5 @@
 open React;
 
-module Shape = {
-  type t = string;
-  [@bs.inline]
-  let circle = "circle";
-  [@bs.inline]
-  let square = "square";
-};
 
 module Size = {
   type t;
@@ -20,8 +13,11 @@ module Size = {
 [@react.component] [@bs.module]
 external make:
   (
-    ~shape: Shape.t=?,
-    ~size: Size.t=?,
+    ~shape: [@bs.string] [
+      | `circle
+      | `square
+    ]=?,
+    ~size: Size.t=?, // cannot be made polyvar
     ~src: string=?,
     ~srcSet: string=?,
     ~icon: Antd_IconType.t=?,

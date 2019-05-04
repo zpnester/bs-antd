@@ -28,7 +28,7 @@ type uploadFile = {
 module Action = {
     type t;
 
-    external fromString: string => t = "%identity";
+    external string: string => t = "%identity";
     external make: (uploadFile => Js.Promise.t(unit)) => t = "%identity";
 };
 
@@ -46,7 +46,7 @@ type customRequest;
 module ShowUploadList = {
      type t;
 
-     external fromBool: bool => t = "%identity";
+     external bool: bool => t = "%identity";
 
      [@bs.obj] external make: (
          ~showRemoveIcon: bool,

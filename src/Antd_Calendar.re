@@ -18,10 +18,11 @@ external make:
     ~value: Moment.t=?,
     // ~defaultValue: Js.null(Moment.t)=?,
     ~defaultValue: Moment.t=?,
-    ~mode: [@bs.string] [
-        | `month
-        | `year
-    ]=?,
+    // ~mode: [@bs.string] [
+    //     | `month
+    //     | `year
+    // ]=?,
+    ~mode: Mode.t=?, // polyvar not used so input and output use same time
     ~fullscreen: bool=?,
     ~dateCellRender: Moment.t => element=?,
     ~monthCellRender: Moment.t => element=?,

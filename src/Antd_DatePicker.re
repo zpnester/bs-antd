@@ -14,12 +14,7 @@ module Mode = {
   let year: t = [%raw {| ("year") |}];
 };
 
-module Size = {
-  type t;
-  let large: t = [%raw {| ("large") |}];
-  let small: t = [%raw {| ("small") |}];
-  let default: t = [%raw {| ("default") |}];
-};
+
 
 module ShowTime = {
   type t;
@@ -88,7 +83,7 @@ external make:
     ~_open: bool=?,
     // TODO placeholder
     ~popupStyle: ReactDOMRe.Style.t=?,
-    ~size: Size.t=?,
+    ~size: [@bs.string] [ | `large | `default | `small]=?,
     ~suffixIcon: element=?,
     ~style: ReactDOMRe.Style.t=?,
     ~onOpenChange: bool => unit=?,
@@ -137,10 +132,10 @@ module MonthPicker = {
       ~dropdownClassName: string=?,
       ~getCalendarContainer: Dom.element => Dom.htmlElement=?,
       ~locale: Antd_Locale.t=?,
-      ~mode: Mode.t=?,
+      ~mode: Mode.t=?, // polyvar not used intentionally
       ~_open: bool=?,
       ~popupStyle: ReactDOMRe.Style.t=?,
-      ~size: Size.t=?,
+      ~size: [@bs.string] [ | `large | `default | `small]=?,
       ~suffixIcon: element=?,
       ~style: ReactDOMRe.Style.t=?,
       ~onOpenChange: bool => unit=?,
@@ -184,7 +179,7 @@ module WeekPicker = {
       ~mode: Mode.t=?,
       ~_open: bool=?,
       ~popupStyle: ReactDOMRe.Style.t=?,
-      ~size: Size.t=?,
+      ~size: [@bs.string] [ | `large | `default | `small]=?,
       ~suffixIcon: element=?,
       ~style: ReactDOMRe.Style.t=?,
       ~onOpenChange: bool => unit=?,
@@ -235,7 +230,7 @@ module RangePicker = {
       ~_open: bool=?,
       // TODO placeholder
       ~popupStyle: ReactDOMRe.Style.t=?,
-      ~size: Size.t=?,
+      ~size: [@bs.string] [ | `large | `default | `small]=?,
       ~suffixIcon: element=?,
       ~style: ReactDOMRe.Style.t=?,
       ~onOpenChange: bool => unit=?,

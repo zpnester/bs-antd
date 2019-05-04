@@ -15,10 +15,10 @@ let make = () => {
 
         <hr />
         {string("Text")}
-        <Divider _type=Type.vertical  />
+        <Divider _type=`vertical  />
 
         <a href="#">{string("Link")}</a>
-        <Divider _type=Type.vertical  />
+        <Divider _type=`vertical  />
         <a href="#">{string("Link")}</a>
     </>
 };

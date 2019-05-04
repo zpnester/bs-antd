@@ -14,36 +14,19 @@ type cascaderOption = {
   "children": array(cascaderOption),
 };
 
-// module ExpandTrigger = {
-//   type t = string;
-//   [@bs.inline]
-//   let click = "click";
-//   [@bs.inline]
-//   let hover = "hover";
-// };
-
-// module PopupPlacement = {
-//   type t = string;
-//   [@bs.inline]
-//   let bottomLeft = "bottomLeft";
-//   [@bs.inline]
-//   let bottomRight = "bottomRight";
-//   [@bs.inline]
-//   let topLeft = "topLeft";
-//   [@bs.inline]
-//   let topRight = "topRight";
-// };
+  module Limit = {
+    type t;
+    external number: int => t = "%identity";
+    
+    // TODO inline when possible
+    let false_: t = [%raw {| (false) |}];
+  };
 
 module ShowSearch = {
   type t;
   external bool: bool => t = "%identity";
 
-  module Limit = {
-    type t;
-    external number: int => t = "%identity";
-    // TODO inline when possible
-    let false_: t = [%raw {| (false) |}];
-  };
+
 
   type filledFieldNames = {
     .
@@ -53,7 +36,7 @@ module ShowSearch = {
   };
 
   [@bs.obj]
-  external object_:
+  external make:
     (
       ~limit: Limit.t=?,
       ~filter: (string, array(cascaderOption), filledFieldNames) => bool=?,
@@ -68,15 +51,7 @@ module ShowSearch = {
     "";
 };
 
-module Size = {
-  type t = string;
-  [@bs.inline]
-  let large = "large";
-  [@bs.inline]
-  let default = "default";
-  [@bs.inline]
-  let small = "small";
-};
+
 
 [@react.component] [@bs.module]
 external make:
@@ -114,7 +89,11 @@ external make:
     ]=?,
     ~popupVisible: bool=?,
     ~showSearch: ShowSearch.t=?,
-    ~size: Size.t=?,
+    ~size: [@bs.string] [
+      | `large
+      | `default
+      | `small
+    ]=?,
     ~style: ReactDOMRe.Style.t=?,
     ~suffixIcon: element=?,
     ~value: array(string)=?,

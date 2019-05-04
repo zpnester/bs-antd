@@ -65,10 +65,17 @@ external make: (
 
 module Sider = {
 
+    // input type, cannot be replaced with polyvar
     module Collapse = {
         type t = string;
         [@bs.inline] let clickTrigger = "clickTrigger";
         [@bs.inline] let responsive = "responsive";
+    };
+
+    module CollapsedWidth = {
+        type t;
+        external string: string => t = "%identity";
+        external number: float => t = "%identity";
     };
 
 
@@ -87,8 +94,7 @@ module Sider = {
             | `xxl
         ]=?,
         ~collapsed: bool=?,
-        ~collapsedWidth: float=?, // string skipped
-        ~_collapsedWidth: string=?, 
+        ~collapsedWidth: CollapsedWidth.t=?,
         ~collapsible: bool=?,
         ~defaultCollapsed: bool=?,
         ~reverseArrow: bool=?,

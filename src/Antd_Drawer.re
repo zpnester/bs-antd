@@ -1,13 +1,6 @@
 
 open React;
 
-module Placement = {
-    type t = string;
-    [@bs.inline] let top = "top";
-    [@bs.inline] let right = "right";
-    [@bs.inline] let bottom = "bottom";
-    [@bs.inline] let left = "left";
-};
 
 [@react.component] [@bs.module]
 external make: (
@@ -25,7 +18,12 @@ external make: (
     ~height: string=?, // number skipped
     ~className: string=?,
     ~zIndex: int=?,
-    ~placement: Placement.t=?,
+    ~placement: [@bs.string] [
+        | `top
+        | `right
+        | `bottom
+        | `left
+    ]=?,
     ~onClose: ReactEvent.Mouse.t => unit=?,
     // TS only
     ~wrapClassName: string=?,

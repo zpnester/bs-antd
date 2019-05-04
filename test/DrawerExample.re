@@ -17,7 +17,7 @@ let make = () => {
         }}>{string("Toggle drawer")}</button>
         <Drawer
           title=string("Drawer title")
-          placement=Placement.right
+          placement=`right
           onClose={e => {
               Js.log2("onClose", e);
               setDrawerOpen(_ => false);

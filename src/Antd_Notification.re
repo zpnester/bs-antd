@@ -40,7 +40,8 @@ module Config = {
         ~onClose: unit => unit=?,
         ~onClick: unit => unit=?,
         ~prefixCls: string=?,
-        // type skipped
+        ~_type: [@bs.string] [ | `info | `success | `error | `warning ]
+                =?,
         unit
     ) => t = "";
 };

@@ -3,13 +3,6 @@
 open React;
 
 
-// module Theme = {
-//     type t = string;
-//     [@bs.inline] let filled = "filled";
-//     [@bs.inline] let outlined = "outlined";
-//     [@bs.inline] let twoTone = "twoTone";
-// };
-
 module Type = Antd_IconType;
 
 
