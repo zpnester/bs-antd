@@ -62,15 +62,15 @@ Changing Antd version is generally not recommended as imports sometimes break
 
 ## Limitations
 
-### Form
-
-Validation not implemented
-
 ### Select
 
-`labelInValue` and `mode` properties are required
+`mode` property is required
 
-`labelInValue: false` is not supported
+`labelInValue` property is required to be LabelInValue.true_
+
+### AutoComplete
+
+`labelInValue` property is required to be LabelInValue.true_
 
 ### Collapse
 
@@ -81,9 +81,10 @@ Validation not implemented
 
 ## Implementation Details
 
-### Input
+### HTML props
 
-Input, Input.TextArea, InputSearch, Input.Password includes `ReactDOMRe.props` properties (except SVG)
+Some components (Col, Row, Form, Input, etc.) have bloated sources because they extend HTML props (copied from [https://github.com/reasonml/reason-react/blob/master/src/ReactDOMRe.re](https://github.com/reasonml/reason-react/blob/master/src/ReactDOMRe.re))
+
 
 ### String enums
 
