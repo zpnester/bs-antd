@@ -42,9 +42,7 @@
     "webpack": "^4.28.1",
     "webpack-cli": "^3.1.2",
     "webpack-dev-server": "^3.1.14",
-    "@zeit/next-css": "^1.0.1"
-  },
-  "dependencies": {
+    "@zeit/next-css": "^1.0.1",
     "antd": "^3.16.6"
   }
 }
