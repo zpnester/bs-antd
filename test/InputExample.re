@@ -16,7 +16,12 @@ let make = () => {
         expectString(s);
         Js.log("on search " ++ s);  
     }}/>
-    <Input.Password />
+    <Input.Password addonBefore={string("Password")} title="Pass"
+    visibilityToggle=true
+    type_="text" onMouseMove={e => {
+        Js.log2("onMouseMove", e);
+    }}
+     className="custom-password" />
 
     <Input.TextArea />
     </>
