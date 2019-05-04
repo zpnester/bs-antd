@@ -2,7 +2,7 @@ open React;
 open Antd;
 open Spin;
 open Expect_;
-open Locale;
+open LocaleProvider;
 
 module App = {
     

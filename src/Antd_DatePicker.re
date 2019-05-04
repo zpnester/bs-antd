@@ -78,7 +78,7 @@ external make:
     ~disabledDate: Moment.t => bool=?, // not null
     ~dropdownClassName: string=?,
     ~getCalendarContainer: Dom.element => Dom.htmlElement=?,
-    ~locale: Antd_Locale.t=?,
+    ~locale: Antd_LocaleProvider.locale=?,
     ~mode: Mode.t=?,
     ~_open: bool=?,
     // TODO placeholder
@@ -131,7 +131,7 @@ module MonthPicker = {
       ~disabledDate: Moment.t => bool=?,
       ~dropdownClassName: string=?,
       ~getCalendarContainer: Dom.element => Dom.htmlElement=?,
-      ~locale: Antd_Locale.t=?,
+      ~locale: Antd_LocaleProvider.locale=?,
       ~mode: Mode.t=?, // polyvar not used intentionally
       ~_open: bool=?,
       ~popupStyle: ReactDOMRe.Style.t=?,
@@ -145,7 +145,7 @@ module MonthPicker = {
       ~defaultValue: Js.null(Moment.t)=?,
       ~defaultPickerValue: Js.null(Moment.t)=?,
       ~format: string=?,
-      ~monthCellContentRender: (Moment.t, Antd_Locale.t) => element=?, // not null
+      ~monthCellContentRender: (Moment.t, Antd_LocaleProvider.locale) => element=?, // not null // todo check locale not null
       ~renderExtraFooter: unit => element=?,
       ~value: Js.null(Moment.t)=?,
       ~onChange: (Js.null(Moment.t), string) => unit=?,
@@ -175,7 +175,7 @@ module WeekPicker = {
       ~disabledDate: Moment.t => bool=?, // not null
       ~dropdownClassName: string=?,
       ~getCalendarContainer: Dom.element => Dom.htmlElement=?,
-      ~locale: Antd_Locale.t=?,
+      ~locale: Antd_LocaleProvider.locale=?,
       ~mode: Mode.t=?,
       ~_open: bool=?,
       ~popupStyle: ReactDOMRe.Style.t=?,
@@ -225,7 +225,7 @@ module RangePicker = {
       ~disabledDate: Moment.t => bool=?, // not null
       ~dropdownClassName: string=?,
       ~getCalendarContainer: Dom.element => Dom.htmlElement=?,
-      ~locale: Antd_Locale.t=?,
+      ~locale: Antd_LocaleProvider.locale=?,
       ~mode: Mode.t=?,
       ~_open: bool=?,
       // TODO placeholder

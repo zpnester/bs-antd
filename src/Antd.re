@@ -20,7 +20,6 @@ module Comment = Antd_Comment;
 module ConfigProvider = Antd_ConfigProvider;
 module DatePicker = Antd_DatePicker;
 module TimePicker = Antd_TimePicker;
-module Locale = Antd_Locale;
 module Divider = Antd_Divider;
 module Drawer = Antd_Drawer;
 module Dropdown = Antd_Dropdown;
