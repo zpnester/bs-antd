@@ -2,6 +2,7 @@ open React;
 open Antd;
 open Expect_;
 open Belt;
+open Helpers;
 
 module WithHooks = {
   [@react.component]
@@ -19,13 +20,7 @@ external window: option(Dom.window) = "window";
 
 external asHtmlElementUnsafe: Dom.element => Dom.htmlElement = "%identity";
 
-let getDocumentBody: unit => Dom.htmlElement = [%raw
-  {|
-function(unit) {
-  return document.body
-}
-|}
-];
+
 
 [@react.component]
 let make = () => {

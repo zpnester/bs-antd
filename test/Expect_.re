@@ -159,6 +159,11 @@ let expectReactElement = (el: reactElement('a)) => {
   expectToEqual(el##props->Js.typeof, "object");
 };
 
+let expectReactElementArray = (els: array(reactElement('a))) => {
+  expectArray(els);
+  els->Array.forEach(expectReactElement);
+}
+
 let expectElementAny = (el: 'a) => {
   expectToEqual(el->isElement, true);
 };
@@ -184,3 +189,7 @@ let expectObject = (x: 'a) => {
 let expectLocale = (x: Antd_LocaleProvider.locale) => {
   Js.log("EXPECT LOCALE NOT IMPLEMENTED YET");
 };
+
+let expectNotNullUndefined = (x: 'a) => {
+  expectToEqual(!x->isNull && x->Js.typeof != "undefined");
+}

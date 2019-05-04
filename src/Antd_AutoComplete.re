@@ -1,14 +1,10 @@
 open React;
-
-type optionElement('o) = {
-  ..
-  "key": option(string),
-  "value": option(string),
-  "text": option(string)
-} as 'o;
+open Antd__;
 
 module Option = Antd_Select.Option;
 module OptGroup = Antd_Select.OptGroup;
+module Mode = Antd_Select.Mode;
+module LabelInValue = Antd_Select.LabelInValue;
 
 type t;
 
@@ -20,30 +16,71 @@ type t;
   [@react.component] [@bs.module]
   external make:
     (
-      ~ref: Ref.t(Js.Nullable.t(t))=?,
+      // ***** BEGIN ABSTRACT SELECT ***** 
       ~prefixCls: string=?,
       ~className: string=?,
+      ~showAction: array(string)=?, // single string skipped
+      ~size: [@bs.string] [
+          | `default
+          | `large
+          | `small
+      ]=?, 
+      ~notFoundContent: Js.null(element)=?,
+      ~transitionName: string=?,
+      ~choiceTransitionName: string=?,
+      ~showSearch: bool=?,
       ~allowClear: bool=?,
-      ~defaultActiveFirstOption: bool=?,
       ~disabled: bool=?,
-      ~filterOption: (string, optionElement('o)) => bool=?,
+      ~showArrow: bool=?,
+      ~style: ReactDOMRe.Style.t=?,
+      ~tabIndex: int=?,
       ~placeholder: element=?,
-      ~onSearch: string => unit=?,
-      ~value: string=?,
-      ~defaultValue: string=?,
-      ~dataSource: array(element)
-                     =?,
-      ~autoFocus: bool=?,
-      ~backfill: bool=?,
-      ~optionLabelProp: string=?,
-      ~onChange: option(string) => unit=?,
-      ~onSelect: (string, element) => unit=?,
-      ~onBlur: option(string) => unit=?,
-      ~onFocus: unit => unit=?,
+      ~defaultActiveFirstOption: bool=?,
+      ~dropdownClassName: string=?,
+      ~dropdownStyle: ReactDOMRe.Style.t=?,
+      ~dropdownMenuStyle: ReactDOMRe.Style.t=?,
+      ~dropdownMatchSelectWidth: bool=?,
+      ~onSearch: string => unit=?, // return any skipped
+      ~getPopupContainer: Dom.element => Dom.htmlElement=?,
+      ~filterOption: (string, reactElement(Option.makeProps)) => bool=?, 
+      ~id: string=?,
       ~defaultOpen: bool=?,
       ~_open: bool=?,
       ~onDropdownVisibleChange: bool => unit=?,
+      ~autoClearSearchValue: bool=?,
+      ~dropdownRender: (element, Js.t({..})) => element=?, // select props as obj
+      ~loading: bool=?,
+      // ***** END ABSTRACT SELECT ***** EDITED
+      // ***** BEGIN SELECT *****
+      ~value: option(Antd_Select.labeledValue)=?,
+      ~defaultValue: Antd_Select.labeledValue=?,
+      ~optionLabelProp: string=?,
+      ~firstActiveValue: string=?, // doc says string[], fails at runtime
+      ~onChange: option(Antd_Select.labeledValue) => unit=?,
+      ~onSelect: (Antd_Select.labeledValue, reactElement(Js.t({..}))) => unit=?,
+      ~onDeselect: Antd_Select.labeledValue => unit=?, // return any skipped
+      ~onBlur: option(Antd_Select.labeledValue) => unit=?,
+      ~onFocus: unit => unit=?,
+      ~onPopupScroll: ReactEvent.Synthetic.t => unit=?,
+      ~onInputKeyDown: ReactEvent.Keyboard.t => unit=?,
+      ~onMouseEnter: ReactEvent.Mouse.t => unit=?,
+      ~onMouseLeave: ReactEvent.Mouse.t => unit=?,
+      ~optionFilterProp: string=?,
+      ~labelInValue: LabelInValue.t, // required
+      ~tokenSeparators: array(string)=?,
+      ~getInputElement: unit => element=?,
+      ~autoFocus: bool=?,
+      ~suffixIcon: element=?,
+      ~removeIcon: element=?,
+      ~clearIcon: element=?,
+      ~menuItemSelectedIcon: element=?,
+      // ***** END SELECT *****
+      // ***** BEGIN AUTOCOMPLETE *****
+      ~backfill: bool=?,
+      ~dataSource: array(element), // Option simpler variants skipped
+      // ***** END AUTOCOMPLETE *****
       ~children: element=?,
+      ~ref: Ref.t(Js.Nullable.t(t))=?,
       unit
     ) =>
     element =

@@ -1,7 +1,7 @@
 open React;
 open Antd;
 open Expect_;
-
+open Helpers;
 
 // let expectOption = (op: element) => {
 //   expectToEqual(op->Js.typeof, "object");
@@ -104,6 +104,7 @@ let make = () => {
       }>
       {string("blur")}
     </button>
+    <h2>{string("Default")}</h2>
     <Select
     // disabled=true
       mode=Select.Mode.default
@@ -116,8 +117,14 @@ let make = () => {
           Js.log2("onDropdownVisibleChange", v);
           expectToEqual(v->Js.typeof, "boolean");
       }}
-      
+      showSearch=true
       allowClear=true
+      getPopupContainer={e => {
+        Js.log2("getPopupContainer", e);
+        expectNotNullUndefined(e);
+        getDocumentBody();
+
+      }}
       filterOption={(s, opt) => {
           Js.log3("filterOption", s, opt);
           expectReactElement(opt);
@@ -132,12 +139,12 @@ let make = () => {
       onChange={(value, option) => {
         Js.log3("on change", value, option);
         expectMaybeValue(value);
-        expectMaybeElement(option);
+        expectMaybeReactElement(option);
       }}
       onSelect={(value, option) => {
         Js.log3("on select", value, option);
         expectValue(value);
-        expectElement(option);
+        expectReactElement(option);
       }}
       onBlur={value => {
         Js.log2("on blur", value);
@@ -153,6 +160,8 @@ let make = () => {
         {string("Option 3")}
       </Select.Option>
     </Select>
+    <h2>{string("Multiple")}</h2>
+
     <Select
     onSearch={str => {
         Js.log2("onSearch", str);
@@ -185,7 +194,7 @@ let make = () => {
       onChange={(value, option) => {
         Js.log3("on change", value, option);
         expectValueArray(value);
-        expectElementArray(option);
+        expectReactElementArray(option);
       }}
       onBlur={value => {
         Js.log2("on blur", value);
@@ -194,7 +203,7 @@ let make = () => {
       onSelect={(value, option) => {
         Js.log3("on select", value, option);
         expectValue(value);
-        expectElement(option);
+        expectReactElement(option);
       }}
       onDeselect={value => {
         Js.log2("on deselect", value);
@@ -208,6 +217,8 @@ let make = () => {
         {string("Option 2")}
       </Select.Option>
     </Select>
+    <h2>{string("Tags")}</h2>
+
     <Select
       style
       placeholder={string("Please select")}
@@ -233,7 +244,7 @@ let make = () => {
       onMouseLeave={e => Js.log2("onMouseLeave", e)}
       onChange={(values, options) => {
         expectValueArray(values);
-        expectElementArray(options);
+        expectReactElementArray(options);
 
         Js.log3("on change", values, options);
       }}
@@ -244,7 +255,7 @@ let make = () => {
       onSelect={(value, option) => {
         Js.log3("on select", value, option);
         expectValue(value);
-        expectElement(option);
+        expectReactElement(option);
       }}
       onDeselect={value => {
         Js.log2("on deselect", value);

@@ -3,10 +3,46 @@ open Antd;
 open AutoComplete;
 open Expect_;
 
+// let expectOptionElement = (o: optionElement('a)) => {
+//   expectObject(o);
+//   expectMaybeString(o##value)
+//   expectMaybeString(o##key)
+// };
+
+let expectValue =
+    (
+      value: {
+        .
+        "key": string,
+        "label": element,
+      },
+    ) => {
+  expectToEqual(value->Js.typeof, "object");
+  expectToEqual(value##key->Js.typeof, "string");
+  expectElement(value##label);
+};
+
+
+
+let expectMaybeValue =
+    (
+      value:
+        option({
+          .
+          "key": string,
+          "label": element,
+        }),
+    ) => {
+  switch (value) {
+  | None => () // ok
+  | Some(value) => expectValue(value)
+  };
+};
+
 [@react.component]
 let make = () => {
   let acRef = useRef(Js.Nullable.undefined);
-  let value = "one";
+  let value = { "key": "one", "label": string("Value One!") };
 
   let dataSource = [|
     string("red"),
@@ -23,19 +59,16 @@ let make = () => {
     </OptGroup>
   |];
 
-  let filterOption = (value, opt) => {
-    let  key = opt##key->Belt.Option.getWithDefault("");
+  let filterOption = (s, opt) => {
+    let  key = opt##props->Option.keyGet->Belt.Option.getWithDefault("");
 
     Js.log3("filterOption", value, opt);
-    expectString(value);
-    // expectElementAny(opt); // TODO
+    expectString(s);
+    expectReactElement(opt);
     
-    key |> Js.String.indexOf(value) >= 0
+    key |> Js.String.indexOf(value##key) >= 0
   };
 
-  let a = ReactDOMRe.props(~ariaLabel="322", ());
-  let x = a->ReactDOMRe.ariaRoledescription;
-  Js.log2("___________________________", x);
 
   <> 
     <h1 id="autocomplete-example"> {string("AutoComplete Example")} </h1>
@@ -48,40 +81,43 @@ let make = () => {
       }>
       {string("focus")}
     </button>
+   
+
     <AutoComplete
+      labelInValue=LabelInValue.true_
       allowClear=true
       ref=acRef
       backfill=true
       dataSource
-      filterOption
       defaultValue=value
       defaultActiveFirstOption=false
       placeholder={<h3>{string("...")}</h3>}
       onChange={v => {
           Js.log2("onChange", v);
-          expectMaybeString(v);
+          expectMaybeValue(v);
       }}    
       onBlur={v => {
           Js.log2("onBlur", v);
-          expectMaybeString(v);
+          expectMaybeValue(v);
       
       }}
       onSearch={s => {
           Js.log2("onSearch", s);
           expectString(s);
       }}
-      onSelect={(s, e) => {
-          Js.log3("onSelect", s, e);
-          expectString(s);
-          // expectElement(e); // TODO
+      onSelect={(v, e) => {
+          Js.log3("onSelect", v, e);
+          expectValue(v);
+          expectReactElement(e);
       }}
     />
   
 
   <br />
-  {string("------------")}
+  
   <AutoComplete
       allowClear=true
+      labelInValue=LabelInValue.true_
       ref=acRef
       backfill=true
       dataSource
@@ -90,11 +126,11 @@ let make = () => {
       defaultActiveFirstOption=false
       onChange={v => {
           Js.log2("onChange", v);
-          expectMaybeString(v);
+          expectMaybeValue(v);
       }}    
       onBlur={v => {
           Js.log2("onBlur", v);
-          expectMaybeString(v);
+          expectMaybeValue(v);
       
       }}
       onSearch={s => {
@@ -103,8 +139,8 @@ let make = () => {
       }}
       onSelect={(s, e) => {
           Js.log3("onSelect", s, e);
-          expectString(s);
-          // expectElement(e); // TODO
+          expectValue(s);
+          expectReactElement(e);
       }}
     >
      <Input.TextArea

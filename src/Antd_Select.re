@@ -42,20 +42,20 @@ module Mode = {
   let default: t(
     option(labeledValue), 
     labeledValue,
-    option(element),
-    element
+    option(reactElement(Option.makeProps)),
+    reactElement(Option.makeProps)
     ) = [%raw {| ("default") |}];
   let multiple: t(
     array(labeledValue),
     labeledValue,
-    array(element),
-    element
+    array(reactElement(Option.makeProps)),
+    reactElement(Option.makeProps)
   ) = [%raw {| ("multiple") |}];
   let tags: t(
     array(labeledValue),
     labeledValue,
-    array(element),
-    element
+    array(reactElement(Option.makeProps)),
+    reactElement(Option.makeProps)
   ) = [%raw {| ("tags") |}];
 };
 
@@ -95,8 +95,8 @@ module LabelInValue = {
       ~dropdownMenuStyle: ReactDOMRe.Style.t=?,
       ~dropdownMatchSelectWidth: bool=?,
       ~onSearch: string => unit=?, // return any skipped
-      ~getPopupContainer: Dom.element => Dom.htmlElement=?, // TODO test input null
-      ~filterOption: (string, reactElement(Option.makeProps)) => bool=?, // TODO test
+      ~getPopupContainer: Dom.element => Dom.htmlElement=?,
+      ~filterOption: (string, reactElement(Option.makeProps)) => bool=?, 
       ~id: string=?,
       ~defaultOpen: bool=?,
       ~_open: bool=?,
@@ -109,10 +109,10 @@ module LabelInValue = {
       ~value: 'selectValue=?,
       ~defaultValue: 'selectValue=?,
       ~mode: Mode.t('selectValue, 'selectValueSingle, 'optionElement, 'optionElementSingle), // required
-      ~optionLabelProp: string=?, // TODO test
+      ~optionLabelProp: string=?,
       ~firstActiveValue: string=?, // doc says string[], fails at runtime
       ~onChange: ('selectValue, 'optionElement) => unit=?,
-      ~onSelect: ('selectValueSingle, 'optionElementSingle) => unit=?, // TODO tst
+      ~onSelect: ('selectValueSingle, 'optionElementSingle) => unit=?,
       ~onDeselect: 'selectValueSingle => unit=?, // return any skipped
       ~onBlur: 'selectValue => unit=?,
       ~onFocus: unit => unit=?,
@@ -122,7 +122,7 @@ module LabelInValue = {
       ~onMouseLeave: ReactEvent.Mouse.t => unit=?,
       ~maxTagCount: int=?, // only for multiple/tags
       ~maxTagPlaceholder: 'selectValue => element=?, // only for multiple/tags
-      ~optionFilterProp: string=?, // TODO test, probably remove
+      ~optionFilterProp: string=?,
       ~labelInValue: LabelInValue.t, // required
       ~tokenSeparators: array(string)=?,
       ~getInputElement: unit => element=?,
