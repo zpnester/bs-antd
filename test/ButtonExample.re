@@ -7,9 +7,9 @@ let make = () => {
   <>
     <h1 id="button-example"> {string("Button Exampl")} </h1>
     <Button
-      shape=`round
-      _type=`primary
-      size=`large
+      shape=Shape.round
+      type_=Type.primary
+      size=Size.large
       onClick={e => {
          Js.log("click")
         }}
@@ -20,10 +20,10 @@ let make = () => {
       onClick={e => {
          Js.log("click")
         }}
-      shape=`circle
-      _type=`danger
+      shape=Shape.circle
+      type_=Type.danger
       loading=Loading.bool(true)
-      size=`large
+      size=Size.large
     />
   </>;
 };

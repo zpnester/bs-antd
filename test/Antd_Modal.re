@@ -32,8 +32,8 @@ external make: (
         | `ghost
         | `danger
     ]=?,
-    ~okButtonProps: Antd_Button.NativeProps.t=?,
-    ~cancelButtonProps:  Antd_Button.NativeProps.t=?,
+    ~okButtonProps: Antd_Button.makeProps=?,
+    ~cancelButtonProps:  Antd_Button.makeProps=?,
     ~style: ReactDOMRe.Style.t=?,
     ~title: element=?,
     ~visible: bool=?,
@@ -79,8 +79,8 @@ module Config = {
             | `ghost
             | `danger
         ]=?,
-        ~okButtonProps: Antd_Button.NativeProps.t=?,
-        ~cancelButtonProps:  Antd_Button.NativeProps.t=?,
+        ~okButtonProps: Antd_Button.makeProps=?,
+        ~cancelButtonProps:  Antd_Button.makeProps=?,
         ~title: element=?,
         ~width: Width.t=?,
         ~zIndex: int=?,

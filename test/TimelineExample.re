@@ -21,7 +21,7 @@ let make = () => {
           {string("Technical testing 2015-09-01")}
         </Timeline.Item>
       </Timeline>
-      <Button _type=`primary onClick={_ => setReverse(r => !r)}>
+      <Button type_=Button.Type.primary onClick={_ => setReverse(r => !r)}>
         {string("Toggle Reverse")}
       </Button>
     </div>

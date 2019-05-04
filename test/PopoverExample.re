@@ -10,7 +10,7 @@ let make = () => {
         <h1 id="popover-example">{string("Popover Example")}</h1>
 
         <Popover content={string("Popover content")} title={string("Title")}>
-            <Button _type=`primary>{string("Hover me")}</Button>
+            <Button type_=Button.Type.primary>{string("Hover me")}</Button>
         </Popover>
     </>
 };
