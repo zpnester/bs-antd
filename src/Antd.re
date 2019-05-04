@@ -56,3 +56,5 @@ module Tree = Antd_Tree;
 module TreeSelect = Antd_TreeSelect;
 module Typography = Antd_Typography;
 module Upload = Antd_Upload;
+module Mention = Antd_Mention;
+module LocaleProvider = Antd_LocaleProvider;

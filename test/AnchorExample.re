@@ -49,7 +49,9 @@ let make = () => {
       // <Anchor.Link href="#tree-example" title={string("Tree Example")} />
       // <Anchor.Link href="#treeselect-example" title={string("TreeSelect Example")} />
       // <Anchor.Link href="#typography-example" title={string("Typography Example")} />
-      <Anchor.Link href="#upload-example" title={string("Upload Example")} />
+      // <Anchor.Link href="#upload-example" title={string("Upload Example")} />
+      <Anchor.Link href="#mention-example" title={string("Mention Example")} />
+      <Anchor.Link href="#localeprovider-example" title={string("LocaleProvider Example")} />
 
         
     </Anchor>

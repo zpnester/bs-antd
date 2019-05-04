@@ -58,6 +58,8 @@ let make = () => {
     <TreeSelectExample />
     <TypographyExample />
     <UploadExample />
+    <MentionExample />
+    <LocaleProviderExample />
   </>;
 
 }; 

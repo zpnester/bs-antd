@@ -46,7 +46,7 @@ Appropriate CSS/LESS setup is required (see `webpack.config.js` or `next.config.
 
 ### ES6
 
-These bindings work with both ES6 and CommonJS although have been tested primarily with CommonJS
+These bindings should work with both ES6 and CommonJS although have been tested primarily with CommonJS
 
 ### Next.js
 
