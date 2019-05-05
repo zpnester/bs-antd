@@ -19,48 +19,8 @@ module Mode = {
 module ShowTime = {
   type t;
   external bool: bool => t = "%identity";
+  external timePickerProps: Antd_TimePicker.makeProps => t = "%identity";
 
-  // copy pasted, update on time picker changed
-  [@bs.obj]
-  //    ~ref: Ref.t(Js.nullable(Antd_TimePicker.t))=?,  // no need here
-  external timePickerProps:
-    (
-      ~className: string=?,
-      ~addon: Antd_TimePicker.addon=?,
-      ~allowClear: bool=?,
-      ~autoFocus: bool=?,
-      ~clearText: string=?,
-      ~defaultOpenValue: MomentRe.Moment.t=?,
-      ~defaultValue: MomentRe.Moment.t=?,
-      ~disabled: bool=?,
-      ~disabledHours: unit => array(int)=?,
-      ~disabledMinutes: int => array(int)=?,
-      ~disabledSeconds: (~selectedHour: int, ~selectedMinute: int) =>
-                        array(int)
-                          =?,
-      ~style: ReactDOMRe.Style.t=?,
-      ~format: string=?,
-      ~getPopupContainer: Dom.element => Dom.htmlElement=?,
-      ~hideDisabledOptions: bool=?,
-      ~hourStep: int=?,
-      ~inputReadOnly: bool=?,
-      ~minuteStep: int=?,
-      ~_open: bool=?,
-      ~placeholder: string=?,
-      ~popupClassName: string=?,
-      ~popupStyle: ReactDOMRe.Style.t=?,
-      ~secondStep: int=?,
-      ~suffixIcon: React.element=?,
-      ~clearIcon: React.element=?,
-      ~use12Hours: bool=?,
-      ~value: MomentRe.Moment.t=?,
-      ~onChange: (MomentRe.Moment.t, string) => unit=?,
-      ~onOpenChange: bool => unit=?,
-      ~key: string=?,
-      unit
-    ) =>
-    t =
-    "";
 };
 
 // using Js.null is important here, option/nullable won't work

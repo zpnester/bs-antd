@@ -16,7 +16,7 @@ let make = () => {
         onChange={(~page, ~pageSize) => {
             // Js.log3("onChange", page, pageSize);
             expectInt(page);
-            expectInt(pageSize);
+            expectMaybeInt(pageSize);
         }}
         itemRender={(page, t, el) => {
             // Js.log4("itemRender", page, t, el);

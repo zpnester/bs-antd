@@ -24,13 +24,10 @@ external asHtmlElementUnsafe: Dom.element => Dom.htmlElement = "%identity";
 
 [@react.component]
 let make = () => {
-  let affixRef = useRef(Js.Nullable.undefined);
-
  
   <>
     <h1 id="affix-example"> {string("Affix Example")} </h1>
     <Affix
-      ref=affixRef
       offsetTop=150.0
       // offsetBottom=50.0
       className="myaffixclassname"
@@ -41,14 +38,6 @@ let make = () => {
       }}>
       <WithHooks />
     </Affix>
-      <button
-        onClick={_ => {
-        // Js.log(affixRef->Ref.current);
-        let r = affixRef->Ref.current->Js.Nullable.toOption->Option.getExn;
-        expectObject(r);
-      }}>
-      {string("test ref")}
-    </button>
   </>
   
 };

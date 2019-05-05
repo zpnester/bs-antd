@@ -11,6 +11,7 @@ let make = () => {
     <>
         <h1 id="timepicker-example">{string("TimePicker Example")}</h1>
         <TimePicker
+        key="tp1"
         clearText="Clear"
         disabledHours={() => {
             [|2,3 |]

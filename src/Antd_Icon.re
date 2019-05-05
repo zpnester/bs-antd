@@ -10,7 +10,7 @@ module Type = Antd_IconType;
 external make:
 (
     // ~children: element=?, // no need for children
-    // ~ref: Ref.t(Js.Nullable.t(Js.t({..})))=?, // no ref, functional
+    // ~ref // no ref, functional
     ~tabIndex: int=?,
     ~_type: string=?,
     ~className: string=?,

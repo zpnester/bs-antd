@@ -26,14 +26,14 @@ Styles must be added manually
 
 ```reason
 %bs.raw
-{| require("antd/dist/antd.css");  |};
+{| require("antd/dist/antd.css"); |};
 ```
 
 Or with LESS
 
 ```reason
 %bs.raw
-{| require("antd/dist/antd.less");  |};
+{| require("antd/dist/antd.less"); |};
 ```
 
 Appropriate CSS/LESS setup is required (see `webpack.config.js` or `next.config.js` for CSS example)
