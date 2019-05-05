@@ -90,7 +90,6 @@ module Title = {
     ~underline: bool=?,
     ~delete: bool=?,
     // omit strong
-    // TODO test if string work
     ~level: [@bs.int] [
         | [@bs.as 1] `h1
         | [@bs.as 2 ] `h2

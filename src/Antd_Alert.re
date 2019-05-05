@@ -2,8 +2,6 @@ open React;
 open Belt;
 
 [@react.component] [@bs.module]
-// ~children: element=?, // no need for children
-// ~ref: Ref.t(Js.Nullable.t(Js.t({..})))=?,
 external make:
   (
     ~_type: [@bs.string] [ | `success | `info | `warning | `error]=?,
@@ -21,6 +19,7 @@ external make:
     ~className: string=?,
     ~banner: bool=?,
     ~icon: element=?,
+    ~children: element=?, // TODO no need for children?
     unit
   ) =>
   element =

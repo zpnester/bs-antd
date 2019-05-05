@@ -69,9 +69,9 @@ module Nav = {
         // ***** BEGIN NAV FROM WEBSITE ****
         ~value: string=?,
         ~children: element=?,
-        ~data: Js.Json.t=?,
+        ~data: Js.Json.t=?, // TODO
         // ***** END NAV FROM WEBSITE *****
-        ~ref: Ref.t(Js.nullable(t))=?,
+        ~ref: Ref.t(Js.nullable(t))=?, // TODO ensure OK
         unit
     ) => element = "Nav";
 };

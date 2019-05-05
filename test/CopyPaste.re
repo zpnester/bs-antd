@@ -489,7 +489,7 @@ type makeProps = {
   [@bs.optional]
   dangerouslySetInnerHTML: {. "__html": string},
   [@bs.optional]
-  suppressContentEditableWarning: bool
+  suppressContentEditableWarning: bool,
   // ***** END HTML *****
 };
 

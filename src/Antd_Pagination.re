@@ -37,7 +37,7 @@ external make: (
     ~simple: bool=?,
     ~size: string=?,
     ~total: int=?,
-    ~onChange: (~page: int, ~pageSize: int) => unit=?, // TODO test second type
+    ~onChange: (~page: int, ~pageSize: option(int)) => unit=?, 
     ~style: ReactDOMRe.Style.t=?,
     ~className: string=?,
     ~prefixCls: string=?,

@@ -50,7 +50,7 @@ These bindings should work with both ES6 and CommonJS although have been tested 
 
 ### Next.js
 
-These bindings work with Next.js although CommonJS is required
+CommonJS is required for Next.js
 
 [BuckleScript configuration](https://bucklescript.github.io/docs/en/build-configuration.html#package-specs)
 
@@ -89,6 +89,10 @@ Changing Antd version is generally not recommended as imports sometimes break
 ### HTML props
 
 Some components (Col, Row, Form, Input, etc.) have bloated sources because they extend HTML props (copied from [https://github.com/reasonml/reason-react/blob/master/src/ReactDOMRe.re](https://github.com/reasonml/reason-react/blob/master/src/ReactDOMRe.re))
+
+It does not have impact on generated JavaScript or runtime performance
+
+Note that you should never alias or curry any ReasonReact makeProps, if you do - it affects runtime performance and generates lots of JavaScript
 
 
 ### String enums

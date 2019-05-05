@@ -21,7 +21,7 @@ external make:
         | `default
         | `small
     ]=?,
-    // ~_type
+    // ~_type // TS: CardType = 'inner'
     ~cover: element=?,
     ~actions: array(element)=?,
     ~tabList: array({

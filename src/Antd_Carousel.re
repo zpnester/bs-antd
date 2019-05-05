@@ -6,11 +6,11 @@ type t;
     [@bs.send] external next: t => unit = "next";
     [@bs.send] external prev: t => unit = "prev";
 
-module Effect = {
-    type t = string;
-    [@bs.inline] let scrollx = "scrollx";
-    [@bs.inline] let fade = "fade";
-};
+// module Effect = {
+//     type t = string;
+//     [@bs.inline] let scrollx = "scrollx";
+//     [@bs.inline] let fade = "fade";
+// };
 
 
 [@react.component] [@bs.module]

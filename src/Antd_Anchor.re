@@ -1,12 +1,5 @@
 open React;
 
-// module Container = {
-//     type t;
-//     external window: Dom.window => t = "%identity";
-//     external htmlElement: Dom.htmlElement => t = "%identity";
-
-// };
-
 [@react.component] [@bs.module]
 external make:
   (
@@ -18,7 +11,7 @@ external make:
     ~bounds: float=?,
     ~affix: bool=?,
     ~showInkInFixed: bool=?,
-    ~getContainer: unit => Dom.htmlElement=?,
+    ~getContainer: unit => Dom.htmlElement=?, // window skipped, window is default
     ~onClick: (
                 ReactEvent.Mouse.t,
                 {
@@ -39,9 +32,9 @@ module Link = {
   external make:
     (
       ~prefixCls: string=?,
-      ~href: string=?, // TS: not optional
-      ~title: element=?, // TS: not optional
-      ~children: element=?, // children?: any;
+      ~href: string=?,
+      ~title: element=?,
+      ~children: element=?,
       ~className: string=?
     ) =>
     element =

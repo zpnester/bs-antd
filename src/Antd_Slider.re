@@ -34,7 +34,7 @@ external make: (
     ~max: float=?,
     ~min: float=?,
     ~step: Js.null(float)=?, // null requried
-    ~tipFormatter: Js.null(float => element)=?, // tODO remove null if possible
+    ~tipFormatter: Js.null(float => element)=?, // TODO remove null if possible
     ~value: 'value=?,
     ~vertical: bool=?,
     ~onAfterChange: 'value => unit=?,

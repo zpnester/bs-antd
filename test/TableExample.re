@@ -274,6 +274,5 @@ let make = () => {
     childrenColumnName="name2"
      rowSelection
     />
-    <h1> {string("TODO TABLE")} </h1>
   </>;
 };

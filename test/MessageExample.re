@@ -5,7 +5,7 @@ open Antd;
 open Js.Promise;
 
 Message.config(Message.GlobalConfig.make(
-    ~top=200.0,
+    ~top=50.0,
     ()
 ))
 

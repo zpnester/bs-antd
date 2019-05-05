@@ -50,6 +50,7 @@ external make: (
     ~options: array(checkboxOption)=?,
     ~value: array(string)=?,
     // actually array of ```string | number | boolean``` but should be safe
+    // TODO ensure is safe
     ~onChange: array(string) => unit=?,
     ~children: element=?,
     unit

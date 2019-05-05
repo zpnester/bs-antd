@@ -3,8 +3,6 @@ open React;
 [@react.component] [@bs.module]
 external make:
   (
-    ~children: element=?,
-    ~ref: Ref.t(Js.Nullable.t(Js.t({..})))=?,
     ~offsetTop: float=?,
     ~offsetBottom: float=?,
     ~offset: float=?,
@@ -13,6 +11,7 @@ external make:
     ~target: unit => Dom.htmlElement=?, // null and window skipped, window is default
     ~prefixCls: string=?,
     ~className: string=?,
+    ~children: element=?,
     unit
   ) =>
   React.element =

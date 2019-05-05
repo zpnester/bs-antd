@@ -127,7 +127,7 @@ module ItemGroup = {
     external make: (
         ~children: element=?,
         ~title: element=?,
-        // TODO
+        // TODO nothing in TS and website?
         unit
     ) => element = "ItemGroup"
 

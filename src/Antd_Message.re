@@ -20,7 +20,7 @@ external warn: (element) => message = "warn";
 [@bs.module "antd/lib/message"]
 external loading: (element) => message = "loading";
 
-// TODO
+
 module GlobalConfig = {
   type t;
 
@@ -29,7 +29,7 @@ module GlobalConfig = {
     (
       ~top: float=?,
       ~duration: float=?,
-      ~maxCount: float=?,
+      ~maxCount: int=?,
       ~getContainer: unit => Dom.htmlElement=?,
       ~transitionName: string=?,
       ~prefixCls: string=?,
