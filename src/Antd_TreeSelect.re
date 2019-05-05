@@ -1,34 +1,64 @@
 
 
 open React;
+open Antd__;
 
 type t;
 
 [@bs.send] external blur: t => unit = "blur";
 [@bs.send] external focus: t => unit = "focus";
 
-type treeNode;
 
 type labeledValue = {
     .
     "value": string,
     "label": element,
-    "halfChecked": array(string)
 };
 
-// TODO
-type treeNodeNormal = {
+
+// copy pasted from Tree because Tree is functor-based atm
+type treeNodeProps = {
     .
-    "value": string, // number skipped
-    // label deprecated
-    "title": element,
-    "key": string,
-    "isLeaf": bool,
-    "disabled": bool,
-    "disableCheckbox": bool,
-    "selectable": bool,
-    "children": array(treeNodeNormal)
+    "checked": bool,
+    "dragOver": bool,
+    "dragOverGapTop": bool,
+    "dragOverGapBottom": bool,
+    "eventKey": string,
+    "expanded": bool,
+    "halfChecked": bool,
+    "loaded": bool,
+    "loading": bool,
+    "pos": string,
+    "selected": bool,
+    "title": element
 };
+
+type treeNode =  Antd__.reactElement(treeNodeProps);
+
+module Node = {
+    [@bs.deriving abstract]
+    type make = {
+        [@bs.optional]
+        value: string, // number skipped
+        // label deprecated
+        [@bs.optional]
+        title: element,
+        [@bs.optional]
+        key: string,
+        [@bs.optional]
+        isLeaf: bool,
+        [@bs.optional]
+        disabled: bool,
+        [@bs.optional]
+        disableCheckbox: bool,
+        [@bs.optional]
+        selectable: bool,
+        [@bs.optional]
+        children: array(make)
+    };
+
+};
+
 
 module TreeDataSimpleMode = {
     type t;
@@ -43,28 +73,79 @@ module TreeDataSimpleMode = {
     ) => t = "";
 };
 
+// assumes labelInValue supports only true
+
 
 module LabelInValue = Antd_Select.LabelInValue;
+module TreeCheckStrictly = {
+    type t;
+    let true_: t = [%raw {| true |}];
+    let false_: t = [%raw {| false |}];
+};
+module Option = Antd_Select.Option;
+
+
+module Multiple = {
+    type t('a);
+
+    let true_: t(array(labeledValue)) = [%raw {| true |}];
+    let false_: t(option(labeledValue)) = [%raw {| false |}];
+};
 
 [@react.component] [@bs.module]
 external make: (
-    // TODO abstract select
+    // ***** BEGIN ABSTRACT SELECT *****
+      ~prefixCls: string=?,
+      ~className: string=?,
+      ~showAction: array(string)=?, // single string skipped
+      ~size: [@bs.string] [
+          | `default
+          | `large
+          | `small
+      ]=?, 
+    //   ~notFoundContent: Js.null(element)=?,
+      ~transitionName: string=?,
+      ~choiceTransitionName: string=?,
+      ~showSearch: bool=?,
+      ~allowClear: bool=?,
+      ~disabled: bool=?,
+      ~showArrow: bool=?,
+      ~style: ReactDOMRe.Style.t=?,
+      ~tabIndex: int=?,
+      ~placeholder: element=?,
+      ~defaultActiveFirstOption: bool=?,
+      ~dropdownClassName: string=?,
+    //   ~dropdownStyle: ReactDOMRe.Style.t=?,
+      ~dropdownMenuStyle: ReactDOMRe.Style.t=?,
+      ~dropdownMatchSelectWidth: bool=?,
+    //   ~onSearch: string => unit=?, // return any skipped
+      ~getPopupContainer: Dom.element => Dom.htmlElement=?,
+      ~filterOption: (string, reactElement(Option.makeProps)) => bool=?, 
+      ~id: string=?,
+      ~defaultOpen: bool=?,
+      ~_open: bool=?,
+      ~onDropdownVisibleChange: bool => unit=?,
+      ~autoClearSearchValue: bool=?,
+      ~dropdownRender: (element, Js.t({..})) => element=?, // select props as obj
+      ~loading: bool=?,
+      // ***** END ABSTRACT SELECT *****
     // ***** BEGIN TREE SELECT *****
     ~autoFocus: bool=?,
-    ~defaultValue: array(string)=?,
+    ~defaultValue: 'value=?,
     ~dropdownStyle: ReactDOMRe.Style.t=?,
-    ~filterTreeNode: (string, treeNode) => bool=?,
-    ~loadData: 'node => unit=?,
+    ~filterTreeNode: (string, treeNode) => bool=?, 
+      ~labelInValue: LabelInValue.t, // required
+    ~loadData: treeNode => Js.Promise.t(unit)=?, // TS lying, promise is required
     ~maxTagCount: int=?,
-    ~maxTagPlaceholder: array('todo2) => element=?,
-    ~multiple: bool=?,
+    ~maxTagPlaceholder: array(labeledValue) => element=?,
+    ~multiple: Multiple.t('value), // required
     ~notFoundContent: element=?,
-    ~onChange: ('todo5, 'todo6, 'todo7) => unit=?,
-    ~onSearch: ('todo8) => unit=?,
-    ~onSelect: ('todo9) => unit=?,
+    ~onChange: ('value, 'todoLabelAlwaysNull, Js.t({..})) => unit=?,
+    ~onSearch: (string) => unit=?,
+    ~onSelect: (labeledValue) => unit=?,
     ~onTreeExpand: array(string) => unit=?,
     ~onFocus: ReactEvent.Synthetic.t => unit=?,
-    ~onBlur: ReactEvent.Synthetic.t => unit=?, // TODO test param
+    ~onBlur: ReactEvent.Synthetic.t => unit=?,
     ~searchPlaceholder: string=?,
     ~searchValue: string=?,
     ~showCheckedStrategy: [@bs.string] [
@@ -74,34 +155,16 @@ external make: (
     ]=?,
     ~suffixIcon: element=?,
     ~treeCheckable: bool=?, // reactnode skipped, bool on website
-    
-    ~treeCheckStrictly: bool=?,
-
-    ~allowClear: bool=?,
-    ~autoClearSearchValue: bool=?,
-    ~disabled: bool=?,
-    ~dropdownClassName: string=?,
-    ~dropdownMatchSelectWidth: bool=?,
-    ~getPopupContainer: Dom.element => Dom.htmlElement=?,
-    ~placeholder: string=?,
-    ~treeIcon: bool=?,
-    ~showSearch: bool=?,
-    ~size: [@bs.string] [
-        | `default
-        | `large
-        | `small
-    ]=?,
-    // treeNodeNormal used instead of treeNode 
-    ~treeData: array(treeNodeNormal)=?,
-    ~treeDataSimpleMode: TreeDataSimpleMode.t=?,
+    ~treeCheckStrictly: TreeCheckStrictly.t=?,
+    ~treeData: array(Node.make)=?,
+    ~treeDataSimpleMode: TreeDataSimpleMode.t=?, // todo test
     ~treeDefaultExpandAll: bool=?,  
     ~treeDefaultExpandedKeys: array(string)=?,
     ~treeExpandedKeys: array(string)=?,
+    ~treeIcon: bool=?,
     ~treeNodeFilterProp: string=?,
     ~treeNodeLabelProp: string=?,
-    ~value: array(string)=?, // TODO test, string skipped
-    
-    ~style: ReactDOMRe.Style.t=?,
+    ~value: 'value=?,
     // ***** END TREE SELECT *****
     ~children: element=?,
     ~ref: Ref.t(Js.nullable(t))=?,
@@ -119,10 +182,11 @@ external make: (
     ~isLeaf: bool=?,
     ~key: string=?,
     ~title: element=?,
+    ~label: element=?,
     ~value: string=?,
     ~children: element=?,
 
-    unit
+        unit
 ) => element = "TreeNode";
    
 }

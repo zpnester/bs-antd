@@ -9,6 +9,9 @@ function isArray(arr) {
 }
 
 function isElement(x) {
+    if (x === null) {
+        return true;
+    }
     if (typeof (x) == "string") {
         return true;
     }

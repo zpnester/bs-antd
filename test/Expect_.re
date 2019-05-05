@@ -222,10 +222,30 @@ let expectArrayOf = (f, xs) => {
     xs->Array.forEach(f);
 };
 
+let expectNullOf = (f, x) => {
+  switch (x->Js.Null.toOption) {
+    | None => ()
+    | Some(x) => f(x)
+  }
+};
+
+let expectOptionOf = (f, x) => {
+  switch (x) {
+    | None => ()
+    | Some(x) => f(x)
+  }
+};
+
 let expectReactMouseEvent = (e: ReactEvent.Mouse.t) => {
   expectInt(e->ReactEvent.Mouse.clientX);
   expectInt(e->ReactEvent.Mouse.nativeEvent##clientX);
 };
+
+
+let expectSynEvent = (e: ReactEvent.Synthetic.t) => {
+  expectObject(e->ReactEvent.Synthetic.nativeEvent);
+};
+
 
 
 

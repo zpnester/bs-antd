@@ -88,6 +88,12 @@ Changing Antd version is generally not recommended as imports sometimes break
 
 `checkStrictly` property is required
 
+### TreeSelect
+
+`multiple` property is required
+`labelInValue` property is required to be `LabelInValue.true_`
+
+
 ## Implementation Details
 
 ### HTML props

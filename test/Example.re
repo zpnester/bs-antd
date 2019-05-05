@@ -64,7 +64,7 @@ let make = () => {
 
 }; 
 
- [@react.component]
-  let make = () => {
-    <TreeExample />
-  };
+//  [@react.component]
+//   let make = () => {
+//     <TreeSelectExample />
+//   };
