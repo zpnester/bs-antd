@@ -16,7 +16,7 @@ type labeledValue = {
     "halfChecked": array(string)
 };
 
-
+// TODO
 type treeNodeNormal = {
     .
     "value": string, // number skipped
@@ -43,41 +43,54 @@ module TreeDataSimpleMode = {
     ) => t = "";
 };
 
+
+module LabelInValue = Antd_Select.LabelInValue;
+
 [@react.component] [@bs.module]
 external make: (
-    ~ref: Ref.t(Js.nullable(t))=?,
-    ~allowClear: bool=?,
-    ~autoClearSearchValue: bool=?,
+    // TODO abstract select
+    // ***** BEGIN TREE SELECT *****
+    ~autoFocus: bool=?,
     ~defaultValue: array(string)=?,
-    ~disabled: bool=?,
-    ~dropdownClassName: string=?,
-    ~dropdownMatchSelectWidth: bool=?,
     ~dropdownStyle: ReactDOMRe.Style.t=?,
     ~filterTreeNode: (string, treeNode) => bool=?,
-    ~getPopupContainer: Dom.element => Dom.htmlElement=?,
-    ~labelInValue: bool=?,
     ~loadData: 'node => unit=?,
     ~maxTagCount: int=?,
     ~maxTagPlaceholder: array('todo2) => element=?,
     ~multiple: bool=?,
-    ~placeholder: string=?,
+    ~notFoundContent: element=?,
+    ~onChange: ('todo5, 'todo6, 'todo7) => unit=?,
+    ~onSearch: ('todo8) => unit=?,
+    ~onSelect: ('todo9) => unit=?,
+    ~onTreeExpand: array(string) => unit=?,
+    ~onFocus: ReactEvent.Synthetic.t => unit=?,
+    ~onBlur: ReactEvent.Synthetic.t => unit=?, // TODO test param
     ~searchPlaceholder: string=?,
     ~searchValue: string=?,
-    ~treeIcon: bool=?,
     ~showCheckedStrategy: [@bs.string] [
         | [@bs.as "SHOW_ALL"] `showAll
         | [@bs.as "SHOW_PARENT"] `showParent
         | [@bs.as "SHOW_CHILD"] `showChild
     ]=?,
+    ~suffixIcon: element=?,
+    ~treeCheckable: bool=?, // reactnode skipped, bool on website
+    
+    ~treeCheckStrictly: bool=?,
+
+    ~allowClear: bool=?,
+    ~autoClearSearchValue: bool=?,
+    ~disabled: bool=?,
+    ~dropdownClassName: string=?,
+    ~dropdownMatchSelectWidth: bool=?,
+    ~getPopupContainer: Dom.element => Dom.htmlElement=?,
+    ~placeholder: string=?,
+    ~treeIcon: bool=?,
     ~showSearch: bool=?,
     ~size: [@bs.string] [
         | `default
         | `large
         | `small
     ]=?,
-    ~suffixIcon: element=?,
-    ~treeCheckable: bool=?, // reactnode skipped, bool on website
-    ~treeCheckStrictly: bool=?,
     // treeNodeNormal used instead of treeNode 
     ~treeData: array(treeNodeNormal)=?,
     ~treeDataSimpleMode: TreeDataSimpleMode.t=?,
@@ -87,12 +100,12 @@ external make: (
     ~treeNodeFilterProp: string=?,
     ~treeNodeLabelProp: string=?,
     ~value: array(string)=?, // TODO test, string skipped
-    ~onChange: ('todo5, 'todo6, 'todo7) => unit=?,
-    ~onSearch: ('todo8) => unit=?,
-    ~onSelect: ('todo9) => unit=?,
-    ~onTreeExpand: array(string) => unit=?,
+    
     ~style: ReactDOMRe.Style.t=?,
+    // ***** END TREE SELECT *****
     ~children: element=?,
+    ~ref: Ref.t(Js.nullable(t))=?,
+
     unit
 ) => element = "antd/lib/tree-select";
 

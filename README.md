@@ -84,6 +84,10 @@ Changing Antd version is generally not recommended as imports sometimes break
 ### Slider
 `range` property is required
 
+### Tree
+
+`checkStrictly` property is required
+
 ## Implementation Details
 
 ### HTML props
@@ -92,8 +96,9 @@ Some components (Col, Row, Form, Input, etc.) have bloated sources because they 
 
 It does not have impact on generated JavaScript or runtime performance
 
-Note that you should never alias or curry any ReasonReact makeProps, if you do - it affects runtime performance and generates lots of JavaScript
+Note that you should never alias or curry any ReasonReact `makeProps`, if you do - it affects runtime performance and generates lots of JavaScript
 
+HTML props require `[@bs.deriving abstract]` instead of `[@react.component]` or `[@bs.obj]`
 
 ### String enums
 
@@ -101,6 +106,5 @@ Polymorphic variants are used for string enums when `[@bs.obj]` or `[@react.comp
 
 Separate modules are used for string enums when `[@bs.deriving abstract]` is used for makeProps
 
-`[@bs.deriving abstract]` is required to rename properties when DOM properties are copy-pasted
 
 

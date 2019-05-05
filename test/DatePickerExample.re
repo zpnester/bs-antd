@@ -62,7 +62,7 @@ let make = () => {
         // // Js.log3("dateRender", current, today);
         expectMoment(current);
         expectMoment(today);
-        string(current |> MomentRe.Moment.format("MMMM DD"));
+        string(current |> MomentRe.Moment.locale("ru") |>MomentRe.Moment.format("MMMM DD"));
       }}
       renderExtraFooter={mode => {
         // // Js.log2("renderExtraFooter", mode);
@@ -77,7 +77,7 @@ let make = () => {
         // // Js.log3("monthCellContentRender", m, l);
         expectMoment(m);
         expectLocale(l);
-        string(m |> MomentRe.Moment.format("MMMM"));
+        string(m |>  MomentRe.Moment.format("MMMM"));
       }}
       onChange={(m, s) => {
         // // Js.log3("onChange", m, s);

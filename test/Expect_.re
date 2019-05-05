@@ -215,4 +215,26 @@ let expectLocale = (x: Antd_LocaleProvider.locale) => {
 
 let expectNotNullUndefined = (x: 'a) => {
   expectToEqual(!x->isNull && x->Js.typeof != "undefined");
+};
+
+let expectArrayOf = (f, xs) => {
+    expectArray(xs);
+    xs->Array.forEach(f);
+};
+
+let expectReactMouseEvent = (e: ReactEvent.Mouse.t) => {
+  expectInt(e->ReactEvent.Mouse.clientX);
+  expectInt(e->ReactEvent.Mouse.nativeEvent##clientX);
+};
+
+
+
+let expectDomMouseEvent: Dom.mouseEvent => unit = [%raw {|
+function(e) {
+  if (typeof(e.nativeEvent) != "undefined") {
+    throw "not dom event - it is react event";
+  }
+
+  expectNumber(e.clientX);
 }
+|}]

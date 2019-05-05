@@ -1,4 +1,4 @@
-    
+
 function expectToEqual(a, b) {
     let expect = require("expect");
     expect(a).toEqual(b);
@@ -9,14 +9,14 @@ function isArray(arr) {
 }
 
 function isElement(x) {
-    if (typeof(x) == "string") {
+    if (typeof (x) == "string") {
         return true;
     }
-    if (typeof(x) == "object" && typeof(x.props) == "object") {
+    if (typeof (x) == "object" && typeof (x.props) == "object") {
         return true;
     }
-        return false;
-    
+    return false;
+
 }
 
 function isInt(x) {
