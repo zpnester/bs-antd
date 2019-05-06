@@ -104,6 +104,10 @@ Changing Antd version is generally not recommended as imports sometimes break
 
 `itemRender`, `routes`, `params` property are required in `Breadcrumb.Routes`
 
+### Checkbox, Radio, Radio.Button
+
+`value` property is required to ensure types in a Group
+
 
 ## Implementation Details
 

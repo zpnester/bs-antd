@@ -1,66 +1,66 @@
 open React;
 
-type changeEvent = {
-  .
-  "target": {
-    .
-    "checked": bool, // TODO test
-    "value": option(string) // TODO test, not in TS
-  },
-  [@bs.meth] "stopPropagation": unit => unit,
-  [@bs.meth] "preventDefault": unit => unit,
-  "nativeEvent": Dom.mouseEvent,
-};
+
 
 type t;
 
 [@bs.send] external blur: t => unit = "blur";
 [@bs.send] external focus: t => unit = "focus";
 
+type radioChangeEventTraget = {
+  .
+  "checked": bool,
+  "value": string, // not optional ensured in other places
+  "name": option(string),
+  // TODO other, lowest priority
+};
+
+type radioChangeEvent = {
+  .
+  "target": radioChangeEventTraget,
+  [@bs.meth] "stopPropagation": unit => unit,
+  [@bs.meth] "preventDefault": unit => unit,
+  "nativeEvent": Dom.mouseEvent,
+};
+
+
 [@react.component] [@bs.module]
 external make:
   (
-    ~ref: Ref.t(Js.nullable(t))=?,
-    ~autoFocus: bool=?,
-    ~checked: bool=?,
-    ~defaultChecked: bool=?,
-    ~disabled: bool=?,
-    ~value: string=?, // any TODO test
-    // AbstractCheckboxProps
+    // ***** BEGIN ABSTRACT CHECKBOX *****
     ~prefixCls: string=?,
     ~className: string=?,
+    ~defaultChecked: bool=?,
+    ~checked: bool=?,
     ~style: ReactDOMRe.Style.t=?,
-    ~onChange: changeEvent=?,
+    ~disabled: bool=?,
+    // replaced below
+    // ~onChange: checkboxChangeEvent => unit=?,
     ~onClick: ReactEvent.Mouse.t => unit=?,
     ~onMouseEnter: ReactEvent.Mouse.t => unit=?,
     ~onMouseLeave: ReactEvent.Mouse.t => unit=?,
     ~onKeyPress: ReactEvent.Keyboard.t => unit=?,
     ~onKeyDown: ReactEvent.Keyboard.t => unit=?,
+    ~value: string, // value is required to ensure type on Group
     ~tabIndex: int=?,
     ~name: string=?,
     ~children: element=?,
+    // ***** END ABSTRACT CHECKBOX *****
+    // ***** BEGIN ABSTRACT CHECKBOX ONCHANGE *****
+    ~onChange: radioChangeEvent => unit=?,
+    // ***** END ABSTRACT CHECKBOX ONCHANGE *****
+    // ***** BEGIN RADIO FROM WEBSITE *****
+    ~autoFocus: bool=?,
+    // ***** END RADIO FROM WEBSITE *****
+    ~ref: Ref.t(Js.nullable(t))=?,
     unit
   ) =>
   element =
   "antd/lib/radio/radio";
 
-module Option = {
-  type t;
 
-  external string: string => t = "%identity";
+type checkboxOption('a) = Antd_Checkbox.checkboxOption('a);
 
-  [@bs.obj]
-  external make:
-    (
-      ~label: element=?,
-      ~value: string=?, // (any) TODO test
-      ~disabled: bool=?,
-      ~onChange: changeEvent => unit=?, // TODO test
-      unit
-    ) =>
-    t =
-    "";
-};
 
 module Group = {
   // TODO blur/focus and ref too?
@@ -68,21 +68,25 @@ module Group = {
   [@react.component] [@bs.module]
   external make:
     (
-      ~defaultValue: string=?, // any TODO  test
-      ~disabled: bool=?,
-      ~name: string=?,
-      ~options: array(Option.t)=?,
-      ~size: [@bs.string] [ | `large | `default | `small]=?,
-      ~value: string=?, // TODO test
-      ~onChange: changeEvent => unit=?,
-      ~buttonStyle: [@bs.string] [ | `outline | `solid]=?,
-      ~onMouseEnter: ReactEvent.Mouse.t => unit=?,
-      ~onMouseLeave: ReactEvent.Mouse.t => unit=?,
-      ~children: element=?,
-      ~id: string=?,
+      // ***** BEGIN ABSTRACT CHECKBOX GROUP ****
       ~prefixCls: string=?,
       ~className: string=?,
+      ~options: array(checkboxOption('option))=?,
+      ~disabled: bool=?,
       ~style: ReactDOMRe.Style.t=?,
+      // ***** END ABSTRACT CHECKBOX GROUP ****
+      // ***** BEGIN RADIO GROUP *****
+      ~defaultValue: string=?, // any skipped
+      ~value: string=?, // any skipped
+      ~onChange: radioChangeEvent => unit=?,
+      ~size: [@bs.string] [ | `large | `default | `small]=?, // only for buttons
+      ~onMouseEnter: ReactEvent.Mouse.t => unit=?,
+      ~onMouseLeave: ReactEvent.Mouse.t => unit=?,
+      ~name: string=?,
+      ~children: element=?,
+      ~id: string=?,
+      ~buttonStyle: [@bs.string] [ | `outline | `solid]=?,
+      // ***** END RADIO GROUP *****
       unit
     ) =>
     element =
@@ -90,31 +94,38 @@ module Group = {
 };
 
 module Button = {
-  // copy pasted
+  // complete copy paste of radio
 
   [@react.component] [@bs.module]
   external make:
     (
-      ~ref: Ref.t(Js.nullable(t))=?,
-      ~autoFocus: bool=?,
-      ~checked: bool=?,
-      ~defaultChecked: bool=?,
-      ~disabled: bool=?,
-      ~value: string=?, // any TODO test
-      // AbstractCheckboxProps
-      ~prefixCls: string=?,
-      ~className: string=?,
-      ~style: ReactDOMRe.Style.t=?,
-      ~onChange: changeEvent=?,
-      ~onClick: ReactEvent.Mouse.t => unit=?,
-      ~onMouseEnter: ReactEvent.Mouse.t => unit=?,
-      ~onMouseLeave: ReactEvent.Mouse.t => unit=?,
-      ~onKeyPress: ReactEvent.Keyboard.t => unit=?,
-      ~onKeyDown: ReactEvent.Keyboard.t => unit=?,
-      ~tabIndex: int=?,
-      ~name: string=?,
-      ~children: element=?,
-      unit
+      // ***** BEGIN ABSTRACT CHECKBOX *****
+    ~prefixCls: string=?,
+    ~className: string=?,
+    ~defaultChecked: bool=?,
+    ~checked: bool=?,
+    ~style: ReactDOMRe.Style.t=?,
+    ~disabled: bool=?,
+    // replaced below
+    // ~onChange: checkboxChangeEvent => unit=?,
+    ~onClick: ReactEvent.Mouse.t => unit=?,
+    ~onMouseEnter: ReactEvent.Mouse.t => unit=?,
+    ~onMouseLeave: ReactEvent.Mouse.t => unit=?,
+    ~onKeyPress: ReactEvent.Keyboard.t => unit=?,
+    ~onKeyDown: ReactEvent.Keyboard.t => unit=?,
+    ~value: string, // value is required to ensure type on Group
+    ~tabIndex: int=?,
+    ~name: string=?,
+    ~children: element=?,
+    // ***** END ABSTRACT CHECKBOX *****
+    // ***** BEGIN ABSTRACT CHECKBOX ONCHANGE *****
+    ~onChange: radioChangeEvent => unit=?,
+    // ***** END ABSTRACT CHECKBOX ONCHANGE *****
+    // ***** BEGIN RADIO FROM WEBSITE *****
+    ~autoFocus: bool=?,
+    // ***** END RADIO FROM WEBSITE *****
+    ~ref: Ref.t(Js.nullable(t))=?,
+    unit
     ) =>
     element =
     "antd/lib/radio/radioButton";

@@ -4,6 +4,13 @@ open React;
 
 open Expect_;
 
+let expectCheckboxChangeEvent = e => {
+  expectBool(e##target##checked);
+  expectDomMouseEvent(e##nativeEvent);
+  expectString(e##target##value);
+  expectMaybeString(e##target##name);
+};
+
 [@react.component]
 let make = () => {
   let (c, setC) = useState(() => false);
@@ -27,21 +34,51 @@ let make = () => {
   <>
     <h1 id="checkbox-example"> {string("Checkbox Example")} </h1>
     <Checkbox
+      value="c1"
       checked=c
-      onChange={e =>
-        // Js.log2("onChange", e);
-        setC(_ => e##target##checked)}
+      indeterminate=false
+      autoFocus=true
+      onClick={e => {
+        expectReactMouseEvent(e);
+      }}
+      onChange={e => {
+        expectCheckboxChangeEvent(e);
+        setC(_ => e##target##checked)
+      }}
     />
+    <h2>{string("Group")}</h2>
+    <Checkbox.Group onChange={ss => {
+      expectStringArray(ss);
+    }}
+    
+    >
+      <Checkbox value="a"
+      onChange={e => {
+        expectCheckboxChangeEvent(e);
+      }}
+      />
+      <Checkbox value="b" 
+      onChange={e => {
+        expectCheckboxChangeEvent(e);
+      }}/>
+    </Checkbox.Group>
+    
     <br />
+
+    <h2>{string("Group with options")}</h2>
     {string("group: " ++ (g |> Js.Array.joinWith(",")))}
     <br />
+
     <Checkbox.Group
       options
       onChange={os => {
-        // Js.log2("group change", os);
         expectStringArray(os);
         setG(_ => os);
       }}
     />
+
+    <h2>{string("Group with default value")}</h2>
+
+    <Checkbox.Group options defaultValue=[|"2"|] />
   </>;
 };

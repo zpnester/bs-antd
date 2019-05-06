@@ -5,50 +5,79 @@ type t;
 [@bs.send] external blur: t => unit = "blur";
 [@bs.send] external focus: t => unit = "focus";
 
-type changeEvent = {
+type checkboxChangeEvent = {
   .
-  "target": {. "checked": bool},
+  // ideally target should be of makeProps type but recursion won't work here
+    "target": {. 
+    "checked": bool,
+    "value": string, // any skipped, not optional ensured in other places
+    "name": option(string)
+  },
   [@bs.meth] "stopPropagation": unit => unit,
   [@bs.meth] "preventDefault": unit => unit,
-  [@bs.meth] "nativeEvent": Dom.mouseEvent => unit,
+  "nativeEvent": Dom.mouseEvent,
 };
 
 [@react.component] [@bs.module]
 external make:
   (
-    ~ref: Ref.t(Js.nullable(t))=?,
-    ~autoFocus: bool=?,
-    ~checked: bool=?,
+    // ***** BEGIN ABSTRACT CHECKBOX *****
+    ~prefixCls: string=?,
+    ~className: string=?,
     ~defaultChecked: bool=?,
+    ~checked: bool=?,
+    ~style: ReactDOMRe.Style.t=?,
     ~disabled: bool=?,
-    ~indeterminate: bool=?,
-    ~onChange: changeEvent => unit=?,
+    ~onChange: checkboxChangeEvent => unit=?,
+    ~onClick: ReactEvent.Mouse.t => unit=?,
+    ~onMouseEnter: ReactEvent.Mouse.t => unit=?,
+    ~onMouseLeave: ReactEvent.Mouse.t => unit=?,
+    ~onKeyPress: ReactEvent.Keyboard.t => unit=?,
+    ~onKeyDown: ReactEvent.Keyboard.t => unit=?,
+    ~value: string, // value is required to ensure type on Group
+    ~tabIndex: int=?,
+    ~name: string=?,
     ~children: element=?,
+    // ***** END ABSTRACT CHECKBOX *****
+    // ***** BEGIN CHECKBOX *****
+    ~indeterminate: bool=?,
+    // ***** END CHECKBOX *****
+    // ***** BEGIN CHECKBOX FROM WEBSITE *****
+    ~autoFocus: bool=?,
+    // ***** END CHECKBOX FROM WEBSITE *****
+    ~ref: Ref.t(Js.nullable(t))=?,
     unit
   ) =>
   element =
   "antd/lib/checkbox";
 
-module Group = {
-  type checkboxOption = {
-    .
+type checkboxOption('a) = {
+    ..
     "label": element,
-    "value": string,
+    "value": string, // not optional ensured in other places
     "disabled": bool,
-    "onChange": option(changeEvent => unit),
-  };
+    "onChange": option(checkboxChangeEvent => unit),
+  } as 'a;
+
+module Group = {
+  
 
   [@react.component] [@bs.module]
   external make:
     (
-      ~defaultValue: array(string)=?,
+      // ***** BEGIN ABSTRACT CHECKBOX GROUP ****
+      ~prefixCls: string=?,
+      ~className: string=?,
+      ~options: array(checkboxOption('option))=?,
       ~disabled: bool=?,
+      ~style: ReactDOMRe.Style.t=?,
+      // ***** END ABSTRACT CHECKBOX GROUP ****
+      // ***** BEGIN CHECKBOX GROUP *****
       ~name: string=?,
-      ~options: array(checkboxOption)=?,
+      ~defaultValue: array(string)=?, // other than string skipped
       ~value: array(string)=?,
-      // actually array of ```string | number | boolean``` but should be safe
-      // TODO ensure is safe
       ~onChange: array(string) => unit=?,
+      // ***** END CHECKBOX GROUP *****
       ~children: element=?,
       unit
     ) =>
