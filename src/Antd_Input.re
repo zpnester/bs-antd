@@ -17,7 +17,7 @@ type makeProps = {
   [@bs.optional]
   key: string,
   [@bs.optional]
-  ref: Js.nullable(Dom.element) => unit,
+  ref: ReactDOMRe.domRef,
   [@bs.optional] [@bs.as "aria-details"]
   ariaDetails: string,
   [@bs.optional] [@bs.as "aria-disabled"]
@@ -543,7 +543,7 @@ module TextArea = {
     [@bs.optional]
     key: string,
     [@bs.optional]
-    ref: Js.nullable(Dom.element) => unit,
+    ref: ReactDOMRe.domRef,
     [@bs.optional] [@bs.as "aria-details"]
     ariaDetails: string,
     [@bs.optional] [@bs.as "aria-disabled"]
@@ -1107,7 +1107,7 @@ module Password = {
     [@bs.optional]
     key: string,
     [@bs.optional]
-    ref: Js.nullable(Dom.element) => unit,
+    ref: ReactDOMRe.domRef,
     [@bs.optional] [@bs.as "aria-details"]
     ariaDetails: string,
     [@bs.optional] [@bs.as "aria-disabled"]

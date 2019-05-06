@@ -26,6 +26,8 @@ module AmPm = {
   let pm = "PM";
 };
 
+// null is required for value/defaultValue, option/nullable won't work
+
 [@bs.deriving abstract]
 type makeProps = {
   // ***** BEGIN TIME PICKER *****
@@ -36,12 +38,12 @@ type makeProps = {
   [@bs.optional]
   value: Js.null(MomentRe.Moment.t),
   [@bs.optional]
-  defaultValue: Js.null(MomentRe.Moment.t), // TODO test
+  defaultValue: Js.null(MomentRe.Moment.t), 
   [@bs.optional] [@bs.as "open"]
   open_: bool,
   [@bs.optional]
   format: string,
-  [@bs.optional]
+  [@bs.optional]  
   onChange: (Js.null(MomentRe.Moment.t), string) => unit, // TODO test
   [@bs.optional]
   onOpenChange: bool => unit,

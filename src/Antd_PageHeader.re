@@ -6,9 +6,9 @@ external make:
     ~title: element=?,
     ~subTitle: element=?,
     ~backIcon: element=?,
-    ~tags: array(string)=?, // TODO test
+    ~tags: array(element)=?,
     ~extra: element=?,
-    ~breadcrumb: Js.t({..})=?, // TODO improve breadcrumb
+    ~breadcrumb: Js.t({..})=?, // TODO ref breadcrumb, lowest priority
     ~footer: element=?,
     ~onBack: ReactEvent.Mouse.t => unit=?,
     ~className: string=?,

@@ -1,6 +1,8 @@
 open React;
 open Antd;
 open Modal;
+open Js.Promise;
+open Expect_;
 
 [@react.component]
 let make = () => {
@@ -42,15 +44,37 @@ let make = () => {
       }}>
       {string("show 2 modals and destroy all")}
     </button>
+
+    <button
+      onClick={_ => {
+        Modal.error(
+            Config.make(
+              ~content=string("Error content"),
+              ~okType=`dashed,
+              ~okText=string("Okay"),
+              ~okCancel=true,
+              ~onOk={e => {
+                resolve();
+              }},
+              ~onCancel={e => {
+                resolve();
+              }},
+              (),
+            ),
+          ) |> ignore;
+      }}>
+      {string("test")}
+    </button>
+
     <Modal
       visible=m1
       onOk={e => {
-        // Js.log2("onOk", e);
+        expectReactMouseEvent(e);
         setM1(_ => false);
         Js.Promise.resolve();
       }}
       onCancel={e => {
-        // Js.log2("onCancel", e);
+        expectReactMouseEvent(e);
         setM1(_ => false);
 
         Js.Promise.resolve();

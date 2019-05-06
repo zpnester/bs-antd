@@ -20,11 +20,11 @@ external make:
     ~style: ReactDOMRe.Style.t=?,
     ~tooltips: array(string)=?,
     ~value: float=?,
-    ~onBlur: unit => unit=?, // TODO type?
-    ~onChange: float => unit=?, // TODO test
+    ~onBlur: unit => unit=?,
+    ~onChange: float => unit=?,
     ~onFocus: unit => unit=?,
     ~onHoverChange: float => unit=?,
-    ~onKeyDown: ReactEvent.Keyboard.t => unit=?, // tODO test
+    ~onKeyDown: ReactEvent.Keyboard.t => unit=?, 
     ~prefixCls: string=?,
     unit
   ) =>

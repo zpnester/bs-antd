@@ -8,6 +8,8 @@ type filterItem = {
   "children": array(filterItem),
 };
 
+
+
 module SortOrder = {
   type t = string;
 
@@ -16,6 +18,14 @@ module SortOrder = {
   [@bs.inline]
   let ascend: t = "ascend";
 };
+
+type sorterResult('a) = {
+  .
+  "column": Js.t({..}), // TODO
+  "order": SortOrder.t,
+  "field": string,
+  "columnKey": string
+} as 'a;
 
 module Sorter = {
   type t('a);
@@ -116,46 +126,76 @@ module Locale = {
     "";
 };
 
+module Position = {
+  type t = string;
+  [@bs.inline] let top = "top";
+  [@bs.inline] let bottom = "bottom";
+  [@bs.inline] let both = "both";
+};
+
 module Pagination = {
   type t;
 
-  let false_: t = [%raw {| (false) |}];
+  let false_: t = [%raw {| false |}];
 
-  // copy pasted from antd_pagination + position
-  [@bs.obj]
-  external make:
-    (
-      ~position: [@bs.string] [ | `top | `bottom | `both]=?,
-      ~current: int=?,
-      ~defaultCurrent: int=?,
-      ~defaultPageSize: int=?,
-      ~hideOnSinglePage: bool=?,
-      ~itemRender: (
-                     int,
-                     Antd_Pagination.ItemRenderType.t,
-                     reactElement(Js.t({..}))
-                   ) =>
-                   element
-                     =?,
-      ~pageSize: int=?,
-      ~pageSizeOptions: array(string)=?,
-      ~showLessItems: bool=?,
-      ~showQuickJumper: Antd_Pagination.ShowQuickJumper.t=?,
-      ~showSizeChanger: bool=?,
-      ~showTotal: (~total: int, ~range: (int, int)) => element=?,
-      ~simple: bool=?,
-      ~size: string=?,
-      ~total: int=?,
-      ~onChange: (~page: int, ~pageSize: option(int)) => unit=?,
-      ~style: ReactDOMRe.Style.t=?,
-      ~className: string=?,
-      ~prefixCls: string=?,
-      ~selectPrefixCls: string=?,
-      ~role: string=?,
-      unit
-    ) =>
-    t =
-    "";
+  module ItemRenderType = Antd_Pagination.ItemRenderType;
+  module ShowQuickJumper = Antd_Pagination.ShowQuickJumper;
+  module Size = Antd_Pagination.Size;
+
+  module Config = {
+
+    [@bs.deriving abstract]
+    type make = {
+        // ***** BEGIN PAGINATION *****
+      [@bs.optional]
+      current: int,
+      [@bs.optional]
+      defaultCurrent: int,
+      [@bs.optional]
+      defaultPageSize: int,
+      [@bs.optional]
+      hideOnSinglePage: bool,
+      [@bs.optional]
+      itemRender: (int, ItemRenderType.t, element) => element,
+      [@bs.optional]
+      pageSize: int,
+      [@bs.optional]
+      pageSizeOptions: array(string),
+      [@bs.optional]
+      showLessItems: bool,
+      [@bs.optional]
+      showQuickJumper: ShowQuickJumper.t,
+      [@bs.optional]
+      showSizeChanger: bool,
+      [@bs.optional]
+      showTotal: (~total: int, ~range: (int, int)) => element,
+      [@bs.optional]
+      simple: bool,
+      [@bs.optional]
+      size: Size.t,
+      [@bs.optional]
+      total: int,
+      [@bs.optional]
+      onChange: (~page: int, ~pageSize: option(int)) => unit,
+      [@bs.optional]
+      style: ReactDOMRe.Style.t,
+      [@bs.optional]
+      className: string,
+      [@bs.optional]
+      prefixCls: string,
+      [@bs.optional]
+      selectPrefixCls: string,
+      [@bs.optional]
+      role: string,
+      // ***** END PAGINATION *****
+      [@bs.optional]
+      position: Position.t
+    };
+
+  };
+
+  external make: Config.make => t = "%identity";
+
 };
 
 module RowSelection = {
@@ -217,7 +257,10 @@ module Scroll = {
   external string: string => t = "%identity";
 };
 
-type onChange;
+type tableCurrentDataSource('record) = {
+  .
+  "currentDataSource": array('record)
+};
 
 [@react.component] [@bs.module]
 external make:
@@ -228,7 +271,7 @@ external make:
     ~className: string=?,
     ~style: ReactDOMRe.Style.t=?,
     ~children: element=?,
-    ~components: components=?, // TODO later
+    ~components: components=?, // TODO lowest priority
     ~dataSource: array('record), // required
     ~defaultExpandAllRows: bool=?,
     ~defaultExpandedRowKeys: array(string)=?, // skipped: TS: string[] | number[]
@@ -260,7 +303,7 @@ external make:
     ~showHeader: bool=?,
     ~size: [@bs.string] [ | `default | `middle | `small]=?,
     ~title: array('record) => element=?,
-    ~onChange: onChange=?, // TODO later
+    ~onChange: (Pagination.Config.make, Js.Dict.t(array(string)), sorterResult('todo), tableCurrentDataSource('record)) => unit=?, // TODO
     ~onExpand: (bool, 'record) => unit=?,
     ~onExpandedRowsChange: array(string) => unit=?, // num[] skipped
     ~onHeaderRow: (array(Column.t('record)), int) => Js.t({..})=?,

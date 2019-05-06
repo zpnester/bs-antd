@@ -44,8 +44,9 @@ type makeProps = {
   // ***** BEGIN HTML *****
   [@bs.optional]
   key: string,
-  [@bs.optional]
-  ref: Js.nullable(Dom.element) => unit,
+  // not dom
+  // [@bs.optional]
+  // ref: ReactDOMRe.domRef,
   [@bs.optional] [@bs.as "aria-details"]
   ariaDetails: string,
   [@bs.optional] [@bs.as "aria-disabled"]

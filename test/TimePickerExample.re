@@ -2,11 +2,20 @@ open React;
 open Antd;
 open TimePicker;
 open Expect_;
+open MomentRe;
 
 [@react.component]
 let make = () => {
   <>
     <h1 id="timepicker-example"> {string("TimePicker Example")} </h1>
+
+    <TimePicker defaultValue=Js.Null.empty />
+    <TimePicker defaultValue=Js.Null.return(momentNow())
+    onChange={(m, s) => {
+        expectNullMoment(m);
+        expectString(s);
+      }}
+     />
     <TimePicker
       key="tp1"
       clearText="Clear"
@@ -23,7 +32,6 @@ let make = () => {
       }}
       format="HH_mm_ss"
       onChange={(m, s) => {
-        // Js.log3("onChange", m, s);
         expectNullMoment(m);
         expectString(s);
       }}

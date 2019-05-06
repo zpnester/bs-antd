@@ -8,7 +8,7 @@ let make = () => {
   <>
     <h1 id="progress-example"> {string("Progress Example")} </h1>
     <Progress percent=31 />
-    <Progress _type=`dashboard percent=75 />
+    <Progress _type=`dashboard percent=75 strokeLinecap=`square/>
     <Progress
       _type=`circle
       percent=75

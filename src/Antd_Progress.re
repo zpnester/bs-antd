@@ -34,7 +34,6 @@ external make:
                | `success
              ]
                =?,
-    // TODO test
     ~strokeLinecap: [@bs.string] [ | `round | `square]=?,
     ~strokeColor: StrokeColor.t=?,
     ~successPercent: int=?,

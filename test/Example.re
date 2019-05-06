@@ -62,12 +62,11 @@ let make = () => {
   </>;
 };
 
-[@react.component]
-let make = () => {
- <> 
- <CheckboxExample />
- <RadioExample  /> 
- 
-  </>;
+  // [@react.component]
+  // let make = () => {
+  //  <> 
+  //  <CalendarExample />
+  
+  //   </>;
 
-};
+  // };

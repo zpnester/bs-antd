@@ -14,10 +14,7 @@ external make:
   (
     ~prefixCls: string=?,
     ~className: string=?,
-    // TODO
-    // ~value: Js.null(Moment.t)=?,
-    ~value: Moment.t=?,
-    // ~defaultValue: Js.null(Moment.t)=?,
+    ~value: Moment.t=?, // null not allowed
     ~defaultValue: Moment.t=?,
     ~mode: Mode.t=?, // polyvar not used so input and output use same time
     ~fullscreen: bool=?,
@@ -25,7 +22,7 @@ external make:
     ~monthCellRender: Moment.t => element=?,
     ~dateFullCellRender: Moment.t => element=?,
     ~monthFullCellRender: Moment.t => element=?,
-    ~locale: 'locale=?, // TODO
+    ~locale: Js.t({..})=?, // TODO
     ~style: ReactDOMRe.Style.t=?,
     ~onPanelChange: (Moment.t, Mode.t) => unit=?,
     ~onSelect: Moment.t => unit=?,

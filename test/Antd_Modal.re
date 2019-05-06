@@ -79,8 +79,8 @@ module Config = {
       ~title: element=?,
       ~width: Width.t=?,
       ~zIndex: int=?,
-      ~onCancel: ReactEvent.Mouse.t => Js.Promise.t(unit)=?, // TODO TS says ...any[],
-      ~onOk: ReactEvent.Mouse.t => Js.Promise.t(unit)=?, // TODO TS says ...any[],
+      ~onCancel: unit => Js.Promise.t(unit)=?, // close func param skipped
+      ~onOk: unit => Js.Promise.t(unit)=?, // close func param skipped
       ~okCancel: bool=?,
       ~_type: string=?, // TODO test
       ~style: ReactDOMRe.Style.t=?,

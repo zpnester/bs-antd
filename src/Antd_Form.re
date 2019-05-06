@@ -18,6 +18,8 @@ module Layout = {
   let vertical = "vertical";
 };
 
+// todo confirm ref 
+
 [@bs.deriving abstract]
 type makeProps = {
   // ***** BEGIN HTML *****

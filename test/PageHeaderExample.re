@@ -9,6 +9,7 @@ let make = () => {
     <PageHeader
       title={string("Title")}
       subTitle={string("Subtitle")}
+      tags=[|string("A"), <b key="b">{string("B")}</b>|]
       onBack={e => Js.log2("onBack", e)}
     />
   </>;

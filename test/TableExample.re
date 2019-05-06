@@ -32,13 +32,27 @@ let expectExpandIconPropsOfUser = (x: expandIconProps(user)) => {
   // TODO onExpand
 };
 
+
 let expectSortOder = expectEnum([|SortOrder.ascend, SortOrder.descend|]);
+
+let expectSorterResult = sr => {
+  expectObject(sr##column);
+  expectSortOder(sr##order);
+  expectString(sr##field);
+  expectString(sr##columnKey);
+};
+
 
 let expectNullSortOrder = x => {
   switch (x->Js.Null.toOption) {
   | None => ()
   | Some(x) => expectSortOder(x)
   };
+};
+
+let expectPaginationConfig = (c: Pagination.Config.make) => {
+  expectMaybeInt(c->Pagination.Config.currentGet);
+  expectMaybeInt(c->Pagination.Config.pageSizeGet);
 };
 
 [@react.component]
@@ -233,8 +247,7 @@ let make = () => {
     };
   };
 
-  let pagination =
-    Pagination.make(
+  let pConfig = Pagination.Config.make(
       ~onChange=
         (~page, ~pageSize) => {
           expectInt(page);
@@ -245,7 +258,7 @@ let make = () => {
           expectInt(i);
           // TODO enum
           expectString(t);
-          expectReactElement(el);
+          expectElement(el);
 
           string(i->string_of_int);
         },
@@ -266,6 +279,8 @@ let make = () => {
         },
       (),
     );
+  let pagination = Pagination.make(pConfig);
+    
 
   let onHeaderRow = (c, i) => {
     expectArray(c);
@@ -280,11 +295,19 @@ let make = () => {
   <>
     <h1 id="table-example"> {string("Table Example")} </h1>
     <Table
+      onChange={(cfg,b,c,d) => {
+
+        expectPaginationConfig(cfg);
+        // TODO better b
+        expectObject(b);
+        expectSorterResult(c);
+        expectUserArray(d##currentDataSource);
+      }}
       dataSource
       columns
       defaultExpandedRowKeys
       onHeaderRow
-      pagination
+      // pagination
       onRow
       footer
       title

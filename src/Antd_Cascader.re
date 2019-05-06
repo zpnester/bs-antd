@@ -5,14 +5,14 @@ type t;
 [@bs.send] external blur: t => unit = "blur";
 [@bs.send] external focus: t => unit = "focus";
 
-// TODO .. if possible
-type cascaderOption = {
-  .
+
+type cascaderOption('a) = {
+  ..
   "value": string,
   "label": element,
   "disabled": bool,
-  "children": array(cascaderOption),
-};
+  "children": array(cascaderOption('a)),
+} as 'a;
 
 module Limit = {
   type t;
@@ -23,8 +23,8 @@ module Limit = {
 };
 
 module ShowSearch = {
-  type t;
-  external bool: bool => t = "%identity";
+  type t('option);
+  external bool: bool => t('option) = "%identity";
 
   type filledFieldNames = {
     .
@@ -37,18 +37,18 @@ module ShowSearch = {
   external make:
     (
       ~limit: Limit.t=?,
-      ~filter: (string, array(cascaderOption), filledFieldNames) => bool=?,
+      ~filter: (string, array(cascaderOption('option)), filledFieldNames) => bool=?,
       ~render: (
                  string,
-                 array(cascaderOption),
+                 array(cascaderOption('option)),
                  option(string),
                  filledFieldNames
                ) =>
                element
                  =?,
       ~sort: (
-               array(cascaderOption),
-               array(cascaderOption),
+               array(cascaderOption('option)),
+               array(cascaderOption('option)),
                string,
                filledFieldNames
              ) =>
@@ -57,7 +57,7 @@ module ShowSearch = {
       ~matchInputWidth: bool=?,
       unit
     ) =>
-    t =
+    t('option) =
     "";
 };
 
@@ -71,7 +71,7 @@ external make:
     ~className: string=?,
     ~defaultValue: array(string)=?,
     ~disabled: bool=?,
-    ~displayRender: (array(string), array(cascaderOption)) => element=?,
+    ~displayRender: (array(string), array(cascaderOption('option))) => element=?,
     ~expandTrigger: [@bs.string] [ | `click | `hover]=?,
     ~fieldNames: {
                    .
@@ -81,9 +81,9 @@ external make:
                  }
                    =?,
     ~getPopupContainer: Dom.htmlElement => Dom.htmlElement=?,
-    ~loadData: array(cascaderOption) => unit=?,
+    ~loadData: array(cascaderOption('option)) => unit=?,
     ~notFoundContent: element=?,
-    ~options: array(cascaderOption)=?,
+    ~options: array(cascaderOption('option)),
     ~placeholder: string=?,
     ~popupClassName: string=?,
     ~popupPlacement: [@bs.string] [
@@ -94,12 +94,12 @@ external make:
                      ]
                        =?,
     ~popupVisible: bool=?,
-    ~showSearch: ShowSearch.t=?,
+    ~showSearch: ShowSearch.t('option)=?,
     ~size: [@bs.string] [ | `large | `default | `small]=?,
     ~style: ReactDOMRe.Style.t=?,
     ~suffixIcon: element=?,
     ~value: array(string)=?,
-    ~onChange: (array(string), array(cascaderOption)) => unit=?,
+    ~onChange: (array(string), array(cascaderOption('option))) => unit=?,
     ~onPopupVisibleChange: bool => unit=?,
     unit
   ) =>

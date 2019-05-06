@@ -4,13 +4,16 @@ open React;
 
 [@react.component]
 let make = () => {
+
   <>
     <h1 id="button-example"> {string("Button Exampl")} </h1>
     <Button
       shape=Shape.round
       type_=Type.primary
       size=Size.large
-      onClick={e => Js.log("click")}>
+      onClick={e => {
+        Js.log("click")
+      }}>
       {string("Button 1")}
     </Button>
     <Button
