@@ -21,27 +21,57 @@ module ShowQuickJumper = {
     ) => t = "";
 };
 
-[@react.component] [@bs.module]
-external make: (
-    ~current: int=?,
-    ~defaultCurrent: int=?,
-    ~defaultPageSize: int=?,
-    ~hideOnSinglePage: bool=?,
-    ~itemRender: (int, ItemRenderType.t, element) => element=?,
-    ~pageSize: int=?,
-    ~pageSizeOptions: array(string)=?,
-    ~showLessItems: bool=?,
-    ~showQuickJumper: ShowQuickJumper.t=?,
-    ~showSizeChanger: bool=?,
-    ~showTotal: (~total: int, ~range: (int, int)) => element=?, // TODO test 
-    ~simple: bool=?,
-    ~size: string=?,
-    ~total: int=?,
-    ~onChange: (~page: int, ~pageSize: option(int)) => unit=?, 
-    ~style: ReactDOMRe.Style.t=?,
-    ~className: string=?,
-    ~prefixCls: string=?,
-    ~selectPrefixCls: string=?,
-    ~role: string=?,
-    unit
-) => element = "antd/lib/pagination";
+module Size = {
+    type t = string;
+
+    [@bs.inline] let small = "small";
+};
+
+[@bs.deriving abstract]
+type makeProps = {
+    // ***** BEGIN PAGINATION *****
+    [@bs.optional]
+    current: int,
+    [@bs.optional]
+    defaultCurrent: int,
+    [@bs.optional]
+    defaultPageSize: int,
+    [@bs.optional]
+    hideOnSinglePage: bool,
+    [@bs.optional]
+    itemRender: (int, ItemRenderType.t, element) => element,
+    [@bs.optional]
+    pageSize: int,
+    [@bs.optional]
+    pageSizeOptions: array(string),
+    [@bs.optional]
+    showLessItems: bool,
+    [@bs.optional]
+    showQuickJumper: ShowQuickJumper.t,
+    [@bs.optional]
+    showSizeChanger: bool,
+    [@bs.optional]
+    showTotal: (~total: int, ~range: (int, int)) => element,
+    [@bs.optional]
+    simple: bool,
+    [@bs.optional]
+    size: Size.t,
+    [@bs.optional]
+    total: int,
+    [@bs.optional]
+    onChange: (~page: int, ~pageSize: option(int)) => unit, 
+    [@bs.optional]
+    style: ReactDOMRe.Style.t,
+    [@bs.optional]
+    className: string,
+    [@bs.optional]
+    prefixCls: string,
+    [@bs.optional]
+    selectPrefixCls: string,
+    [@bs.optional]
+    role: string,
+    // ***** END PAGINATION *****
+};
+
+[@bs.module]
+external make: component(makeProps)= "antd/lib/pagination";

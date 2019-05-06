@@ -13,6 +13,12 @@ let make = () => {
         <h1 id="pagination-example">{string("Pagination Example")}</h1>
 
         <Pagination defaultCurrent=1 total=50
+        showTotal={(~total, ~range) => {
+            expectInt(total);
+            expectInt(fst(range))
+            expectInt(snd(range))
+            string("Total: " ++ total->string_of_int)
+        }}
         onChange={(~page, ~pageSize) => {
             // Js.log3("onChange", page, pageSize);
             expectInt(page);

@@ -57,3 +57,4 @@ module Typography = Antd_Typography;
 module Upload = Antd_Upload;
 module Mention = Antd_Mention;
 module LocaleProvider = Antd_LocaleProvider;
+module List = Antd_List;

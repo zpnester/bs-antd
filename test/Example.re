@@ -60,11 +60,15 @@ let make = () => {
     <UploadExample />
     <MentionExample />
     <LocaleProviderExample />
+    <ListExample />
   </>;
 
 }; 
 
-//  [@react.component]
-//   let make = () => {
-//     <TreeSelectExample />
-//   };
+ [@react.component]
+  let make = () => {
+    <>
+    <ListExample />
+    <PaginationExample />
+    </>
+  };
