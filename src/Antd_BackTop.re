@@ -1,9 +1,8 @@
-
-
 open React;
 
 [@react.component] [@bs.module]
-external make: (
+external make:
+  (
     ~target: unit => Dom.htmlElement=?,
     ~visibilityHeight: float=?,
     ~onClick: ReactEvent.Mouse.t => unit=?,
@@ -12,4 +11,6 @@ external make: (
     ~visible: bool=?,
     ~children: element=?,
     unit
-) => element = "antd/lib/back-top";
+  ) =>
+  element =
+  "antd/lib/back-top";

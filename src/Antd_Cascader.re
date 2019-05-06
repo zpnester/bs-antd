@@ -14,19 +14,17 @@ type cascaderOption = {
   "children": array(cascaderOption),
 };
 
-  module Limit = {
-    type t;
-    external number: int => t = "%identity";
-    
-    // TODO inline when possible
-    let false_: t = [%raw {| (false) |}];
-  };
+module Limit = {
+  type t;
+  external number: int => t = "%identity";
+
+  // TODO inline when possible
+  let false_: t = [%raw {| (false) |}];
+};
 
 module ShowSearch = {
   type t;
   external bool: bool => t = "%identity";
-
-
 
   type filledFieldNames = {
     .
@@ -40,18 +38,28 @@ module ShowSearch = {
     (
       ~limit: Limit.t=?,
       ~filter: (string, array(cascaderOption), filledFieldNames) => bool=?,
-      ~render: (string, array(cascaderOption), option(string), filledFieldNames) =>
+      ~render: (
+                 string,
+                 array(cascaderOption),
+                 option(string),
+                 filledFieldNames
+               ) =>
                element
                  =?,
-      ~sort: (array(cascaderOption), array(cascaderOption), string, filledFieldNames) => float=?,
+      ~sort: (
+               array(cascaderOption),
+               array(cascaderOption),
+               string,
+               filledFieldNames
+             ) =>
+             float
+               =?,
       ~matchInputWidth: bool=?,
       unit
     ) =>
     t =
     "";
 };
-
-
 
 [@react.component] [@bs.module]
 external make:
@@ -64,10 +72,7 @@ external make:
     ~defaultValue: array(string)=?,
     ~disabled: bool=?,
     ~displayRender: (array(string), array(cascaderOption)) => element=?,
-    ~expandTrigger: [@bs.string] [
-      | `click
-      | `hover
-    ]=?,
+    ~expandTrigger: [@bs.string] [ | `click | `hover]=?,
     ~fieldNames: {
                    .
                    "value": string,
@@ -82,18 +87,15 @@ external make:
     ~placeholder: string=?,
     ~popupClassName: string=?,
     ~popupPlacement: [@bs.string] [
-      | `bottomLeft
-      | `bottomRight
-      | `topLeft
-      | `topRight
-    ]=?,
+                       | `bottomLeft
+                       | `bottomRight
+                       | `topLeft
+                       | `topRight
+                     ]
+                       =?,
     ~popupVisible: bool=?,
     ~showSearch: ShowSearch.t=?,
-    ~size: [@bs.string] [
-      | `large
-      | `default
-      | `small
-    ]=?,
+    ~size: [@bs.string] [ | `large | `default | `small]=?,
     ~style: ReactDOMRe.Style.t=?,
     ~suffixIcon: element=?,
     ~value: array(string)=?,

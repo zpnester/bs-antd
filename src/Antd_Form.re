@@ -2,15 +2,20 @@ open React;
 
 module LabelAlign = {
   type t = string;
-  [@bs.inline] let left = "left";
-  [@bs.inline] let right = "right";
+  [@bs.inline]
+  let left = "left";
+  [@bs.inline]
+  let right = "right";
 };
 
 module Layout = {
   type t = string;
-  [@bs.inline] let horizontal = "horizontal";
-  [@bs.inline] let inline = "inline";
-  [@bs.inline] let vertical = "vertical";
+  [@bs.inline]
+  let horizontal = "horizontal";
+  [@bs.inline]
+  let inline = "inline";
+  [@bs.inline]
+  let vertical = "vertical";
 };
 
 [@bs.deriving abstract]
@@ -481,7 +486,6 @@ type makeProps = {
   /* Transition events */
   [@bs.optional]
   onTransitionEnd: ReactEvent.Transition.t => unit,
-  
   /* RDFa */
   [@bs.optional]
   about: string,
@@ -526,12 +530,7 @@ type makeProps = {
   children: React.element,
 };
 
-
-
- [@bs.module]
-external make: component(makeProps) =
-  "antd/lib/form";
-
+[@bs.module] external make: component(makeProps) = "antd/lib/form";
 
 module Item = {
   [@react.component] [@bs.module "antd/lib/form"]

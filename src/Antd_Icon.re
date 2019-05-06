@@ -1,24 +1,16 @@
-
-
 open React;
-
 
 module Type = Antd_IconType;
 
-
 [@react.component] [@bs.module]
+// ~children: element=?, // no need for children
+// ~ref // no ref, functional
 external make:
-(
-    // ~children: element=?, // no need for children
-    // ~ref // no ref, functional
+  (
     ~tabIndex: int=?,
     ~_type: string=?,
     ~className: string=?,
-    ~theme: [@bs.string] [
-        | `filled
-        | `outlined
-        | `twoTone
-    ]=?,
+    ~theme: [@bs.string] [ | `filled | `outlined | `twoTone]=?,
     ~title: string=?,
     ~onKeyUp: ReactEvent.Keyboard.t => unit=?,
     ~onClick: ReactEvent.Mouse.t => unit=?,
@@ -31,4 +23,6 @@ external make:
     ~prefixCls: string=?,
     ~role: string=?,
     unit
-) => element = "antd/lib/icon";
+  ) =>
+  element =
+  "antd/lib/icon";

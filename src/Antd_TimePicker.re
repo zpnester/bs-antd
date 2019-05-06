@@ -1,7 +1,6 @@
 open React;
 open MomentRe;
 
-
 type t;
 
 [@bs.send] external blur: t => unit = "blur";
@@ -11,30 +10,35 @@ type addon;
 
 module Size = {
   type t = string;
-  [@bs.inline] let large = "large";
-  [@bs.inline] let default = "default";
-  [@bs.inline] let small = "small";
+  [@bs.inline]
+  let large = "large";
+  [@bs.inline]
+  let default = "default";
+  [@bs.inline]
+  let small = "small";
 };
 
 module AmPm = {
   type t = string;
-  [@bs.inline] let am = "AM";
-  [@bs.inline] let pm = "PM";
+  [@bs.inline]
+  let am = "AM";
+  [@bs.inline]
+  let pm = "PM";
 };
 
 [@bs.deriving abstract]
 type makeProps = {
   // ***** BEGIN TIME PICKER *****
   [@bs.optional]
-    className: string,
+  className: string,
   [@bs.optional]
   size: Size.t,
   [@bs.optional]
-  value: Js.null(MomentRe.Moment.t), 
+  value: Js.null(MomentRe.Moment.t),
   [@bs.optional]
   defaultValue: Js.null(MomentRe.Moment.t), // TODO test
   [@bs.optional] [@bs.as "open"]
-    open_: bool,
+  open_: bool,
   [@bs.optional]
   format: string,
   [@bs.optional]
@@ -56,13 +60,15 @@ type makeProps = {
   [@bs.optional]
   disabledMinutes: Js.null(int) => array(int),
   [@bs.optional]
-  disabledSeconds: (~selectedHour: Js.null(int), ~selectedMinute: Js.null(int)) => array(int),
+  disabledSeconds:
+    (~selectedHour: Js.null(int), ~selectedMinute: Js.null(int)) =>
+    array(int),
   [@bs.optional]
   style: ReactDOMRe.Style.t,
   [@bs.optional]
   getPopupContainer: Dom.element => Dom.htmlElement,
   [@bs.optional]
-  addon: addon,
+  addon,
   [@bs.optional]
   use12Hours: bool,
   [@bs.optional]
@@ -92,10 +98,7 @@ type makeProps = {
   [@bs.optional]
   clearIcon: React.element,
   [@bs.optional]
-  locale: {
-    .
-    "placeholder": string
-  },
+  locale: {. "placeholder": string},
   // ***** END TIME PICKER *****
   // ***** BEGIN TIME PICKER FROM WEBSITE *****
   [@bs.optional]
@@ -105,8 +108,6 @@ type makeProps = {
   key: string,
 };
 
-  
 // using default is fragile, antd change exports sometimes
 [@bs.module "antd/lib/time-picker"]
 external make: component(makeProps) = "default";
-

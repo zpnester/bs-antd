@@ -1,56 +1,62 @@
-
-
 open React;
 
-type transferItem('a) = {
+type transferItem('a) =
+  {
     ..
     "key": string,
     "title": string,
     "description": option(string),
-    "disabled": bool
-} as 'a;
+    "disabled": bool,
+  } as 'a;
 
 module List = {
-    type t;
+  type t;
 
-    // TODO it is outout type, not input, REDO
-    [@bs.obj] external make: (
-        ~prefixCls: string=?,
-        ~titleText: string=?,
-        // probably should be removed
-        // ~dataSource: array(transferItem('a))=?,
-        ~filter: string=?,
-        ~filterOption: ('todo, 'todo2) => bool=?,
-        ~style: ReactDOMRe.Style.t=?,
-        ~checkedKeys: array(string)=?,
-        ~handleFilter: 'todo3 => unit=?,
-        ~handleSelect: ('todo4, bool) => unit=?,
-        ~handleSelectAll: (array('todo5), bool) => unit=?,
-        ~handleClear: unit => unit=?,
-        ~render: 'todo6 => 'todo7=?,
-        ~showSearch: bool=?,
-        ~searchPlaceholder: string=?,
-        ~notFoundContent: element=?,
-        ~itemUnit: string=?,
-        ~itemsUnit: string=?,
-        // TODO self props
-        ~body: Js.t({..}) => element=?,
-        ~footer: Js.t({..}) => element=?,
-        ~_lazy: bool=?, // obj skipped
-        ~onScroll: 'todo8 => 'todo9=?,
-        ~disabled: bool=?,
-    unit
-    ) => t = "";
+  // TODO it is outout type, not input, REDO
+  [@bs.obj]
+  external make:
+    (
+      ~prefixCls: string=?,
+      ~titleText: string=?,
+      // probably should be removed
+      // ~dataSource: array(transferItem('a))=?,
+      ~filter: string=?,
+      ~filterOption: ('todo, 'todo2) => bool=?,
+      ~style: ReactDOMRe.Style.t=?,
+      ~checkedKeys: array(string)=?,
+      ~handleFilter: 'todo3 => unit=?,
+      ~handleSelect: ('todo4, bool) => unit=?,
+      ~handleSelectAll: (array('todo5), bool) => unit=?,
+      ~handleClear: unit => unit=?,
+      ~render: 'todo6 => 'todo7=?,
+      ~showSearch: bool=?,
+      ~searchPlaceholder: string=?,
+      ~notFoundContent: element=?,
+      ~itemUnit: string=?,
+      ~itemsUnit: string=?,
+      // TODO self props
+      ~body: Js.t({..}) => element=?,
+      ~footer: Js.t({..}) => element=?,
+      ~_lazy: bool=?, // obj skipped
+      ~onScroll: 'todo8 => 'todo9=?,
+      ~disabled: bool=?,
+      unit
+    ) =>
+    t =
+    "";
 };
 
 module Direction = {
-    type t = string;
-    [@bs.inline] let left = "left";
-    [@bs.inline] let right = "right";
+  type t = string;
+  [@bs.inline]
+  let left = "left";
+  [@bs.inline]
+  let right = "right";
 };
 
 [@react.component] [@bs.module]
-external make: (
+external make:
+  (
     ~className: string=?,
     ~dataSource: array(transferItem('a)), // requried
     ~disabled: bool=?,
@@ -73,4 +79,6 @@ external make: (
     // won't be needed as key is required in transferItem
     ~rowKey: transferItem('a) => string=?,
     unit
-) => element = "antd/lib/transfer"
+  ) =>
+  element =
+  "antd/lib/transfer";

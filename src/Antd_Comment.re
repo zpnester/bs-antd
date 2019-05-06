@@ -1,10 +1,8 @@
-    
-
 open React;
 
-
 [@react.component] [@bs.module]
-external make: (
+external make:
+  (
     ~actions: array(element)=?,
     ~author: element=?,
     ~avatar: element=?,
@@ -15,4 +13,6 @@ external make: (
     ~style: ReactDOMRe.Style.t=?,
     ~className: string=?,
     unit
-) => element = "antd/lib/comment";
+  ) =>
+  element =
+  "antd/lib/comment";

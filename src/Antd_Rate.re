@@ -1,6 +1,4 @@
-
 open React;
-
 
 type t;
 
@@ -8,7 +6,8 @@ type t;
 [@bs.send] external focus: t => unit = "focus";
 
 [@react.component] [@bs.module]
-external make: (
+external make:
+  (
     ~ref: Ref.t(Js.nullable(t))=?,
     ~allowClear: bool=?,
     ~allowHalf: bool=?,
@@ -28,4 +27,6 @@ external make: (
     ~onKeyDown: ReactEvent.Keyboard.t => unit=?, // tODO test
     ~prefixCls: string=?,
     unit
-) => element = "antd/lib/rate";
+  ) =>
+  element =
+  "antd/lib/rate";

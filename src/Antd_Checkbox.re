@@ -5,21 +5,17 @@ type t;
 [@bs.send] external blur: t => unit = "blur";
 [@bs.send] external focus: t => unit = "focus";
 
-
 type changeEvent = {
-    .
-    "target": {
-        .
-        "checked": bool
-    },
-    [@bs.meth] "stopPropagation": unit => unit,
-    [@bs.meth] "preventDefault": unit => unit,
-    [@bs.meth] "nativeEvent": Dom.mouseEvent => unit,
-
+  .
+  "target": {. "checked": bool},
+  [@bs.meth] "stopPropagation": unit => unit,
+  [@bs.meth] "preventDefault": unit => unit,
+  [@bs.meth] "nativeEvent": Dom.mouseEvent => unit,
 };
 
 [@react.component] [@bs.module]
-external make: (
+external make:
+  (
     ~ref: Ref.t(Js.nullable(t))=?,
     ~autoFocus: bool=?,
     ~checked: bool=?,
@@ -29,30 +25,33 @@ external make: (
     ~onChange: changeEvent => unit=?,
     ~children: element=?,
     unit
-) => element = "antd/lib/checkbox";
+  ) =>
+  element =
+  "antd/lib/checkbox";
 
 module Group = {
+  type checkboxOption = {
+    .
+    "label": element,
+    "value": string,
+    "disabled": bool,
+    "onChange": option(changeEvent => unit),
+  };
 
-
-    type checkboxOption = {
-        .
-        "label": element,
-        "value": string,
-        "disabled": bool,
-        "onChange": option(changeEvent => unit)
-    };
-
-    [@react.component] [@bs.module]
-external make: (
-    ~defaultValue: array(string)=?,
-    ~disabled: bool=?,
-    ~name: string=?,
-    ~options: array(checkboxOption)=?,
-    ~value: array(string)=?,
-    // actually array of ```string | number | boolean``` but should be safe
-    // TODO ensure is safe
-    ~onChange: array(string) => unit=?,
-    ~children: element=?,
-    unit
-) => element = "antd/lib/checkbox/Group";
+  [@react.component] [@bs.module]
+  external make:
+    (
+      ~defaultValue: array(string)=?,
+      ~disabled: bool=?,
+      ~name: string=?,
+      ~options: array(checkboxOption)=?,
+      ~value: array(string)=?,
+      // actually array of ```string | number | boolean``` but should be safe
+      // TODO ensure is safe
+      ~onChange: array(string) => unit=?,
+      ~children: element=?,
+      unit
+    ) =>
+    element =
+    "antd/lib/checkbox/Group";
 };

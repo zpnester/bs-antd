@@ -1,47 +1,48 @@
-
 open React;
 
 module AdjustOverflow = {
-    type t;
+  type t;
 
-    external bool: bool => t = "%identity";
-    // TODO test
-    [@bs.obj] external make: (
-        ~adjustX: int=?,
-        ~adjustY: int=?,
-        unit
-    ) => t = "";
+  external bool: bool => t = "%identity";
+  // TODO test
+  [@bs.obj] external make: (~adjustX: int=?, ~adjustY: int=?, unit) => t = "";
 };
 
 module Offset = {
-    type t;
+  type t;
 
-    // TODO test
-    external numbers: ((float, float)) => t = "%identity";
-    external strings: ((string, string)) => t = "%identity";
+  // TODO test
+  external numbers: ((float, float)) => t = "%identity";
+  external strings: ((string, string)) => t = "%identity";
 };
 
 module Align = {
-    type t;
+  type t;
 
-    [@bs.obj] external make: (
-        ~points: (string, string)=?,
-        ~offset: Offset.t=?,
-        ~targetOffset: Offset.t=?,
-        ~overflow: {
-            .
-            "adjustX": bool,
-            "adjustY": bool
-        }=?,
-        ~useCssRight: bool=?,
-        ~useCssBottom: bool=?,
-        ~useCssTransform: bool=?,
-        unit
-    ) => t = "";
+  [@bs.obj]
+  external make:
+    (
+      ~points: (string, string)=?,
+      ~offset: Offset.t=?,
+      ~targetOffset: Offset.t=?,
+      ~overflow: {
+                   .
+                   "adjustX": bool,
+                   "adjustY": bool,
+                 }
+                   =?,
+      ~useCssRight: bool=?,
+      ~useCssBottom: bool=?,
+      ~useCssTransform: bool=?,
+      unit
+    ) =>
+    t =
+    "";
 };
 
 [@react.component] [@bs.module]
-external make: (
+external make:
+  (
     ~content: element=?,
     ~title: element=?,
     ~prefixCls: string=?,
@@ -50,19 +51,20 @@ external make: (
     ~className: string=?,
     ~overlayStyle: ReactDOMRe.Style.t=?,
     ~placement: [@bs.string] [
-        | `top
-        | `left
-        | `right
-        | `bottom
-        | `topLeft
-        | `topRight
-        | `bottomLeft
-        | `bottomRight
-        | `leftTop
-        | `leftBottom
-        | `rightTop
-        | `rightBottom
-    ]=?,
+                  | `top
+                  | `left
+                  | `right
+                  | `bottom
+                  | `topLeft
+                  | `topRight
+                  | `bottomLeft
+                  | `bottomRight
+                  | `leftTop
+                  | `leftBottom
+                  | `rightTop
+                  | `rightBottom
+                ]
+                  =?,
     ~builtinPlacements: Js.t({..})=?, // TODO
     ~defaultVisible: bool=?,
     ~visible: bool=?,
@@ -70,12 +72,7 @@ external make: (
     ~mouseEnterDelay: float=?,
     ~mouseLeaveDelay: float=?,
     ~transitionName: string=?,
-    ~trigger: [@bs.string] [
-        | `hover
-        | `focus
-        | `click
-        | `contextMenu
-    ]=?,
+    ~trigger: [@bs.string] [ | `hover | `focus | `click | `contextMenu]=?,
     ~openClassName: string=?,
     ~arrowPointAtCenter: bool=?,
     ~autoAdjustOverflow: AdjustOverflow.t=?,
@@ -84,5 +81,6 @@ external make: (
     ~children: element=?,
     ~align: Align.t=?,
     unit
-
-) => element = "antd/lib/popover"
+  ) =>
+  element =
+  "antd/lib/popover";

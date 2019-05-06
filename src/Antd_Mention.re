@@ -1,44 +1,39 @@
-
-
 open React;
-
 
 type t;
 
 [@bs.send] external blur: t => unit = "blur";
 [@bs.send] external focus: t => unit = "focus";
 
-
 module Suggestion = {
-    type t;
+  type t;
 
-    external string: string => t = "%identity";
-    external nav: element => t = "%identity";
+  external string: string => t = "%identity";
+  external nav: element => t = "%identity";
 };
 
-
 module ContentState = {
-    type t;
+  type t;
 
-    [@bs.module "antd/lib/mention"]
-    external fromString: string => t = "toContentState";
+  [@bs.module "antd/lib/mention"]
+  external fromString: string => t = "toContentState";
 
-    [@bs.module "antd/lib/mention"]
-    external toString: t => string = "toString";
+  [@bs.module "antd/lib/mention"] external toString: t => string = "toString";
 };
 
 [@react.component] [@bs.module]
-external make: (
-    // ***** BEGIN MENTION ****
+// ***** BEGIN MENTION ****
+external make:
+  (
     ~prefixCls: string=?,
     ~suggestionStyle: ReactDOMRe.Style.t=?,
     ~defaultSuggestions: array(Suggestion.t)=?,
     ~suggestions: array(Suggestion.t)=?,
-    ~onSearchChange: (~value: string, ~trigger: string) =>  unit=?, // ret any skipped
-    ~onChange: (ContentState.t) => unit=?, // ret any skipped
+    ~onSearchChange: (~value: string, ~trigger: string) => unit=?, // ret any skipped
+    ~onChange: ContentState.t => unit=?, // ret any skipped
     ~notFoundContent: element=?, // todo test non string
     ~loading: bool=?,
-    ~style: ReactDOMRe.Style.t=?, 
+    ~style: ReactDOMRe.Style.t=?,
     ~defaultValue: ContentState.t=?,
     ~value: ContentState.t=?,
     ~className: string=?,
@@ -51,28 +46,27 @@ external make: (
     ~onSelect: (~suggestion: string, ~data: Js.Json.t) => unit=?, // ret any skipped // TODO data
     ~readOnly: bool=?,
     ~disabled: bool=?,
-    ~placement: [@bs.string] [
-        | `top
-        | `bottom
-    ]=?,
+    ~placement: [@bs.string] [ | `top | `bottom]=?,
     // ***** END MENTION *****
     ~ref: Ref.t(Js.nullable(t))=?,
     unit
-) => element = "antd/lib/mention";
-
+  ) =>
+  element =
+  "antd/lib/mention";
 
 // no types in TS
 module Nav = {
-
-    [@react.component] [@bs.module "antd/lib/mention"]
-    external make: (
-        // ***** BEGIN NAV FROM WEBSITE ****
-        ~value: string=?,
-        ~children: element=?,
-        ~data: Js.Json.t=?, // TODO
-        // ***** END NAV FROM WEBSITE *****
-        ~ref: Ref.t(Js.nullable(t))=?, // TODO ensure OK
-        unit
-    ) => element = "Nav";
+  [@react.component] [@bs.module "antd/lib/mention"]
+  // ***** BEGIN NAV FROM WEBSITE ****
+  external make:
+    (
+      ~value: string=?,
+      ~children: element=?,
+      ~data: Js.Json.t=?, // TODO
+      // ***** END NAV FROM WEBSITE *****
+      ~ref: Ref.t(Js.nullable(t))=?, // TODO ensure OK
+      unit
+    ) =>
+    element =
+    "Nav";
 };
-

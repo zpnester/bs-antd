@@ -109,9 +109,9 @@ HTML props require `[@bs.deriving abstract]` instead of `[@react.component]` or 
 
 ### String enums
 
-Polymorphic variants are used for string enums when `[@bs.obj]` or `[@react.component]` is used for makeProps
+Polymorphic variants are used when `[@bs.obj]` or `[@react.component]` is used for makeProps
 
-Separate modules are used for string enums when `[@bs.deriving abstract]` is used for makeProps
+Local modules with Identity External are used when `[@bs.deriving abstract]` is used for makeProps
 
 
 

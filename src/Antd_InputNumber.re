@@ -1,56 +1,47 @@
-
-
 open React;
-
-
-
 
 type t;
 
 [@bs.send] external blur: t => unit = "blur";
 [@bs.send] external focus: t => unit = "focus";
 
-
 module Value = {
-    type t;
+  type t;
 
-    external makeUnsafe: Js.Json.t => t = "%identity";
-    external toJson: t => Js.Json.t = "%identity";
+  external makeUnsafe: Js.Json.t => t = "%identity";
+  external toJson: t => Js.Json.t = "%identity";
 
-    let make = (value: option([ `String(string) | `Number(float)])) => {
-        switch (value) {
-            | None => Js.Json.null->makeUnsafe
-            | Some(`String(s)) => Js.Json.string(s)->makeUnsafe
-            | Some(`Number(f)) => Js.Json.number(f)->makeUnsafe
-        }
+  let make = (value: option([ | `String(string) | `Number(float)])) => {
+    switch (value) {
+    | None => Js.Json.null->makeUnsafe
+    | Some(`String(s)) => Js.Json.string(s)->makeUnsafe
+    | Some(`Number(f)) => Js.Json.number(f)->makeUnsafe
     };
+  };
 
-    let get = (js: t) => {
-        let json = js->toJson;
-        switch (json->Js.Json.decodeString) {
-            | Some(s) => Some(`String(s))
-            | None =>
-                switch (json->Js.Json.decodeNumber) {
-                    | Some(f) => Some(`Number(f))
-                    | None => None // does not raise on invalid value
-                }
-        }
+  let get = (js: t) => {
+    let json = js->toJson;
+    switch (json->Js.Json.decodeString) {
+    | Some(s) => Some(`String(s))
+    | None =>
+      switch (json->Js.Json.decodeNumber) {
+      | Some(f) => Some(`Number(f))
+      | None => None // does not raise on invalid value
+      }
     };
-
+  };
 };
-
-
 
 module Size = Antd_Input.Size;
 
 [@bs.deriving abstract]
 type makeProps = {
-    // ***** BEGIN HTML *****
+  // ***** BEGIN HTML *****
   [@bs.optional]
   key: string,
   // input number has own ref
-//   [@bs.optional]
-//   ref: Js.nullable(Dom.element) => unit,
+  //   [@bs.optional]
+  //   ref: Js.nullable(Dom.element) => unit,
   [@bs.optional] [@bs.as "aria-details"]
   ariaDetails: string,
   [@bs.optional] [@bs.as "aria-disabled"]
@@ -134,8 +125,8 @@ type makeProps = {
   [@bs.optional]
   defaultChecked: bool,
   // omit
-//   [@bs.optional]
-//   defaultValue: string,
+  //   [@bs.optional]
+  //   defaultValue: string,
   /* global html attributes */
   [@bs.optional]
   accessKey: string,
@@ -272,8 +263,8 @@ type makeProps = {
   [@bs.optional]
   manifest: string, /* uri */
   // has own max
-//   [@bs.optional]
-//   max: string, /* should be int or Js.Date.t */
+  //   [@bs.optional]
+  //   max: string, /* should be int or Js.Date.t */
   [@bs.optional]
   maxLength: int,
   [@bs.optional]
@@ -283,8 +274,8 @@ type makeProps = {
   [@bs.optional]
   method: string, /* "post" or "get" */
   // has own min
-//   [@bs.optional]
-//   min: int,
+  //   [@bs.optional]
+  //   min: int,
   [@bs.optional]
   minLength: int,
   [@bs.optional]
@@ -337,8 +328,8 @@ type makeProps = {
   [@bs.optional]
   shape: string,
   // omit
-//   [@bs.optional]
-//   size: int,
+  //   [@bs.optional]
+  //   size: int,
   [@bs.optional]
   sizes: string,
   [@bs.optional]
@@ -354,8 +345,8 @@ type makeProps = {
   [@bs.optional]
   start: int,
   // has own step
-//   [@bs.optional]
-//   step: float,
+  //   [@bs.optional]
+  //   step: float,
   [@bs.optional]
   summary: string, /* deprecated */
   [@bs.optional]
@@ -365,8 +356,8 @@ type makeProps = {
   [@bs.optional]
   useMap: string,
   // has own value
-//   [@bs.optional]
-//   value: string,
+  //   [@bs.optional]
+  //   value: string,
   [@bs.optional]
   width: string, /* in html5 this can only be a number, but in html4 it can ba a percentage as well */
   [@bs.optional]
@@ -399,8 +390,8 @@ type makeProps = {
   onBlur: ReactEvent.Focus.t => unit,
   /* Form events */
   // omit
-//   [@bs.optional]
-//   onChange: ReactEvent.Form.t => unit,
+  //   [@bs.optional]
+  //   onChange: ReactEvent.Form.t => unit,
   [@bs.optional]
   onInput: ReactEvent.Form.t => unit,
   [@bs.optional]
@@ -519,7 +510,6 @@ type makeProps = {
   /* Transition events */
   [@bs.optional]
   onTransitionEnd: ReactEvent.Transition.t => unit,
-  
   /* RDFa */
   [@bs.optional]
   about: string,
@@ -545,34 +535,32 @@ type makeProps = {
   // ***** END HTML *****
   // ***** BEGIN INPUT NUMBER *****
   [@bs.optional]
-    prefixCls: string,
+  prefixCls: string,
   [@bs.optional]
-    min: float,
+  min: float,
   [@bs.optional]
-    max: float,
+  max: float,
   [@bs.optional]
-    value: Value.t,
+  value: Value.t,
   [@bs.optional]
-    step: float, // string omited
+  step: float, // string omited
   [@bs.optional]
-    defaultValue: Value.t,
+  defaultValue: Value.t,
   [@bs.optional]
-    onChange: Value.t => unit,
+  onChange: Value.t => unit,
   [@bs.optional]
-     size: Size.t,
+  size: Size.t,
   [@bs.optional]
-    formatter: Value.t => string, 
+  formatter: Value.t => string,
   [@bs.optional]
-    parser: string => Value.t, 
+  parser: string => Value.t,
   [@bs.optional]
-    decimalSeparator: string,
+  decimalSeparator: string,
   [@bs.optional]
-    precision: float,
+  precision: float,
   // ***** END INPUT NUMBER *****
   [@bs.optional]
-    ref: Ref.t(Js.nullable(t)),
+  ref: Ref.t(Js.nullable(t)),
 };
 
-[@bs.module]
-external make: component(makeProps) = "antd/lib/input-number";
- 
+[@bs.module] external make: component(makeProps) = "antd/lib/input-number";

@@ -55,8 +55,8 @@ module Countdown = {
   };
 
   [@react.component] [@bs.module]
+  // copy paste (except value)
   external make:
-    // copy paste (except value)
     (
       ~decimalSeparator: string=?,
       ~formatter: Formatter.t=?,

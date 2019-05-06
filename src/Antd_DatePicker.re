@@ -14,13 +14,10 @@ module Mode = {
   let year: t = [%raw {| ("year") |}];
 };
 
-
-
 module ShowTime = {
   type t;
   external bool: bool => t = "%identity";
   external timePickerProps: Antd_TimePicker.makeProps => t = "%identity";
-
 };
 
 // using Js.null is important here, option/nullable won't work
@@ -105,7 +102,9 @@ module MonthPicker = {
       ~defaultValue: Js.null(Moment.t)=?,
       ~defaultPickerValue: Js.null(Moment.t)=?,
       ~format: string=?,
-      ~monthCellContentRender: (Moment.t, Antd_LocaleProvider.locale) => element=?, // not null // todo check locale not null
+      ~monthCellContentRender: (Moment.t, Antd_LocaleProvider.locale) =>
+                               element
+                                 =?, // not null // todo check locale not null
       ~renderExtraFooter: unit => element=?,
       ~value: Js.null(Moment.t)=?,
       ~onChange: (Js.null(Moment.t), string) => unit=?,
@@ -157,24 +156,21 @@ module WeekPicker = {
     "WeekPicker";
 };
 
-
-
 module RangePicker = {
-
-
   module Partial = {
     type t = string;
-    [@bs.inline] let start = "start";
-    [@bs.inline] let end_ = "end";
-
+    [@bs.inline]
+    let start = "start";
+    [@bs.inline]
+    let end_ = "end";
   };
 
   // docs are lying, made it abstract (can be undef, m, [m, m]...)
   type rangeDisableTimeCurrent;
 
   [@react.component] [@bs.module "antd/lib/date-picker"]
+  // begin common
   external make:
-    // begin common
     (
       ~ref: Ref.t(Js.nullable(t))=?,
       ~allowClear: bool=?,
@@ -199,12 +195,13 @@ module RangePicker = {
       ~defaultValue: (Js.null(Moment.t), Js.null(Moment.t))=?,
       ~defaultPickerValue: (Js.null(Moment.t), Js.null(Moment.t))=?,
       ~disabledTime: (rangeDisableTimeCurrent, Partial.t) => // option, not null; not tuple/array
-                   {
-                     .
-                     "disabledHours": option(unit => array(int)),
-                     "disabledMinutes": option(unit => array(int)),
-                     "disabledSeconds": option(unit => array(int)),
-                   }=?,
+                     {
+                       .
+                       "disabledHours": option(unit => array(int)),
+                       "disabledMinutes": option(unit => array(int)),
+                       "disabledSeconds": option(unit => array(int)),
+                     }
+                       =?,
       ~format: array(string)=?,
       ~ranges: Js.Dict.t(unit => (Js.null(Moment.t), Js.null(Moment.t)))=?,
       ~renderExtraFooter: unit => element=?,
@@ -212,7 +209,7 @@ module RangePicker = {
       ~showTime: ShowTime.t=?, // TODO test
       ~value: (Js.null(Moment.t), Js.null(Moment.t))=?,
       // removed second param
-      ~onCalendarChange: (array(Js.null(Moment.t))) => unit=?,
+      ~onCalendarChange: array(Js.null(Moment.t)) => unit=?,
       ~onChange: (array(Js.null(Moment.t)), (string, string)) => unit=?,
       ~onOk: array(Js.null(Moment.t)) => unit=?,
       unit

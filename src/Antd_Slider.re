@@ -1,4 +1,3 @@
-
 open React;
 
 type t;
@@ -6,23 +5,22 @@ type t;
 [@bs.send] external blur: t => unit = "blur";
 [@bs.send] external focus: t => unit = "focus";
 
-
 module Range = {
-    type t('value);
+  type t('value);
 
-    let true_: t((float, float)) = [%raw {| (true) |}];
-    let false_: t(float) = [%raw {| (false) |}];
+  let true_: t((float, float)) = [%raw {| (true) |}];
+  let false_: t(float) = [%raw {| (false) |}];
 };
 
 module Marks = {
-    type t;
+  type t;
 
-    external makeUnsafe: Js.t({..}) => t = "%identity";
+  external makeUnsafe: Js.t({..}) => t = "%identity";
 };
 
 [@react.component] [@bs.module]
-external make: (
-   
+external make:
+  (
     ~range: Range.t('value), // required
     ~ref: Ref.t(Js.nullable(t))=?,
     ~autoFocus: bool=?,
@@ -46,5 +44,6 @@ external make: (
     ~prefixCls: string=?,
     ~tooltipPrefixCls: string=?,
     unit
-) => element = "antd/lib/slider";
-
+  ) =>
+  element =
+  "antd/lib/slider";

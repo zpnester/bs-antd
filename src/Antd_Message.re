@@ -1,6 +1,5 @@
 open React;
 
-
 // promise field is not documented on website but keep it anyway
 type message = {. "promise": Js.Promise.t(unit)};
 
@@ -8,18 +7,14 @@ type message = {. "promise": Js.Promise.t(unit)};
 // returned promise should cover onClose use cases
 
 [@bs.module "antd/lib/message"]
-external success: (element) => message = "success";
+external success: element => message = "success";
+[@bs.module "antd/lib/message"] external error: element => message = "error";
+[@bs.module "antd/lib/message"] external info: element => message = "info";
 [@bs.module "antd/lib/message"]
-external error: (element) => message = "error";
+external warning: element => message = "warning";
+[@bs.module "antd/lib/message"] external warn: element => message = "warn";
 [@bs.module "antd/lib/message"]
-external info: (element) => message = "info";
-[@bs.module "antd/lib/message"]
-external warning: (element) => message = "warning";
-[@bs.module "antd/lib/message"]
-external warn: (element) => message = "warn";
-[@bs.module "antd/lib/message"]
-external loading: (element) => message = "loading";
-
+external loading: element => message = "loading";
 
 module GlobalConfig = {
   type t;

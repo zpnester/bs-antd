@@ -9,7 +9,6 @@ external make:
     ~closeText: element=?,
     ~message: element=?,
     ~description: element=?,
-    // React.MouseEventHandler<HTMLAnchorElement>
     ~onClose: ReactEvent.Mouse.t => unit=?,
     ~afterClose: unit => unit=?,
     ~showIcon: bool=?,

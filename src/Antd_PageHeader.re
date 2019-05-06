@@ -1,8 +1,8 @@
-
 open React;
 
 [@react.component] [@bs.module]
-external make: (
+external make:
+  (
     ~title: element=?,
     ~subTitle: element=?,
     ~backIcon: element=?,
@@ -14,4 +14,6 @@ external make: (
     ~className: string=?,
     ~style: ReactDOMRe.Style.t=?,
     unit
-) => element = "antd/lib/page-header";
+  ) =>
+  element =
+  "antd/lib/page-header";

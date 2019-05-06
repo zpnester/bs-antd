@@ -1,67 +1,61 @@
-
 open React;
 
 module ProgressDot = {
-    type t;
+  type t;
 
-    external bool: bool => t = "%identity";
-  
-    external make: ((element, {
-        .
-        "index": int,
-        "status": string, // enum ignored
-        "title": option(string),
-        "description": option(string)
-    }) => element) => t = "%identity";
+  external bool: bool => t = "%identity";
+
+  external make:
+    (
+      (
+        element,
+        {
+          .
+          "index": int,
+          "status": string, // enum ignored
+          "title": option(string),
+          "description": option(string),
+        }
+      ) =>
+      element
+    ) =>
+    t =
+    "%identity";
 };
 
 [@react.component] [@bs.module]
-external make: (
+external make:
+  (
     ~className: string=?,
     ~current: int=?,
-    ~direction: [@bs.string] [
-        | `horizontal
-        | `vertical
-    ]=?,
-    ~labelPlacement: [@bs.string] [
-        | `horizontal
-        | `vertical
-    ]=?,
+    ~direction: [@bs.string] [ | `horizontal | `vertical]=?,
+    ~labelPlacement: [@bs.string] [ | `horizontal | `vertical]=?,
     ~progressDot: ProgressDot.t=?,
-    ~size: [@bs.string] [
-        | `default
-        | `small
-    ]=?,
-    ~status: [@bs.string] [
-        | `wait
-        | `process
-        | `finish
-        | `error
-    ]=?,
+    ~size: [@bs.string] [ | `default | `small]=?,
+    ~status: [@bs.string] [ | `wait | `process | `finish | `error]=?,
     ~initial: int=?,
     ~style: ReactDOMRe.Style.t=?,
     ~iconPrefix: string=?, // not element // TODO check
     ~children: element=?,
     unit
-) => element = "antd/lib/steps";
-
+  ) =>
+  element =
+  "antd/lib/steps";
 
 module Step = {
-    [@react.component] [@bs.module "antd/lib/steps"]
-    external make: (
-        ~description: element=?,
-        ~icon: element=?,
-        ~status: [@bs.string] [
-            | `wait
-            | `process
-            | `finish
-            | `error
-        ]=?,
-        ~title: element=?,
-        ~className: string=?,
-        ~onClick: ReactEvent.Mouse.t => unit=?,
-        ~style: ReactDOMRe.Style.t=?,
-        // ~children: element=?, // not needed
-        unit
-    ) => element = "Step"
+  [@react.component] [@bs.module "antd/lib/steps"]
+  external make:
+    (
+      ~description: element=?,
+      ~icon: element=?,
+      ~status: [@bs.string] [ | `wait | `process | `finish | `error]=?,
+      ~title: element=?,
+      ~className: string=?,
+      ~onClick: ReactEvent.Mouse.t => unit=?,
+      ~style: ReactDOMRe.Style.t=?,
+      // ~children: element=?, // not needed
+      unit
+    ) =>
+    element =
+    "Step";
 };

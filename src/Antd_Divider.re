@@ -1,21 +1,16 @@
-
-
 open React;
 
 [@react.component] [@bs.module]
-external make: (
+external make:
+  (
     ~className: string=?,
     ~dashed: bool=?,
-    ~orientation: [@bs.string] [
-        | `left
-        | `right
-    ]=?,
+    ~orientation: [@bs.string] [ | `left | `right]=?,
     ~style: ReactDOMRe.Style.t=?,
-    ~_type: [@bs.string] [
-        | `horizontal
-        | `vertical
-    ]=?,
+    ~_type: [@bs.string] [ | `horizontal | `vertical]=?,
     ~prefixCls: string=?,
     ~children: element=?,
-    unit 
-) => element = "antd/lib/divider"
+    unit
+  ) =>
+  element =
+  "antd/lib/divider";

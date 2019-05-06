@@ -1,23 +1,13 @@
-
-
 open React;
 
 type locale;
 
-[@bs.module]
-external ar_EG: locale = "antd/lib/locale-provider/ar_EG";
-
-[@bs.module]
-external bg_BG: locale = "antd/lib/locale-provider/bg_BG";
-[@bs.module]
-external ca_ES: locale = "antd/lib/locale-provider/ca_ES";
-[@bs.module]
-external cs_CZ: locale = "antd/lib/locale-provider/cs_CZ";
-[@bs.module]
-external da_DK: locale = "antd/lib/locale-provider/da_DK";
-
+[@bs.module] external ar_EG: locale = "antd/lib/locale-provider/ar_EG";
+[@bs.module] external bg_BG: locale = "antd/lib/locale-provider/bg_BG";
+[@bs.module] external ca_ES: locale = "antd/lib/locale-provider/ca_ES";
+[@bs.module] external cs_CZ: locale = "antd/lib/locale-provider/cs_CZ";
+[@bs.module] external da_DK: locale = "antd/lib/locale-provider/da_DK";
 [@bs.module] external de_DE: locale = "antd/lib/locale-provider/de_DE";
-
 [@bs.module] external el_GR: locale = "antd/lib/locale-provider/el_GR";
 [@bs.module] external en_GB: locale = "antd/lib/locale-provider/en_GB";
 [@bs.module] external en_US: locale = "antd/lib/locale-provider/en_US";
@@ -58,8 +48,5 @@ external da_DK: locale = "antd/lib/locale-provider/da_DK";
 [@bs.module] external zh_TW: locale = "antd/lib/locale-provider/zh_TW";
 
 [@react.component] [@bs.module]
-external make: (
-   ~locale: locale=?,
-   ~children: element=?,
-    unit
-) => element = "antd/lib/locale-provider"
+external make: (~locale: locale=?, ~children: element=?, unit) => element =
+  "antd/lib/locale-provider";

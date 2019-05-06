@@ -1,6 +1,5 @@
 open React;
 
-
 module Size = {
   type t;
   let large: t = [%raw {| ("large") |}];
@@ -13,10 +12,7 @@ module Size = {
 [@react.component] [@bs.module]
 external make:
   (
-    ~shape: [@bs.string] [
-      | `circle
-      | `square
-    ]=?,
+    ~shape: [@bs.string] [ | `circle | `square]=?,
     ~size: Size.t=?, // cannot be made polyvar
     ~src: string=?,
     ~srcSet: string=?,

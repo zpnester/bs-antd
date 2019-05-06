@@ -3,38 +3,45 @@ open React;
 module Loading = {
   type t;
   external bool: bool => t = "%identity";
-  
-  [@bs.obj] external make: (
-    ~delay: float
-  ) => t = "";
+
+  [@bs.obj] external make: (~delay: float) => t = "";
 };
 
-
 module Shape = {
-    type t = string;
-    [@bs.inline] let round = "round";
-    [@bs.inline] let circle = "circle";
-    [@bs.inline] let circleOutline = "circle-outline";
+  type t = string;
+  [@bs.inline]
+  let round = "round";
+  [@bs.inline]
+  let circle = "circle";
+  [@bs.inline]
+  let circleOutline = "circle-outline";
 };
 
 module Size = {
-    type t = string;
-    [@bs.inline] let small = "small";
-    [@bs.inline] let default = "default";
-    [@bs.inline] let large = "large";
+  type t = string;
+  [@bs.inline]
+  let small = "small";
+  [@bs.inline]
+  let default = "default";
+  [@bs.inline]
+  let large = "large";
 };
 
 module Type = {
-    type t = string;
-    [@bs.inline] let primary = "primary";
-    [@bs.inline] let ghost = "ghost";
-    [@bs.inline] let dashed = "dashed";
-    [@bs.inline] let danger = "danger";
+  type t = string;
+  [@bs.inline]
+  let primary = "primary";
+  [@bs.inline]
+  let ghost = "ghost";
+  [@bs.inline]
+  let dashed = "dashed";
+  [@bs.inline]
+  let danger = "danger";
 };
 
 [@bs.deriving abstract]
 type makeProps = {
-    // ***** BEGIN HTML *****
+  // ***** BEGIN HTML *****
   [@bs.optional]
   key: string,
   [@bs.optional]
@@ -500,7 +507,6 @@ type makeProps = {
   /* Transition events */
   [@bs.optional]
   onTransitionEnd: ReactEvent.Transition.t => unit,
-  
   /* RDFa */
   [@bs.optional]
   about: string,
@@ -524,32 +530,30 @@ type makeProps = {
   [@bs.optional]
   suppressContentEditableWarning: bool,
   // ***** END HTML *****
-    // ***** BEGIN NATIVE BUTTON *****
-    [@bs.optional]
-    htmlType: string,
-    // *** BEGIN BASE BUTTON ***
-    [@bs.optional] [@bs.as "type"]
-    type_: Type.t,
-    [@bs.optional]
-    icon: Antd_Icon.Type.t,
-    [@bs.optional]
-    shape: Shape.t,
-    [@bs.optional]
-    size: Size.t,
-    [@bs.optional]
-    loading: Loading.t,
-    [@bs.optional]
-    prefixCls: string,
-    [@bs.optional]
-    ghost: bool,
-    [@bs.optional]
-    block: bool,
-    // *** END BASE BUTTON ***
-    // ***** END NATIVE BUTTON *****
-    [@bs.optional]
-    children: element,
+  // ***** BEGIN NATIVE BUTTON *****
+  [@bs.optional]
+  htmlType: string,
+  // *** BEGIN BASE BUTTON ***
+  [@bs.optional] [@bs.as "type"]
+  type_: Type.t,
+  [@bs.optional]
+  icon: Antd_Icon.Type.t,
+  [@bs.optional]
+  shape: Shape.t,
+  [@bs.optional]
+  size: Size.t,
+  [@bs.optional]
+  loading: Loading.t,
+  [@bs.optional]
+  prefixCls: string,
+  [@bs.optional]
+  ghost: bool,
+  [@bs.optional]
+  block: bool,
+  // *** END BASE BUTTON ***
+  // ***** END NATIVE BUTTON *****
+  [@bs.optional]
+  children: element,
 };
 
-[@bs.module]
-external make: component(makeProps) =
-  "antd/lib/button";
+[@bs.module] external make: component(makeProps) = "antd/lib/button";

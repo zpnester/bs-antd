@@ -31,3 +31,4 @@ lib
 .next
 /out
 /test_dist
+.idea

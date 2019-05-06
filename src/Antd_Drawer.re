@@ -1,9 +1,8 @@
-
 open React;
 
-
 [@react.component] [@bs.module]
-external make: (
+external make:
+  (
     ~closable: bool=?,
     ~destroyOnClose: bool=?,
     ~getContainer: unit => Dom.htmlElement=?,
@@ -18,18 +17,15 @@ external make: (
     ~height: string=?, // number skipped
     ~className: string=?,
     ~zIndex: int=?,
-    ~placement: [@bs.string] [
-        | `top
-        | `right
-        | `bottom
-        | `left
-    ]=?,
+    ~placement: [@bs.string] [ | `top | `right | `bottom | `left]=?,
     ~onClose: ReactEvent.Mouse.t => unit=?,
     // TS only
     ~wrapClassName: string=?,
     ~prefixCls: string=?,
     ~push: bool=?,
-    ~handler: element=?, 
+    ~handler: element=?,
     ~children: element=?,
     unit
-) => element = "antd/lib/drawer";
+  ) =>
+  element =
+  "antd/lib/drawer";

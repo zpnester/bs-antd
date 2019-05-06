@@ -12,7 +12,6 @@ type changeEvent = {
   "nativeEvent": Dom.mouseEvent,
 };
 
-
 type t;
 
 [@bs.send] external blur: t => unit = "blur";
