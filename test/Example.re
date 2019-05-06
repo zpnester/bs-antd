@@ -64,6 +64,6 @@ let make = () => {
 
 [@react.component]
 let make = () => {
- <> <TransferExample  />  </>;
+ <> <BreadcrumbExample  />  </>;
 
 };

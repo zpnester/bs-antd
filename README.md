@@ -98,6 +98,12 @@ Changing Antd version is generally not recommended as imports sometimes break
 
 `render`, `dataSource` properties are required
 
+### Breadcrumb
+
+`itemRender`, `routes` properties are available only in submodule `Breadcrumb.Routes`
+
+`itemRender`, `routes`, `params` property are required in `Breadcrumb.Routes`
+
 
 ## Implementation Details
 
