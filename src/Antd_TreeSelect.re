@@ -12,25 +12,6 @@ type labeledValue = {
   "label": element,
 };
 
-// copy pasted from Tree because Tree is functor-based atm
-type treeNodeProps = {
-  .
-  "checked": bool,
-  "dragOver": bool,
-  "dragOverGapTop": bool,
-  "dragOverGapBottom": bool,
-  "eventKey": string,
-  "expanded": bool,
-  "halfChecked": bool,
-  "loaded": bool,
-  "loading": bool,
-  "pos": string,
-  "selected": bool,
-  "title": element,
-};
-
-type treeNode = Antd__.reactElement(treeNodeProps);
-
 module Node = {
   [@bs.deriving abstract]
   type make = {
@@ -119,9 +100,9 @@ external make:
     ~autoFocus: bool=?,
     ~defaultValue: 'value=?,
     ~dropdownStyle: ReactDOMRe.Style.t=?,
-    ~filterTreeNode: (string, treeNode) => bool=?,
+    ~filterTreeNode: (string, Antd_Tree.treeNode) => bool=?,
     ~labelInValue: LabelInValue.t, // required
-    ~loadData: treeNode => Js.Promise.t(unit)=?, // TS lying, promise is required
+    ~loadData: Antd_Tree.treeNode => Js.Promise.t(unit)=?, // TS lying, promise is required
     ~maxTagCount: int=?,
     ~maxTagPlaceholder: array(labeledValue) => element=?,
     ~multiple: Multiple.t('value), // required
