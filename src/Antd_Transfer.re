@@ -1,50 +1,15 @@
 open React;
 
-type transferItem('a) =
+type transferItem('data) =
   {
     ..
     "key": string,
     "title": string,
     "description": option(string),
     "disabled": bool,
-  } as 'a;
+  } as 'data;
 
-module List = {
-  type t;
-
-  // TODO it is outout type, not input, REDO
-  [@bs.obj]
-  external make:
-    (
-      ~prefixCls: string=?,
-      ~titleText: string=?,
-      // probably should be removed
-      // ~dataSource: array(transferItem('a))=?,
-      ~filter: string=?,
-      ~filterOption: ('todo, 'todo2) => bool=?,
-      ~style: ReactDOMRe.Style.t=?,
-      ~checkedKeys: array(string)=?,
-      ~handleFilter: 'todo3 => unit=?,
-      ~handleSelect: ('todo4, bool) => unit=?,
-      ~handleSelectAll: (array('todo5), bool) => unit=?,
-      ~handleClear: unit => unit=?,
-      ~render: 'todo6 => 'todo7=?,
-      ~showSearch: bool=?,
-      ~searchPlaceholder: string=?,
-      ~notFoundContent: element=?,
-      ~itemUnit: string=?,
-      ~itemsUnit: string=?,
-      // TODO self props
-      ~body: Js.t({..}) => element=?,
-      ~footer: Js.t({..}) => element=?,
-      ~_lazy: bool=?, // obj skipped
-      ~onScroll: 'todo8 => 'todo9=?,
-      ~disabled: bool=?,
-      unit
-    ) =>
-    t =
-    "";
-};
+// list props skipped, dataSource SSR crash, kept as Js.t({..})
 
 module Direction = {
   type t = string;
@@ -54,30 +19,41 @@ module Direction = {
   let right = "right";
 };
 
+type locale = {
+  .
+  "searchPlaceholder": string,
+    "itemUnit": string,
+    "itemsUnit": string,
+};
+
 [@react.component] [@bs.module]
 external make:
   (
+    ~prefixCls: string=?,
     ~className: string=?,
-    ~dataSource: array(transferItem('a)), // requried
     ~disabled: bool=?,
-    ~filterOption: ('todo, 'todo2) => bool=?,
-    ~footer: List.t => element=?, // tODO test
-    ~_lazy: bool=?, // obj skipped
-    ~listStyle: ReactDOMRe.Style.t=?,
-    ~locale: Js.t({..})=?, // TODO
-    ~operations: array(string)=?,
-    ~operationStyle: ReactDOMRe.Style.t=?,
-    ~render: transferItem('a) => element=?,
-    ~selectedKeys: array(string)=?,
-    ~showSearch: bool=?,
-    ~style: ReactDOMRe.Style.t=?,
+    ~dataSource: array(transferItem('data)), // requried
     ~targetKeys: array(string)=?,
+    ~selectedKeys: array(string)=?,
+    ~render: transferItem('data) => element, // requried
+    ~onChange: (~targetKeys: array(string), ~direction: Direction.t, ~moveKeys: array(string)) => unit=?,
+    ~onSelectChange: (~sourceSelectedKeys: array(string), ~targetSelectedKeys: array(string)) => unit=?,
+    ~style: ReactDOMRe.Style.t=?,
+    ~listStyle: ReactDOMRe.Style.t=?,
+    ~operationStyle: ReactDOMRe.Style.t=?,
     ~titles: array(string)=?,
-    ~onChange: (array(string), string, 'todo3) => unit=?,
+    ~operations: array(string)=?,
+    ~showSearch: bool=?,
+    ~filterOption: (string, transferItem('data)) => bool=?,
+    ~footer: Js.t({..}) => element=?,
+    ~body: Js.t({..})  => element=?,
+    ~rowKey: transferItem('data) => string=?, // not required as key is required in 'data
+    // onSearchChange deprecated
+    // ~onSearchChange: (Direction.t, ReactEvent.Synthetic.t) => unit=?,
+    ~onSearch: (Direction.t, string) => unit=?,
+    ~_lazy: bool=?, // obj skipped
+    ~locale: locale=?, 
     ~onScroll: (Direction.t, ReactEvent.Synthetic.t) => unit=?,
-    ~onSearch: (Direction.t, string) => unit=?, // TODO test
-    // won't be needed as key is required in transferItem
-    ~rowKey: transferItem('a) => string=?,
     unit
   ) =>
   element =

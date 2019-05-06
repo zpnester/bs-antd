@@ -15,7 +15,7 @@ external make:
     ~character: element=?,
     ~className: string=?,
     ~count: int=?,
-    ~defaultValue: float=?, // TODO float vs int OK?
+    ~defaultValue: float=?,
     ~disabled: bool=?,
     ~style: ReactDOMRe.Style.t=?,
     ~tooltips: array(string)=?,

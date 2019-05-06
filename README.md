@@ -94,6 +94,10 @@ Changing Antd version is generally not recommended as imports sometimes break
 
 `labelInValue` property is required to be `LabelInValue.true_`
 
+### Transfer
+
+`render`, `dataSource` properties are required
+
 
 ## Implementation Details
 

@@ -4,7 +4,7 @@ open Expect_;
 open Belt;
 open Helpers;
 
-module WithHooks = {
+module Counter = {
   [@react.component]
   let make = () => {
     let (c, setC) = useState(() => 0);
@@ -27,7 +27,7 @@ let make = () => {
       onChange={a =>
         // Js.log2("affix changed", a);
         expectToEqual(a->Js.typeof, "boolean")}>
-      <WithHooks />
+      <Counter />
     </Affix>
   </>;
 };

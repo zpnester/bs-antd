@@ -60,8 +60,10 @@ let make = () => {
     <LocaleProviderExample />
     <ListExample />
   </>;
-} /*}*/;
+};
 
-//[@react.component]
-//let make = () => {
-//  <> <ListExample /> <PaginationExample /> </>;
+[@react.component]
+let make = () => {
+ <> <TransferExample  />  </>;
+
+};
