@@ -1,4 +1,3 @@
-
 [@bs.deriving abstract]
 type makeProps = {
   // ***** BEGIN HTML *****
@@ -467,7 +466,6 @@ type makeProps = {
   /* Transition events */
   [@bs.optional]
   onTransitionEnd: ReactEvent.Transition.t => unit,
-  
   /* RDFa */
   [@bs.optional]
   about: string,
@@ -493,10 +491,9 @@ type makeProps = {
   // ***** END HTML *****
 };
 
-
 [@bs.deriving abstract]
 type svg = {
-    /* svg */
+  /* svg */
   [@bs.optional]
   accentHeight: string,
   [@bs.optional]
@@ -845,7 +842,6 @@ type svg = {
   strikethroughPosition: string,
   [@bs.optional]
   strikethroughThickness: string,
-
   [@bs.optional]
   string,
   [@bs.optional]

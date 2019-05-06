@@ -22,8 +22,6 @@ let expectValue =
   expectElement(value##label);
 };
 
-
-
 let expectMaybeValue =
     (
       value:
@@ -42,7 +40,7 @@ let expectMaybeValue =
 [@react.component]
 let make = () => {
   let acRef = useRef(Js.Nullable.undefined);
-  let value = { "key": "one", "label": string("Value One!") };
+  let value = {"key": "one", "label": string("Value One!")};
 
   let dataSource = [|
     string("red"),
@@ -52,25 +50,23 @@ let make = () => {
     string("lightblue"),
     string("green"),
     <Option key="lg"> {string("lightgreen")} </Option>,
-    <OptGroup key="g1" label=string("a group")>   
-        <Option key="a"> {string("A")} </Option>
-        <Option key="b"> {string("B")} </Option>
-
-    </OptGroup>
+    <OptGroup key="g1" label={string("a group")}>
+      <Option key="a"> {string("A")} </Option>
+      <Option key="b"> {string("B")} </Option>
+    </OptGroup>,
   |];
 
   let filterOption = (s, opt) => {
-    let  key = opt##props->Option.keyGet->Belt.Option.getWithDefault("");
+    let key = opt##props->Option.keyGet->Belt.Option.getWithDefault("");
 
     // Js.log3("filterOption", value, opt);
     expectString(s);
     expectReactElement(opt);
-    
-    key |> Js.String.indexOf(value##key) >= 0
+
+    key |> Js.String.indexOf(value##key) >= 0;
   };
 
-
-  <> 
+  <>
     <h1 id="autocomplete-example"> {string("AutoComplete Example")} </h1>
     <button
       onClick={_ =>
@@ -81,8 +77,6 @@ let make = () => {
       }>
       {string("focus")}
     </button>
-   
-
     <AutoComplete
       labelInValue=LabelInValue.true_
       allowClear=true
@@ -91,31 +85,24 @@ let make = () => {
       dataSource
       defaultValue=value
       defaultActiveFirstOption=false
-      placeholder={<h3>{string("...")}</h3>}
-      onChange={v => {
-          // Js.log2("onChange", v);
-          expectMaybeValue(v);
-      }}    
-      onBlur={v => {
-          // Js.log2("onBlur", v);
-          expectMaybeValue(v);
-      
-      }}
-      onSearch={s => {
-          // Js.log2("onSearch", s);
-          expectString(s);
-      }}
+      placeholder={<h3> {string("...")} </h3>}
+      onChange={v =>
+        // Js.log2("onChange", v);
+        expectMaybeValue(v)}
+      onBlur={v =>
+        // Js.log2("onBlur", v);
+        expectMaybeValue(v)}
+      onSearch={s =>
+        // Js.log2("onSearch", s);
+        expectString(s)}
       onSelect={(v, e) => {
-          // Js.log3("onSelect", v, e);
-          expectValue(v);
-          expectReactElement(e);
+        // Js.log3("onSelect", v, e);
+        expectValue(v);
+        expectReactElement(e);
       }}
     />
-  
-
-  <br />
-  
-  <AutoComplete
+    <br />
+    <AutoComplete
       allowClear=true
       labelInValue=LabelInValue.true_
       ref=acRef
@@ -124,38 +111,27 @@ let make = () => {
       filterOption
       defaultValue=value
       defaultActiveFirstOption=false
-      onChange={v => {
-          // Js.log2("onChange", v);
-          expectMaybeValue(v);
-      }}    
-      onBlur={v => {
-          // Js.log2("onBlur", v);
-          expectMaybeValue(v);
-      
-      }}
-      onSearch={s => {
-          // Js.log2("onSearch", s);
-          expectString(s);
-      }}
+      onChange={v =>
+        // Js.log2("onChange", v);
+        expectMaybeValue(v)}
+      onBlur={v =>
+        // Js.log2("onBlur", v);
+        expectMaybeValue(v)}
+      onSearch={s =>
+        // Js.log2("onSearch", s);
+        expectString(s)}
       onSelect={(s, e) => {
-          // Js.log3("onSelect", s, e);
-          expectValue(s);
-          expectReactElement(e);
-      }}
-    >
-     <Input.TextArea
-          placeholder="input here"
-          className="custom"
-          style=ReactDOMRe.Style.make(~height="50", ())
-          onKeyPress={e => {
-            Js.log2("onKeyPress", e);
-          }}
-          onPressEnter={e => {
-            Js.log2("onPressEnter", e);
-          }}
-        />
+        // Js.log3("onSelect", s, e);
+        expectValue(s);
+        expectReactElement(e);
+      }}>
+      <Input.TextArea
+        placeholder="input here"
+        className="custom"
+        style={ReactDOMRe.Style.make(~height="50", ())}
+        onKeyPress={e => Js.log2("onKeyPress", e)}
+        onPressEnter={e => Js.log2("onPressEnter", e)}
+      />
     </AutoComplete>
-
-
   </>;
 };

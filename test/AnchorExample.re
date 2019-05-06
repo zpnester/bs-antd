@@ -4,7 +4,7 @@ open Antd;
 [@react.component]
 let make = () => {
   <>
-    <h1>{string("Anchor Example")}</h1>
+    <h1> {string("Anchor Example")} </h1>
     <Anchor>
       <Anchor.Link href="#alert-example" title={string("Alert Example")} />
       // <Anchor.Link href="#select-example" title={string("Select Example")} />
@@ -19,7 +19,10 @@ let make = () => {
       // <Anchor.Link href="#comment-example" title={string("Comment Example")} />
       // <Anchor.Link href="#datepicker-example" title={string("DatePicker Example")} />
       // <Anchor.Link href="#timepicker-example" title={string("TimePicker Example")} />
-      <Anchor.Link href="#divider-example" title={string("Divider Example")} />
+      <Anchor.Link
+        href="#divider-example"
+        title={string("Divider Example")}
+      />
       // <Anchor.Link href="#drawer-example" title={string("Drawer Example")} />
       // <Anchor.Link href="#dropdown-example" title={string("Dropdown Example")} />
       // <Anchor.Link href="#empty-example" title={string("Empty Example")} />
@@ -53,8 +56,6 @@ let make = () => {
       // <Anchor.Link href="#mention-example" title={string("Mention Example")} />
       // <Anchor.Link href="#localeprovider-example" title={string("LocaleProvider Example")} />
       <Anchor.Link href="#list-example" title={string("List Example")} />
-
-        
     </Anchor>
   </>;
 };

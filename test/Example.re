@@ -1,14 +1,12 @@
-
-
 [@react.component]
 let make = () => {
-  <> 
+  <>
     <AnchorExample />
     <SelectExample />
-    <BackTopExample />  
+    <BackTopExample />
     <AlertExample />
     <IconExample />
-    <AffixExample /> 
+    <AffixExample />
     <AutoCompleteExample />
     <AvatarExample />
     <BadgeExample />
@@ -62,13 +60,8 @@ let make = () => {
     <LocaleProviderExample />
     <ListExample />
   </>;
+} /*}*/;
 
-}; 
-
- [@react.component]
-  let make = () => {
-    <>
-    <ListExample />
-    <PaginationExample />
-    </>
-  };
+//[@react.component]
+//let make = () => {
+//  <> <ListExample /> <PaginationExample /> </>;

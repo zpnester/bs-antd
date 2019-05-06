@@ -1,11 +1,16 @@
-[@bs.val] [@bs.module "./expect"] external expectToEqual: ('a, 'a) => unit = "expectToEqual";
-[@bs.val] [@bs.module "./expect"] external expectToEqualAny: ('a, 'b) => unit = "expectToEqual"; 
-[@bs.val] [@bs.module "./expect"] external isArray: 'a => bool = "isArray"; 
-[@bs.val] [@bs.module "./expect"] external isInt: 'a => bool = "isInt"; 
-[@bs.val] [@bs.module "./expect"] external isElement: React.element => bool = "isElement"; 
-[@bs.val] [@bs.module "./expect"] external isNull: 'a => bool = "isNull"; 
-[@bs.val] [@bs.module "./expect"] external isUndefined: 'a => bool = "isUndefined"; 
-[@bs.val] [@bs.module "./expect"] external hasLen: ('a, int) => bool = "hasLen"; 
+[@bs.val] [@bs.module "./expect"]
+external expectToEqual: ('a, 'a) => unit = "expectToEqual";
+[@bs.val] [@bs.module "./expect"]
+external expectToEqualAny: ('a, 'b) => unit = "expectToEqual";
+[@bs.val] [@bs.module "./expect"] external isArray: 'a => bool = "isArray";
+[@bs.val] [@bs.module "./expect"] external isInt: 'a => bool = "isInt";
+[@bs.val] [@bs.module "./expect"]
+external isElement: React.element => bool = "isElement";
+[@bs.val] [@bs.module "./expect"] external isNull: 'a => bool = "isNull";
+[@bs.val] [@bs.module "./expect"]
+external isUndefined: 'a => bool = "isUndefined";
+[@bs.val] [@bs.module "./expect"]
+external hasLen: ('a, int) => bool = "hasLen";
 
 let expect = expectToEqual;
 
@@ -27,16 +32,15 @@ let expectNumber = (f: float) => {
   expectToEqual(f->Js.typeof, "number");
 };
 
-
 let expectBool = (b: bool) => {
   expectToEqual(b->Js.typeof, "boolean");
 };
 
 let expectMomentOption = (m: option(MomentRe.Moment.t)) => {
   switch (m) {
-    | None => ()
-    | Some(m) => expectMoment(m);
-  }
+  | None => ()
+  | Some(m) => expectMoment(m)
+  };
 };
 
 let expectFloat = (f: float) => {
@@ -45,9 +49,9 @@ let expectFloat = (f: float) => {
 
 let expectMaybeFloat = (f: option(float)) => {
   switch (f) {
-    | None => ()
-    | Some(f) => expectFloat(f)
-  }
+  | None => ()
+  | Some(f) => expectFloat(f)
+  };
 };
 
 let expectInt = (i: int) => {
@@ -56,35 +60,35 @@ let expectInt = (i: int) => {
 
 let expectMaybeInt = x => {
   switch (x) {
-    | None => ()
-    | Some(x) => expectInt(x)
-  }
+  | None => ()
+  | Some(x) => expectInt(x)
+  };
 };
 
 let expectNull = (x: 'a) => {
   expectToEqual(x->isNull, true);
-}
+};
 
 let expectNullInt = (i: Js.null(int)) => {
   switch (i->Js.Null.toOption) {
-    | None => expectNull(i)
-    | Some(i) => expectInt(i)
-  }
+  | None => expectNull(i)
+  | Some(i) => expectInt(i)
+  };
 };
 
 let expectNullMoment = (m: Js.null(MomentRe.Moment.t)) => {
   expectToEqual(m->Js.typeof, "object");
   switch (m->Js.Null.toOption) {
-    | None => ()
-    | Some(m) => m->expectMoment
-  }
+  | None => ()
+  | Some(m) => m->expectMoment
+  };
 };
 
 let expectMaybeMoment = (m: option(MomentRe.Moment.t)) => {
   switch (m) {
-    | None => ()
-    | Some(m) => m->expectMoment
-  }
+  | None => ()
+  | Some(m) => m->expectMoment
+  };
 };
 
 let expectArray = (arr: array('a)) => {
@@ -94,7 +98,6 @@ let expectArray = (arr: array('a)) => {
 let expectArrayAny = (arr: 'a) => {
   expectToEqual(arr->isArray, true);
 };
-
 
 let expectMomentArray = (m: array(MomentRe.Moment.t)) => {
   expectArray(m);
@@ -106,29 +109,28 @@ let expectNullMomentArray = (m: array(Js.null(MomentRe.Moment.t))) => {
   m->Array.forEach(expectNullMoment);
 };
 
-let expectNullMomentArrayOption = (m: option(array(Js.null(MomentRe.Moment.t)))) => {
+let expectNullMomentArrayOption =
+    (m: option(array(Js.null(MomentRe.Moment.t)))) => {
   switch (m) {
-    | None => ()
-    | Some(a) => expectNullMomentArray(a);
-  }
+  | None => ()
+  | Some(a) => expectNullMomentArray(a)
+  };
 };
 
-let expectNullMomentTuple = (t: (Js.null(MomentRe.Moment.t), Js.null(MomentRe.Moment.t))) => {
+let expectNullMomentTuple =
+    (t: (Js.null(MomentRe.Moment.t), Js.null(MomentRe.Moment.t))) => {
   expectArrayAny(t);
   expectToEqual(t->hasLen(2), true);
   expectNullMoment(fst(t));
   expectNullMoment(snd(t));
 };
 
-
-
-
-let expectString  = (s: string) => {
-    expectToEqual(s->Js.typeof, "string");
+let expectString = (s: string) => {
+  expectToEqual(s->Js.typeof, "string");
 };
 
-let expectStringAny  = (s: 'a) => {
-    expectToEqual(s->Js.typeof, "string");
+let expectStringAny = (s: 'a) => {
+  expectToEqual(s->Js.typeof, "string");
 };
 
 let expectStringArray = (s: array(string)) => {
@@ -138,24 +140,23 @@ let expectStringArray = (s: array(string)) => {
 
 let expectStringTuple2 = (t: (string, string)) => {
   expectArrayAny(t);
-  expectToEqual(t->hasLen(2), true)
+  expectToEqual(t->hasLen(2), true);
   expectString(fst(t));
   expectString(snd(t));
 };
 
 let expectNumberTuple2 = (t: (float, float)) => {
   expectArrayAny(t);
-  expectToEqual(t->hasLen(2), true)
+  expectToEqual(t->hasLen(2), true);
   expectNumber(fst(t));
   expectNumber(snd(t));
 };
 
-
 let expectMaybeString = (s: option(string)) => {
-    switch (s) {
-        | None => ()
-        | Some(s) => expectString(s)
-    }
+  switch (s) {
+  | None => ()
+  | Some(s) => expectString(s)
+  };
 };
 
 let expectElement = (el: React.element) => {
@@ -169,11 +170,11 @@ let expectEnum = (arr: array(string), x: string) => {
 
   let res = ref(false);
 
-  arr->Array.forEach(s => {
+  arr->Array.forEach(s =>
     if (x == s) {
       res := true;
     }
-  })
+  );
 
   expect(res^, true);
 };
@@ -185,7 +186,7 @@ let expectReactElement = (el: reactElement('a)) => {
 let expectReactElementArray = (els: array(reactElement('a))) => {
   expectArray(els);
   els->Array.forEach(expectReactElement);
-}
+};
 
 let expectElementAny = (el: 'a) => {
   expectToEqual(el->isElement, true);
@@ -218,22 +219,22 @@ let expectNotNullUndefined = (x: 'a) => {
 };
 
 let expectArrayOf = (f, xs) => {
-    expectArray(xs);
-    xs->Array.forEach(f);
+  expectArray(xs);
+  xs->Array.forEach(f);
 };
 
 let expectNullOf = (f, x) => {
   switch (x->Js.Null.toOption) {
-    | None => ()
-    | Some(x) => f(x)
-  }
+  | None => ()
+  | Some(x) => f(x)
+  };
 };
 
 let expectOptionOf = (f, x) => {
   switch (x) {
-    | None => ()
-    | Some(x) => f(x)
-  }
+  | None => ()
+  | Some(x) => f(x)
+  };
 };
 
 let expectReactMouseEvent = (e: ReactEvent.Mouse.t) => {
@@ -241,15 +242,12 @@ let expectReactMouseEvent = (e: ReactEvent.Mouse.t) => {
   expectInt(e->ReactEvent.Mouse.nativeEvent##clientX);
 };
 
-
 let expectSynEvent = (e: ReactEvent.Synthetic.t) => {
   expectObject(e->ReactEvent.Synthetic.nativeEvent);
 };
 
-
-
-
-let expectDomMouseEvent: Dom.mouseEvent => unit = [%raw {|
+let expectDomMouseEvent: Dom.mouseEvent => unit = [%raw
+  {|
 function(e) {
   if (typeof(e.nativeEvent) != "undefined") {
     throw "not dom event - it is react event";
@@ -257,4 +255,5 @@ function(e) {
 
   expectNumber(e.clientX);
 }
-|}]
+|}
+];

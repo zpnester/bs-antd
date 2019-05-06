@@ -21,32 +21,33 @@ let make = () => {
       onSubmit={e => {
         e->ReactEvent.Form.preventDefault;
         setSub(_ => true);
-        // Js.log("submit");
       }}>
-      <Form.Item
-        hasFeedback=usernameFeedback
-        help=?usernameHelp
-        validateStatus=usernameStatus>
-        <Input
-          value=username
-          onChange={e => {
-            let value = e->ReactEvent.Form.target##value;
+      // Js.log("submit");
 
-            setUsername(_ => value);
-          }}
-        />
-      </Form.Item>
-      <Form.Item>
-        <Input
-          value=password
-          type_="password"
-          onChange={e => {
-            let value = e->ReactEvent.Form.target##value;
-            setPassword(_ => value);
-          }}
-        />
-      </Form.Item>
-      <Button htmlType="submit"> {string("Submit")} </Button>
-    </Form>
+        <Form.Item
+          hasFeedback=usernameFeedback
+          help=?usernameHelp
+          validateStatus=usernameStatus>
+          <Input
+            value=username
+            onChange={e => {
+              let value = e->ReactEvent.Form.target##value;
+
+              setUsername(_ => value);
+            }}
+          />
+        </Form.Item>
+        <Form.Item>
+          <Input
+            value=password
+            type_="password"
+            onChange={e => {
+              let value = e->ReactEvent.Form.target##value;
+              setPassword(_ => value);
+            }}
+          />
+        </Form.Item>
+        <Button htmlType="submit"> {string("Submit")} </Button>
+      </Form>
   </>;
 };

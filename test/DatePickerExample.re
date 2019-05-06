@@ -36,8 +36,7 @@ let make = () => {
       }}
       onOk={m =>
         // // Js.log2("onOk", m);
-        expectMoment(m)
-      }
+        expectMoment(m)}
       showTime={ShowTime.bool(true)}
       onPanelChange={(m, mode) => {
         // // Js.log3("onPanelChange", m, mode);
@@ -62,7 +61,11 @@ let make = () => {
         // // Js.log3("dateRender", current, today);
         expectMoment(current);
         expectMoment(today);
-        string(current |> MomentRe.Moment.locale("ru") |>MomentRe.Moment.format("MMMM DD"));
+        string(
+          current
+          |> MomentRe.Moment.locale("ru")
+          |> MomentRe.Moment.format("MMMM DD"),
+        );
       }}
       renderExtraFooter={mode => {
         // // Js.log2("renderExtraFooter", mode);
@@ -77,7 +80,7 @@ let make = () => {
         // // Js.log3("monthCellContentRender", m, l);
         expectMoment(m);
         expectLocale(l);
-        string(m |>  MomentRe.Moment.format("MMMM"));
+        string(m |> MomentRe.Moment.format("MMMM"));
       }}
       onChange={(m, s) => {
         // // Js.log3("onChange", m, s);
@@ -104,8 +107,7 @@ let make = () => {
       }}
       renderExtraFooter={() =>
         // // Js.log("renderExtraFooter");
-        string("extra footer")
-      }
+        string("extra footer")}
     />
     <h2> {string("WeekPicker")} </h2>
     <DatePicker.WeekPicker
@@ -168,8 +170,7 @@ let make = () => {
       }}
       onCalendarChange={m =>
         // // Js.log2("onCalendarChange", m);
-        expectNullMomentArray(m)
-      }
+        expectNullMomentArray(m)}
       onChange={(m, s) => {
         // // Js.log3("onChange", m, s);
         expectStringTuple2(s);
@@ -177,8 +178,7 @@ let make = () => {
       }}
       onOk={m =>
         // // Js.log2("onOk", m);
-        expectNullMomentArray(m)
-      }
+        expectNullMomentArray(m)}
       showTime={ShowTime.bool(true)}
     />
   </>;

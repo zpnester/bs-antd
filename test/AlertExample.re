@@ -5,16 +5,19 @@ open Expect_;
 [@react.component]
 let make = () => {
   <>
-  <h1 id="alert-example">{string("Alert Example")}</h1>
+    <h1 id="alert-example"> {string("Alert Example")} </h1>
     <Alert
       message={string("Alert 1")}
       _type=`success
       closable=true
       closeText={string("CLOSE")}
-      onClose={event => {
-        expectToEqual(event->ReactEvent.Mouse.clientX->Js.typeof, "number");
-        // Js.log("on close");
-      }}
+      onClose={event =>
+        expectToEqual(
+          event->ReactEvent.Mouse.clientX->Js.typeof,
+          "number",
+          // Js.log("on close");
+        )
+      }
       // afterClose={() => {
       //   // Js.log("after close")
       //   }}

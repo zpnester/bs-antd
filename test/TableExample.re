@@ -24,33 +24,35 @@ let expectUserArray = (arr: array(user)) => {
 };
 
 let expectExpandIconPropsOfUser = (x: expandIconProps(user)) => {
-    expectString(x##prefixCls);
-    expectBool(x##expanded);
-    expectUser(x##record);
-    expectBool(x##needIndentSpaced);
-    expectBool(x##expandable);
-    // TODO onExpand
+  expectString(x##prefixCls);
+  expectBool(x##expanded);
+  expectUser(x##record);
+  expectBool(x##needIndentSpaced);
+  expectBool(x##expandable);
+  // TODO onExpand
 };
 
 let expectSortOder = expectEnum([|SortOrder.ascend, SortOrder.descend|]);
 
 let expectNullSortOrder = x => {
   switch (x->Js.Null.toOption) {
-    | None => ()
-    | Some(x) => expectSortOder(x)
-  }
-};  
+  | None => ()
+  | Some(x) => expectSortOder(x)
+  };
+};
 
 [@react.component]
 let make = () => {
-     let dataSource = [||];
-     for (i in 0 to 25) {
-       dataSource |> Js.Array.push( {
+  let dataSource = [||];
+  for (i in 0 to 25) {
+    dataSource
+    |> Js.Array.push({
          "key": i->string_of_int,
-          "name": "Name " ++ i->string_of_int, 
-          "age": 30+i, "address": 
-          (10 + i)->string_of_int ++ " Downing Street"})
-     }
+         "name": "Name " ++ i->string_of_int,
+         "age": 30 + i,
+         "address": (10 + i)->string_of_int ++ " Downing Street",
+       });
+  };
   // let dataSource = [|
   //   {"key": "1", "name": "Mike", "age": 32, "address": "10 Downing Street"},
   //   {"key": "2", "name": "John", "age": 42, "address": "20 Downing Street"},
@@ -58,34 +60,32 @@ let make = () => {
 
   let columns = [|
     Column.make(
-      ~filterDropdown=props => {
-        string("filter")
-      },
-      ~onCell=(u, i) => {
-        expectUser(u);
-        expectInt(i);
-        {
-          "onMouseEnter": _ => {
-            Js.log("cell enter");
-          }
-        }
-      },
-      ~onFilterDropdownVisibleChange=x => {
-        expectBool(x);
-      },
-       ~onHeaderCell=x => {
-        {
-          "onMouseEnter": _ => {
-            Js.log("header cell enter");
-          }
-        }
-      },
-      ~title=x => {
-        expectNullSortOrder(x##sortOrder);
-        expectObject(x##filters);
-        // TODO better filters test
-        string("Name");
-      },
+      ~filterDropdown=props => string("filter"),
+      ~onCell=
+        (u, i) => {
+          expectUser(u);
+          expectInt(i);
+          {
+            "onMouseEnter": _ => {
+              Js.log("cell enter");
+            },
+          };
+        },
+      ~onFilterDropdownVisibleChange=x => expectBool(x),
+      ~onHeaderCell=
+        x =>
+          {
+            "onMouseEnter": _ => {
+              Js.log("header cell enter");
+            },
+          },
+      ~title=
+        x => {
+          expectNullSortOrder(x##sortOrder);
+          expectObject(x##filters);
+          // TODO better filters test
+          string("Name");
+        },
       // ~dataIndex="name",
       ~key="name",
       ~render=
@@ -97,103 +97,108 @@ let make = () => {
         },
       (),
     ),
-    Column.make(~title=_ => string("Age"), ~dataIndex="age", ~key="age", 
-      ~filterDropdown=props => {
-        Js.log2("filterDropdown", props);
-        string("filter")
-      },
-      ~filterIcon=b => {
-        expectBool(b);
-        <Icon _type=Icon.Type.filter />
-      },
-      ~sorter=Sorter.make((a, b, order) => {
-        expectUser(a);
-        expectUser(b);
-        expectSortOder(order);
-        let res = if (order == SortOrder.ascend) {
-          a##age - b##age
-        } else {
-          b##age - a##age
-        }
-        res->float_of_int
-      }),
-    ()),
+    Column.make(
+      ~title=_ => string("Age"),
+      ~dataIndex="age",
+      ~key="age",
+      ~filterDropdown=
+        props => {
+          Js.log2("filterDropdown", props);
+          string("filter");
+        },
+      ~filterIcon=
+        b => {
+          expectBool(b);
+          <Icon _type=Icon.Type.filter />;
+        },
+      ~sorter=
+        Sorter.make((a, b, order) => {
+          expectUser(a);
+          expectUser(b);
+          expectSortOder(order);
+          let res =
+            if (order == SortOrder.ascend) {
+              a##age - b##age;
+            } else {
+              b##age - a##age;
+            };
+          res->float_of_int;
+        }),
+      (),
+    ),
     Column.make(
       ~title=_ => string("Address"),
       ~dataIndex="address",
       ~key="address",
-      ~filters=[|{
-        "text": string("Filter 1"),
-        "value": "f1",
-        "children": [||]
-      },
-      {
-        "text": string("Filter 2"),
-        "value": "f2",
-        "children": [||]
-      }|],
-      ~onFilter=(x, u) => {
-        expectString(x);
-        expectUser(u);
-        false
-      },
-      // ~fixed=`right, 
+      ~filters=[|
+        {"text": string("Filter 1"), "value": "f1", "children": [||]},
+        {"text": string("Filter 2"), "value": "f2", "children": [||]},
+      |],
+      ~onFilter=
+        (x, u) => {
+          expectString(x);
+          expectUser(u);
+          false;
+        },
+      // ~fixed=`right,
       (),
     ),
   |];
 
-  let rowSelection = RowSelection.make(
-    ~onSelect=(record, selected, selectedRows, e) => {
-        // Js.log("onSelect");
-        // Js.log4(record, selected, selectedRows, e);
-        expectUser(record);
-        expectBool(selected);
-        expectUserArray(selectedRows);
-        {
-          "onMouseEnter": _ => {
-            Js.log("select enter")
-          }
-        }
-      },
-      ~onSelectMultiple=(selected, ~selectedRows, ~changeRows) => {
-        failwith("NOT TESTED");
-        // Js.log4("onSelectMultiple", selected, selectedRows, changeRows);
-        expectBool(selected);
-        expectUserArray(selectedRows);
-        expectUserArray(changeRows);
-      },
-      ~getCheckboxProps=record => {
-        // Js.log2("getCheckboxProps", record);
-        expectUser(record);
-        { "pass": "to checkbox" }
-      },
-      ~onSelectInvert=x => {
-        failwith("NOT TESTED")
-      },  
-      ()
-  );
+  let rowSelection =
+    RowSelection.make(
+      ~onSelect=
+        (record, selected, selectedRows, e) => {
+          // Js.log("onSelect");
+          // Js.log4(record, selected, selectedRows, e);
+          expectUser(record);
+          expectBool(selected);
+          expectUserArray(selectedRows);
+          {
+            "onMouseEnter": _ => {
+              Js.log("select enter");
+            },
+          };
+        },
+      ~onSelectMultiple=
+        (selected, ~selectedRows, ~changeRows) => {
+          failwith("NOT TESTED");
+          // Js.log4("onSelectMultiple", selected, selectedRows, changeRows);
+          expectBool(selected);
+          expectUserArray(selectedRows);
+          expectUserArray(changeRows);
+        },
+      ~getCheckboxProps=
+        record => {
+          // Js.log2("getCheckboxProps", record);
+          expectUser(record);
+          {"pass": "to checkbox"};
+        },
+      ~onSelectInvert=x => failwith("NOT TESTED"),
+      (),
+    );
 
-  let expandIcon = (props) => {
+  let expandIcon = props => {
     expectExpandIconPropsOfUser(props);
-    <Icon _type=Icon.Type.up />
-  };  
+    <Icon _type=Icon.Type.up />;
+  };
 
   let footer = props => {
     expectUserArray(props);
-    
-    string("TABLE FOOTER")
+
+    string("TABLE FOOTER");
   };
 
   let rowClassName = (record, i) => {
     expectUser(record);
     expectInt(i);
-    "custom-row-classname"
+    "custom-row-classname";
   };
 
   let rowKey = (record, i) => {
     expectUser(record);
     expectInt(i);
-    (i + 30)->string_of_int
+    (i + 30)->string_of_int;
   };
 
   let expandedRowRender = (~record, ~index, ~indent, ~expanded) => {
@@ -201,17 +206,18 @@ let make = () => {
     expectUser(record);
     expectInt(index);
     expectInt(indent);
-    expectBool(expanded)
+    expectBool(expanded);
   };
 
-  let defaultExpandedRowKeys = [| "1"|];
+  let defaultExpandedRowKeys = [|"1"|];
 
   let title = arr => {
     expectUserArray(arr);
-    let first = switch (arr->Array.get(0)) {
+    let first =
+      switch (arr->Array.get(0)) {
       | None => "none"
       | Some(u) => u##name
-    }
+      };
     string("A TITLE: first is " ++ first);
   };
 
@@ -221,33 +227,45 @@ let make = () => {
 
     {
       "onDoubleClick": () => {
-        [%raw {| alert("onDoubleClick") |}]
-      }
-    }
+        %raw
+        {| alert("onDoubleClick") |};
+      },
+    };
   };
 
-  let pagination = Pagination.make(
-    ~onChange=(~page, ~pageSize) => {
-      expectInt(page);
-      expectMaybeInt(pageSize);
-    },
-    ~itemRender=(i, t, el) => {
-      expectInt(i);
-      // TODO enum
-      expectString(t);
-      expectReactElement(el);
+  let pagination =
+    Pagination.make(
+      ~onChange=
+        (~page, ~pageSize) => {
+          expectInt(page);
+          expectMaybeInt(pageSize);
+        },
+      ~itemRender=
+        (i, t, el) => {
+          expectInt(i);
+          // TODO enum
+          expectString(t);
+          expectReactElement(el);
 
-      string(i->string_of_int)
-    },
-    ~showTotal = (~total, ~range) => {
-      expectInt(total);
-      let (a, b) = range;
-      expectInt(a);
-      expectInt(b);
-      string("Total: " ++ total->string_of_int ++ ", Current: " ++ a->string_of_int ++ "-" ++ b->string_of_int);
-    },
-    ()
-  );
+          string(i->string_of_int);
+        },
+      ~showTotal=
+        (~total, ~range) => {
+          expectInt(total);
+          let (a, b) = range;
+          expectInt(a);
+          expectInt(b);
+          string(
+            "Total: "
+            ++ total->string_of_int
+            ++ ", Current: "
+            ++ a->string_of_int
+            ++ "-"
+            ++ b->string_of_int,
+          );
+        },
+      (),
+    );
 
   let onHeaderRow = (c, i) => {
     expectArray(c);
@@ -255,24 +273,26 @@ let make = () => {
     {
       "onMouseEnter": _ => {
         Js.log("row header enter");
-      }
-    }
+      },
+    };
   };
 
   <>
     <h1 id="table-example"> {string("Table Example")} </h1>
-    <Table dataSource columns
-    defaultExpandedRowKeys
-    onHeaderRow
-    pagination
-    onRow
-    footer
-    title
-    rowClassName
-    rowKey
-  //  expandIcon
-    childrenColumnName="name2"
-     rowSelection
+    <Table
+      dataSource
+      columns
+      defaultExpandedRowKeys
+      onHeaderRow
+      pagination
+      onRow
+      footer
+      title
+      rowClassName
+      rowKey
+      //  expandIcon
+      childrenColumnName="name2"
+      rowSelection
     />
   </>;
 };

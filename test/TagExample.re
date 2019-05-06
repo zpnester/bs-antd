@@ -13,19 +13,16 @@ let make = () => {
         {string("Link")}
       </a>
     </Tag>
-    <Tag closable=true
-    //  onClose={_ => {
-    //   // Js.log("onClose")
-    //   }}
-      >
-      {string("Tag 2")}
-    </Tag>
+    <Tag closable=true>
+      //  onClose={_ => {
+      //   // Js.log("onClose")
+      //   }}
+       {string("Tag 2")} </Tag>
     <Tag
       closable=true
-      onClose={e => {
+      onClose={e =>
         // Js.log2("onClose prevent", e);
-        e->ReactEvent.Mouse.preventDefault;
-      }}>
+        e->ReactEvent.Mouse.preventDefault}>
       {string("Prevent Default")}
     </Tag>
   </>;

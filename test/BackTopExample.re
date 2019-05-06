@@ -7,6 +7,6 @@ let make = () => {
   <>
     <h1> {string("BackTop Example")} </h1>
     {string("Scroll down to see the bottom-right button")}
-     <BackTop />
+    <BackTop />
   </>;
 };

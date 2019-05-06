@@ -10,19 +10,14 @@ let make = () => {
       shape=Shape.round
       type_=Type.primary
       size=Size.large
-      onClick={e => {
-         Js.log("click")
-        }}
-        >
+      onClick={e => Js.log("click")}>
       {string("Button 1")}
     </Button>
     <Button
-      onClick={e => {
-         Js.log("click")
-        }}
+      onClick={e => Js.log("click")}
       shape=Shape.circle
       type_=Type.danger
-      loading=Loading.bool(true)
+      loading={Loading.bool(true)}
       size=Size.large
     />
   </>;

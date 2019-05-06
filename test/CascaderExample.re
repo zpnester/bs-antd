@@ -17,12 +17,11 @@ let expectCascaderOptionArray = (arr: array(cascaderOption)) => {
 };
 
 let expectFilledFieldNames = (x: ShowSearch.filledFieldNames) => {
-    expectObject(x);
-    expectString(x##value);
-    expectString(x##label);
-    expectString(x##children);
+  expectObject(x);
+  expectString(x##value);
+  expectString(x##label);
+  expectString(x##children);
 };
-
 
 [@react.component]
 let make = () => {
@@ -89,16 +88,19 @@ let make = () => {
         expectStringArray(value);
         expectCascaderOptionArray(selectedOpts);
       }}
-      showSearch={ShowSearch.make(~limit=Limit.false_, 
-        ~filter={(inputValue, path, names) => {
+      showSearch={ShowSearch.make(
+        ~limit=Limit.false_,
+        ~filter=
+          (inputValue, path, names) => {
             // Js.log4("filter", inputValue, path, names);
             expectString(inputValue);
             expectCascaderOptionArray(path);
             expectFilledFieldNames(names);
-            true
-        }},
-        ~render={(inputValue, path, prefixCls, names) => {
-                // Js.log("render");
+            true;
+          },
+        ~render=
+          (inputValue, path, prefixCls, names) => {
+            // Js.log("render");
             // Js.log4(inputValue, path, prefixCls, names);
 
             expectString(inputValue);
@@ -107,20 +109,20 @@ let make = () => {
 
             // just a test, it breaks search ui
             path->Array.getExn(0)##label;
-        }},
-        ~sort={(a, b, inputValue, names) => {
+          },
+        ~sort=
+          (a, b, inputValue, names) => {
             // Js.log("sort");
             // Js.log4(a, b, inputValue, names);
             expectCascaderOptionArray(a);
             expectCascaderOptionArray(b);
             expectString(inputValue);
             expectFilledFieldNames(names);
-            1.0
-        }},
+            1.0;
+          },
         ~matchInputWidth=false,
-      ())
-
-      }
+        (),
+      )}
     />
   </>;
 };
