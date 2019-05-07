@@ -111,8 +111,8 @@ external make:
     ~onSearch: string => unit=?,
     ~onSelect: labeledValue => unit=?,
     ~onTreeExpand: array(string) => unit=?,
-    ~onFocus: ReactEvent.Synthetic.t => unit=?,
-    ~onBlur: ReactEvent.Synthetic.t => unit=?,
+    ~onFocus: ReactEvent.Focus.t => unit=?,
+    ~onBlur: ReactEvent.Focus.t => unit=?,
     ~searchPlaceholder: string=?,
     ~searchValue: string=?,
     ~showCheckedStrategy: [@bs.string] [

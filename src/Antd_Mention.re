@@ -41,8 +41,8 @@ external make:
     ~prefix: array(string)=?, // single string skipped
     ~placeholder: string=?,
     ~getSuggestionContainer: Dom.element => Dom.htmlElement=?,
-    ~onFocus: ReactEvent.Synthetic.t => unit=?,
-    ~onBlur: ReactEvent.Synthetic.t => unit=?,
+    ~onFocus: ReactEvent.Focus.t => unit=?,
+    ~onBlur: ReactEvent.Focus.t => unit=?,
     ~onSelect: (~suggestion: string, ~data: Js.Json.t) => unit=?, // ret any skipped // TODO data
     ~readOnly: bool=?,
     ~disabled: bool=?,

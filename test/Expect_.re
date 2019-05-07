@@ -248,6 +248,11 @@ let expectSynEvent = (e: ReactEvent.Synthetic.t) => {
   expectObject(e->ReactEvent.Synthetic.nativeEvent);
 };
 
+let expectFocusEvent = (e: ReactEvent.Focus.t) => {
+  expectObject(e->ReactEvent.Synthetic.nativeEvent);
+  // TODO 
+};
+
 let expectDomMouseEvent: Dom.mouseEvent => unit = [%raw
   {|
 function(e) {

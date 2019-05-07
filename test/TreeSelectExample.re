@@ -83,7 +83,7 @@ let make = () => {
         expectTreeNode(node);
         resolve();
       }}
-      onBlur={e => expectSynEvent(e)}
+      onBlur={e => expectFocusEvent(e)}
       onSelect={value => expectLabeledValue(value)}
       onChange={(value, b, extra) => {
         expectLabeledValueArray(value);
