@@ -1,21 +1,22 @@
 open React;
+open Antd__;
 
-type clickParam = {
+type clickParam('a) = {
+  .
+  "key": string, // no need to required key in Item
+  "keyPath": array(string),
+  "item": Js.t({..}), 
+  "domEvent": ReactEvent.Synthetic.t 
+} as 'a;
+
+type selectParam('a) = {
   .
   "key": string,
   "keyPath": array(string),
-  "item": Js.Json.t, // TODO
-  "domEvent": Dom.event // TODO dom or react
-};
-
-type selectParam = {
-  .
-  "key": string,
-  "keyPath": array(string),
-  "item": Js.Json.t, // TODO
-  "domEvent": Dom.event, // TODO dom or react
+  "item": Js.t({..}), 
+  "domEvent": ReactEvent.Synthetic.t,
   "selectedKeys": array(string),
-};
+} as 'a;
 
 [@react.component] [@bs.module "antd/lib/menu"]
 external make:
@@ -41,10 +42,10 @@ external make:
     ~subMenuCloseDelay: float=?,
     ~subMenuOpenDelay: float=?,
     ~theme: [@bs.string] [ | `light | `dark]=?,
-    ~onClick: clickParam => unit=?,
-    ~onDeselect: selectParam => unit=?,
+    ~onClick: clickParam('clickParam) => unit=?,
+    ~onDeselect: selectParam('selectParam) => unit=?,
     ~onOpenChange: array(string) => unit=?,
-    ~onSelect: selectParam => unit=?,
+    ~onSelect: selectParam('selectParam) => unit=?,
     ~overflowedIndicator: element=?,
     ~children: element=?,
     ~focusable: bool=?,
@@ -52,13 +53,19 @@ external make:
     ~onMouseEnter: ReactEvent.Mouse.t => unit=?,
     ~prefixCls: string=?,
     ~className: string=?,
-    ~openTransitionName: 'openTransitionName=?, // TODO
-    ~openAnimation: 'openAnimation=?, // TODO
+    ~openTransitionName: 'todoOpenTransitionName=?, 
+    ~openAnimation: 'todoOpenAnimation=?, 
     ~id: string=?,
     unit
   ) =>
   element =
   "default";
+
+type mouseEvent = {
+                       .
+                       "key": string,
+                       "domEvent": ReactEvent.Mouse.t,
+                     };
 
 module Item = {
   [@react.component] [@bs.module]
@@ -72,19 +79,11 @@ module Item = {
       ~children: element=?,
       ~className: string=?,
       ~style: ReactDOMRe.Style.t=?,
-      ~onClick: clickParam => unit=?,
-      ~onMouseEnter: {
-                       .
-                       "key": string,
-                       "domEvent": Dom.mouseEvent,
-                     } =>
+      ~onClick: clickParam('clickParam) => unit=?,
+      ~onMouseEnter: mouseEvent =>
                      unit
                        =?,
-      ~onMouseLeave: {
-                       .
-                       "key": string,
-                       "domEvent": Dom.mouseEvent,
-                     } =>
+      ~onMouseLeave: mouseEvent =>
                      unit
                        =?,
       unit
@@ -92,6 +91,12 @@ module Item = {
     element =
     "antd/lib/menu/MenuItem";
 };
+
+type titleEvent = {
+    .
+    "key": string,
+    "domEvent": ReactEvent.Synthetic.t,
+  };
 
 module SubMenu = {
   [@react.component] [@bs.module]
@@ -101,25 +106,13 @@ module SubMenu = {
       ~disabled: bool=?,
       ~key: string=?,
       ~title: element=?,
-      ~onTitleClick: {
-                       .
-                       "key": string,
-                       "domEvent": Dom.event,
-                     } =>
+      ~onTitleClick: titleEvent =>
                      unit
                        =?,
-      ~onTitleMouseEnter: {
-                            .
-                            "key": string,
-                            "domEvent": Dom.event,
-                          } =>
+      ~onTitleMouseEnter: titleEvent =>
                           unit
                             =?,
-      ~onTitleMouseLeave: {
-                            .
-                            "key": string,
-                            "domEvent": Dom.event,
-                          } =>
+      ~onTitleMouseLeave: titleEvent =>
                           unit
                             =?,
       ~style: ReactDOMRe.Style.t=?,

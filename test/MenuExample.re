@@ -1,17 +1,63 @@
 open React;
 open Antd;
 open Menu;
+open Expect_;
+
+let expectClickParam = e => {
+  expectString(e##key);
+  expectStringArray(e##keyPath);
+  expectReactElementObj(e##item)
+  expectSynEvent(e##domEvent);
+};
+
+let expectSelectParam = e => {
+  expectString(e##key);
+  expectStringArray(e##keyPath);
+  expectStringArray(e##selectedKeys);
+  expectReactElementObj(e##item)
+  expectSynEvent(e##domEvent);
+};
+
+let expectMouseEnter = e => {
+  expectString(e##key);
+  expectReactMouseEvent(e##domEvent);
+};
+
+let expectSynKey = e => {
+  expectString(e##key);
+  expectSynEvent(e##domEvent);
+};
 
 [@react.component]
 let make = () => {
   <>
     <h1 id="menu-example"> {string("Menu Example")} </h1>
-    <Menu mode=`horizontal>
-      //  onClick={e => {
-      //     // Js.log2("menu click", e)
-      // }}
+    <Menu mode=`horizontal
+    theme=`dark
+    onMouseEnter={e => {
+      ()
+    }}
+    multiple=true
+      onDeselect={e => {
+        expectSelectParam(e);
+      }}
+      onSelect={e => {
+        expectSelectParam(e);
+      }}
+      onClick={e => {
+         expectClickParam(e);
+      }}
+      // overflowedIndicator=string("over")
+    >
 
-        <Menu.Item>
+        <Menu.Item 
+        onMouseEnter={e => {
+          expectMouseEnter(e);
+        }}
+        onMouseLeave={e => {
+          expectMouseEnter(e);
+        }}
+        >
           <Icon _type=Icon.Type.mail />
           {string("Navigation One")}
         </Menu.Item>
@@ -20,6 +66,16 @@ let make = () => {
           {string("Navigation Two")}
         </Menu.Item>
         <Menu.SubMenu
+        onTitleClick={e => {
+          expectSynKey(e);
+        }}
+        onTitleMouseEnter={e => {
+          expectSynKey(e);
+        }}
+        onTitleMouseLeave={e => {
+          expectSynKey(e);
+        }}
+        
           title={
             <span className="submenu-title-wrapper">
               <Icon _type=Icon.Type.setting />

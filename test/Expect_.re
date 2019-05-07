@@ -183,6 +183,10 @@ let expectReactElement = (el: reactElement('a)) => {
   expectToEqual(el##props->Js.typeof, "object");
 };
 
+let expectReactElementObj = (el: Js.t({..})) => {
+  expectToEqual(el##props->Js.typeof, "object");
+};
+
 let expectReactElementArray = (els: array(reactElement('a))) => {
   expectArray(els);
   els->Array.forEach(expectReactElement);
