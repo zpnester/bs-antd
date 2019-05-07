@@ -4,6 +4,8 @@ open TimePicker;
 open Expect_;
 open MomentRe;
 
+let expectAmPm = expectEnum([|AmPm.am, AmPm.pm |]);
+
 [@react.component]
 let make = () => {
   <>
@@ -31,6 +33,10 @@ let make = () => {
         [|6, 7|];
       }}
       format="HH_mm_ss"
+      onAmPmChange={ap => {
+        expectAmPm(ap);
+      }}
+      use12Hours=true
       onChange={(m, s) => {
         expectNullMoment(m);
         expectString(s);

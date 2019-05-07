@@ -44,11 +44,11 @@ type makeProps = {
   [@bs.optional]
   format: string,
   [@bs.optional]  
-  onChange: (Js.null(MomentRe.Moment.t), string) => unit, // TODO test
+  onChange: (Js.null(MomentRe.Moment.t), string) => unit, 
   [@bs.optional]
   onOpenChange: bool => unit,
   [@bs.optional]
-  onAmPmChange: AmPm.t => unit, // TODO test
+  onAmPmChange: AmPm.t => unit,
   [@bs.optional]
   disabled: bool,
   [@bs.optional]
@@ -90,7 +90,7 @@ type makeProps = {
   [@bs.optional]
   clearText: string,
   [@bs.optional]
-  defaultOpenValue: Js.null(MomentRe.Moment.t), // TODO test
+  defaultOpenValue: Js.null(MomentRe.Moment.t),
   [@bs.optional]
   popupClassName: string,
   [@bs.optional]

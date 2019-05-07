@@ -210,9 +210,7 @@ let expectObject = (x: 'a) => {
   expectToEqual(x->Js.typeof, "object");
 };
 
-let expectLocale = (x: Antd_LocaleProvider.locale) => {
-  // Js.log("EXPECT LOCALE NOT IMPLEMENTED YET");
-};
+
 
 let expectNotNullUndefined = (x: 'a) => {
   expectToEqual(!x->isNull && x->Js.typeof != "undefined");
