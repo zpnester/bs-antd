@@ -116,6 +116,18 @@ Changing Antd version is generally not recommended as imports sometimes break
 
 `value` property can only be a MomentRe.Moment.t
 
+### Mention
+
+Suggestions cannot be created with plain strings, only with a dedicated function
+
+`data` property available in Make functor
+
+Testing of Mention component (version specified above) revealed several issues:
+
+* crash when server side rendered
+* crash when used as controlled input (value property instead of defaultValue)
+
+
 ## Implementation Details
 
 ### HTML props

@@ -1,15 +1,5 @@
 open React;
 
-// module Placement = {
-//     type t = string;
-//     [@bs.inline] let topLeft = "topLeft";
-//     [@bs.inline] let topCenter = "topCenter";
-//     [@bs.inline] let topRight = "topRight";
-//     [@bs.inline] let bottomLeft = "bottomLeft";
-//     [@bs.inline] let bottomCenter = "bottomCenter";
-//     [@bs.inline] let bottomRight = "bottomRight";
-
-// };
 
 module Align = {
   [@bs.deriving abstract]
