@@ -3,7 +3,9 @@ external expectToEqual: ('a, 'a) => unit = "expectToEqual";
 [@bs.val] [@bs.module "./expect"]
 external expectToEqualAny: ('a, 'b) => unit = "expectToEqual";
 [@bs.val] [@bs.module "./expect"] external isArray: 'a => bool = "isArray";
+[@bs.val] [@bs.module "./expect"] external isDate: 'a => bool = "isDate";
 [@bs.val] [@bs.module "./expect"] external isInt: 'a => bool = "isInt";
+[@bs.val] [@bs.module "./expect"] external isFile: 'a => bool = "isFile";
 [@bs.val] [@bs.module "./expect"]
 external isElement: React.element => bool = "isElement";
 [@bs.val] [@bs.module "./expect"] external isNull: 'a => bool = "isNull";
@@ -252,6 +254,14 @@ let expectFocusEvent = (e: ReactEvent.Focus.t) => {
   expectObject(e->ReactEvent.Synthetic.nativeEvent);
   // TODO 
 };
+
+let expectMaybeNumber = expectOptionOf(expectNumber);
+
+let expectDate = (d: Js.Date.t) => {
+  expectToEqual(d->isDate, true);
+};
+
+let expectMaybeDate = expectOptionOf(expectDate);
 
 let expectDomMouseEvent: Dom.mouseEvent => unit = [%raw
   {|

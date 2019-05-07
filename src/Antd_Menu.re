@@ -3,7 +3,7 @@ open Antd__;
 
 type clickParam('a) = {
   .
-  "key": string, // no need to required key in Item
+  "key": string, // no need to require key in Item
   "keyPath": array(string),
   "item": Js.t({..}), 
   "domEvent": ReactEvent.Synthetic.t 
