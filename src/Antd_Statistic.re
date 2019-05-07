@@ -1,78 +1,70 @@
 open React;
 open MomentRe;
 
-type formatConfig = {
-  .
-  // "formatter" // no need to include "self"?
-  "decimalSeparator": option(string),
-  "groupSeparator": option(string),
-  "precision": option(float),
-  "prefixCls": option(string),
-};
-
-module Value = {
-  type t;
-  external string: string => t = "%identity";
-  external number: float => t = "%identity";
-};
-
 module Formatter = {
   type t;
 
   let false_: t = [%raw {| (false) |}];
   let number: t = [%raw {| ("number") |}];
   let countdown: t = [%raw {| ("countdown") |}];
-  // TODo rework, input value not OK
-  // TODO test
-  external make: ((Value.t, formatConfig) => element) => t = "%identity";
+
+  // FormatConfig skipped
+  // value number variant skipped
+  external make: (string => element) => t = "%identity";
 };
 
 [@react.component] [@bs.module]
 external make:
   (
-    ~decimalSeparator: string=?,
+    // ***** BEGIN FORMAT *****
     ~formatter: Formatter.t=?,
+    ~decimalSeparator: string=?,
     ~groupSeparator: string=?,
     ~precision: int=?,
+    ~prefixCls: string=?,
+    // ***** END FORMAT *****
+    // ***** BEGIN STATISTIC *****
+    ~className: string=?,
+    ~style: ReactDOMRe.Style.t=?,
+    ~value: string=?,
+    ~valueStyle: ReactDOMRe.Style.t=?,
+    ~valueRender: element => element=?,
+    ~title: element=?,
     ~prefix: element=?,
     ~suffix: element=?,
-    ~title: element=?,
-    ~value: Value.t=?, // TODO
-    ~valueStyle: ReactDOMRe.Style.t=?,
-    ~style: ReactDOMRe.Style.t=?,
-    ~prefixCls: string=?,
-    ~className: string=?,
+    // ***** END STATISTIC *****
     unit
   ) =>
   element =
   "antd/lib/statistic";
 
 module Countdown = {
-  module Value = {
-    type t;
-    external string: string => t = "%identity";
-    external moment: Moment.t => t = "%identity";
-  };
-
+  
   [@react.component] [@bs.module]
-  // copy paste (except value)
   external make:
     (
-      ~decimalSeparator: string=?,
-      ~formatter: Formatter.t=?,
-      ~groupSeparator: string=?,
-      ~precision: int=?, // TODO ensure OK
-      ~prefix: element=?,
-      ~suffix: element=?,
-      ~title: element=?,
-      ~valueStyle: ReactDOMRe.Style.t=?,
-      ~style: ReactDOMRe.Style.t=?,
-      ~prefixCls: string=?,
-      ~className: string=?,
-      // end of copy paste
+      // ***** BEGIN FORMAT *****
+    ~formatter: Formatter.t=?,
+    ~decimalSeparator: string=?,
+    ~groupSeparator: string=?,
+    ~precision: int=?,
+    ~prefixCls: string=?,
+    // ***** END FORMAT *****
+    // ***** BEGIN STATISTIC *****
+    ~className: string=?,
+    ~style: ReactDOMRe.Style.t=?,
+    // ~value: string=?,
+    ~valueStyle: ReactDOMRe.Style.t=?,
+    ~valueRender: element => element=?,
+    ~title: element=?,
+    ~prefix: element=?,
+    ~suffix: element=?,
+    // ***** END STATISTIC *****
+    // ***** BEGIN COUNTDOWN *****
+      ~value: Moment.t=?,
       ~format: string=?,
       ~onFinish: unit => unit=?,
-      ~value: Value.t=?, // TODO
+    // ***** END COUNTDOWN *****
       unit
     ) =>
     element =

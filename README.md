@@ -108,6 +108,13 @@ Changing Antd version is generally not recommended as imports sometimes break
 
 `value` property is required to ensure types in a Group
 
+### Statistic
+
+`value` property can only be a string
+
+### Statistic.Countdown
+
+`value` property can only be a MomentRe.Moment.t
 
 ## Implementation Details
 

@@ -11,12 +11,21 @@ let make = () => {
   <>
     <h1 id="statistic-example"> {string("Statistic Example")} </h1>
     <Statistic
+      // valueRender={e => {
+      //   e
+      // }}
       title={string("Active Users")}
-      value={Value.number(112893.0)}
+      value={112893.0->Js.Float.toString}
     />
     <Statistic
       title={string("Active")}
-      value={Value.number(11.28)}
+      // formatter={Formatter.make(value => {
+      //   string(value ++ "!")
+      // })}
+      // formatter=Formatter.false_
+      decimalSeparator="o"
+      // value={Value.number(11.2899)}
+      value={"112.289999"}
       precision=2
       valueStyle={ReactDOMRe.Style.make(~color="#3f8600", ())}
       prefix={<Icon _type=Icon.Type.arrowUp />}
@@ -24,10 +33,10 @@ let make = () => {
     />
     <Countdown
       title={string("Countdown")}
-      value={Countdown.Value.moment(deadline)}
-      onFinish={() =>
-        // Js.log("onFinish")
-        ()}
+      value={deadline}
+      onFinish={() => {
+        Js.log("onFinish")
+        }}
     />
   </>;
 };
