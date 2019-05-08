@@ -13,6 +13,7 @@ let make = () => {
       defaultValue="mysite"
     />
     <Input.Search
+      placeholder="..."
       enterButton={Search.EnterButton.element(string("Do Search"))}
       onSearch={(s, e) =>
         expectString(
