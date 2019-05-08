@@ -542,8 +542,8 @@ module TextArea = {
     // ***** BEGIN HTML *****
     [@bs.optional]
     key: string,
-    [@bs.optional]
-    ref: ReactDOMRe.domRef,
+    // [@bs.optional]
+    // ref: ReactDOMRe.domRef,
     [@bs.optional] [@bs.as "aria-details"]
     ariaDetails: string,
     [@bs.optional] [@bs.as "aria-disabled"]
@@ -1597,8 +1597,8 @@ module Password = {
     // ***** BEGIN HTML *****
     [@bs.optional]
     key: string,
-    [@bs.optional]
-    ref: ReactDOMRe.domRef,
+    // [@bs.optional]
+    // ref: ReactDOMRe.domRef,
     [@bs.optional] [@bs.as "aria-details"]
     ariaDetails: string,
     [@bs.optional] [@bs.as "aria-disabled"]

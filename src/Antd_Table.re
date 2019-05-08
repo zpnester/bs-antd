@@ -97,7 +97,7 @@ type expandIconProps('record) = {
   "record": 'record,
   "needIndentSpaced": bool,
   "expandable": bool,
-  "onExpand": ('record, Dom.mouseEvent) => unit,
+  // onExpand skipped
 };
 
 module Loading = {
@@ -208,7 +208,7 @@ module RowSelection = {
       ~selectedRowKeys: array(string)=?, // number[] skipped
       ~onChange: (array(string), array('record)) => unit=?,
       ~getCheckboxProps: 'record => Js.t({..})=?,
-      ~onSelect: ('record, bool, array('record), Dom.event) => Js.t({..})=?, // TODO validate ret works
+      ~onSelect: ('record, bool, array('record), Dom.event) => unit=?, // ret any skipped
       ~onSelectMultiple: (
                            bool,
                            ~selectedRows: array('record),
@@ -267,7 +267,7 @@ external make:
   (
     ~bordered: bool=?,
     ~childrenColumnName: string=?, // array fails at runtime
-    ~columns: array(Column.t('record)), // TODO optional?
+    ~columns: array(Column.t('record)), 
     ~className: string=?,
     ~style: ReactDOMRe.Style.t=?,
     ~children: element=?,
@@ -277,10 +277,10 @@ external make:
     ~defaultExpandedRowKeys: array(string)=?, // skipped: TS: string[] | number[]
     ~expandedRowKeys: array(string)=?, // skipped: TS: string[] | number[]
     ~expandedRowRender: (
-                          ~record: 'record,
-                          ~index: int,
-                          ~indent: int,
-                          ~expanded: bool
+                          'record,
+                          int,
+                          int,
+                          bool
                         ) =>
                         element
                           =?,
@@ -303,7 +303,7 @@ external make:
     ~showHeader: bool=?,
     ~size: [@bs.string] [ | `default | `middle | `small]=?,
     ~title: array('record) => element=?,
-    ~onChange: (Pagination.Config.make, Js.Dict.t(array(string)), sorterResult('todo), tableCurrentDataSource('record)) => unit=?, // TODO
+    ~onChange: (Pagination.Config.make, Js.Dict.t(array(string)), sorterResult('todo), tableCurrentDataSource('record)) => unit=?,
     ~onExpand: (bool, 'record) => unit=?,
     ~onExpandedRowsChange: array(string) => unit=?, // num[] skipped
     ~onHeaderRow: (array(Column.t('record)), int) => Js.t({..})=?,

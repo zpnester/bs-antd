@@ -29,7 +29,6 @@ let expectExpandIconPropsOfUser = (x: expandIconProps(user)) => {
   expectUser(x##record);
   expectBool(x##needIndentSpaced);
   expectBool(x##expandable);
-  // TODO onExpand
 };
 
 
@@ -107,7 +106,9 @@ let make = () => {
           expectUser(x);
           expectUser(record);
           expectInt(index);
-          string(record##name ++ "!");
+          <>
+            <p> {string(record##name ++ "!")}</p>
+          </>
         },
       (),
     ),
@@ -161,34 +162,52 @@ let make = () => {
 
   let rowSelection =
     RowSelection.make(
-      ~onSelect=
-        (record, selected, selectedRows, e) => {
-          // Js.log("onSelect");
-          // Js.log4(record, selected, selectedRows, e);
-          expectUser(record);
+      ~selectWay=`onSelectMultiple,
+      ~onChange={(keys, xs) => {
+          expectStringArray(keys);
+          expectUserArray(xs);
+      }},
+      ~_type=`checkbox,
+        ~onSelect=
+          (record, selected, selectedRows, e) => {
+            [%debugger];
+
+            expectUser(record);
+            expectBool(selected);
+            expectUserArray(selectedRows);
+            expectDomEvent(e);
+            {
+              "onMouseEnter": _ => {
+                Js.log("select enter");
+              },
+            };
+            ()
+          },
+          ~onSelectInvert={keys => {
+            [%debugger];
+             failwith("NOT TESTED")
+            expectStringArray(keys);
+          }},
+        ~onSelectAll={(selected, ~selectedRows, ~changeRows) => {
           expectBool(selected);
           expectUserArray(selectedRows);
-          {
-            "onMouseEnter": _ => {
-              Js.log("select enter");
-            },
-          };
-        },
+          expectUserArray(changeRows);
+        }},
       ~onSelectMultiple=
         (selected, ~selectedRows, ~changeRows) => {
+          [%debugger];
           failwith("NOT TESTED");
-          // Js.log4("onSelectMultiple", selected, selectedRows, changeRows);
           expectBool(selected);
           expectUserArray(selectedRows);
           expectUserArray(changeRows);
         },
       ~getCheckboxProps=
         record => {
-          // Js.log2("getCheckboxProps", record);
           expectUser(record);
-          {"pass": "to checkbox"};
+          {"onMouseEnter": () => {
+            Js.log("checkbox enter")
+          }};
         },
-      ~onSelectInvert=x => failwith("NOT TESTED"),
       (),
     );
 
@@ -215,12 +234,12 @@ let make = () => {
     (i + 30)->string_of_int;
   };
 
-  let expandedRowRender = (~record, ~index, ~indent, ~expanded) => {
-    failwith("NOT TESTED");
+  let expandedRowRender = (record, index, indent, expanded) => {
     expectUser(record);
     expectInt(index);
     expectInt(indent);
     expectBool(expanded);
+    string("Address: " ++ record##address);
   };
 
   let defaultExpandedRowKeys = [|"1"|];
@@ -295,6 +314,11 @@ let make = () => {
   <>
     <h1 id="table-example"> {string("Table Example")} </h1>
     <Table
+    onExpandedRowsChange={x => {
+      expectStringArray(x);
+    }}
+    expandRowByClick=true
+    defaultExpandAllRows=false
       onChange={(cfg,b,c,d) => {
 
         expectPaginationConfig(cfg);
@@ -312,10 +336,11 @@ let make = () => {
       footer
       title
       rowClassName
-      rowKey
+      // rowKey
       //  expandIcon
       childrenColumnName="name2"
       rowSelection
+      expandedRowRender
     />
   </>;
 };

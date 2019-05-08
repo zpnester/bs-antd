@@ -274,3 +274,13 @@ function(e) {
 }
 |}
 ];
+
+let expectDomEvent: Dom.event => unit = [%raw
+  {|
+function(e) {
+  if (typeof(e.nativeEvent) != "undefined") {
+    throw "not dom event - it is react event";
+  }
+}
+|}
+];

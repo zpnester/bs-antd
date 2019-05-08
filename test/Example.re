@@ -65,7 +65,7 @@ let make = () => {
   [@react.component]
   let make = () => {
    <> 
-   <NotificationExample />
+   <TableExample />
   
     </>;
 
