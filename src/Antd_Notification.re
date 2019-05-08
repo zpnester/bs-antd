@@ -45,7 +45,7 @@ module Config = {
                     =?,
       ~style: ReactDOMRe.Style.t=?,
       ~onClose: unit => unit=?,
-      ~onClick: unit => unit=?,
+      ~onClick: ReactEvent.Mouse.t => unit=?,
       ~prefixCls: string=?,
       ~_type: [@bs.string] [ | `info | `success | `error | `warning]=?,
       unit

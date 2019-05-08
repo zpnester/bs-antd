@@ -1,4 +1,4 @@
-open React;
+ open React;
 
 [@react.component] [@bs.module]
 external make:
