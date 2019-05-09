@@ -4,28 +4,29 @@ Ant Design bindings for BuckleScript
 
 ## Install
 
+BuckleScript 5 or newer is required
+
 ```
 npm i antd@3.16.6
-npm i reason-react
-npm i bs-moment
+npm i reason-react@^0.7.0
+npm i bs-moment@^0.4.4
 npm i git+https://git@github.com/zpnester/bs-antd.git
 ```
 
-bsconfig.json
-```json
-{
-    "bs-dependencies": [
-      "reason-react",
-      "bs-moment",
-      "@zpnester/bs-antd"
-    ],
-    "reason": {
-      "react-jsx": 3
-    }
-}
+### Add dependencies to bsconfig.json
+```
+"bs-dependencies": [
+  "reason-react",
+  "bs-moment",
+  "@zpnester/bs-antd"
+]
 ```
 
-Styles must be added manually
+### [Configure JSX](https://reasonml.github.io/reason-react/docs/en/jsx#migrating-from-version-2-to-version-3)
+
+### Add Antd styles
+
+With CSS
 
 ```reason
 %bs.raw
