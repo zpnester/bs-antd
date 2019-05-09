@@ -7,7 +7,7 @@
     },
     {
       "dir": "test",
-      "dev": true
+      "type" : "dev"
     }
   ],
   "package-specs": {
