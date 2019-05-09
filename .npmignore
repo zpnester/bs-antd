@@ -32,7 +32,6 @@ lib
 /out
 /test_dist
 .idea
-/test
 /test_dist
 /test_static
 .babelrc

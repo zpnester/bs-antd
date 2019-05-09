@@ -13,11 +13,16 @@ npm i git+https://git@github.com/zpnester/bs-antd.git
 
 bsconfig.json
 ```json
-"bs-dependencies": [
-  "reason-react",
-  "bs-moment",
-  "@zpnester/bs-antd"
-]
+{
+    "bs-dependencies": [
+      "reason-react",
+      "bs-moment",
+      "@zpnester/bs-antd"
+    ],
+    "reason": {
+      "react-jsx": 3
+    }
+}
 ```
 
 Styles must be added manually
