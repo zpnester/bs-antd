@@ -4,21 +4,6 @@ open Upload;
 open Expect_;
 open Js.Promise;
 
-
-// let expectUploadFile = (f: uploadFile) => {
-//   expectString(f##uid);
-//   expectString(f##name);
-//   expectMaybeString(f##fileName);
-//   expectMaybeNumber(f##lastModified);
-//   expectMaybeDate(f##lastModifiedDate);
-//   expectMaybeString(f##url);
-//   expectString(f##status);
-//   expectMaybeNumber(f##percent);
-//   expectMaybeString(f##thumbUrl);
-//   // abstract skipped
-//   expectString(f##_type);
-// };
-
 let expectUploadFile = (f: File.make) => {
   open File;
   expectString(f->uidGet);
@@ -34,12 +19,10 @@ let expectUploadFile = (f: File.make) => {
   expectString(f->type_Get);
 };
 
-
 let expectUploadFileArray = expectArrayOf(expectUploadFile);
 
-
 let expectRcFile = (f: RcFile.t) => {
- expectToEqual(f->isFile, true);
+  expectToEqual(f->isFile, true);
 };
 
 let expectRcFileArray = expectArrayOf(expectRcFile);
@@ -52,27 +35,28 @@ let make = () => {
       name="file"
       data={f => {
         expectUploadFile(f);
-        [%raw "{}"]
+        %raw
+        "{}";
       }}
       beforeUpload={(f, fs) => {
         expectRcFile(f);
         expectRcFileArray(fs);
         BeforeUpload.bool(true);
-        // let p = Js.Promise.make((~resolve, ~reject) => {
-        //   Js.Global.setTimeout(() => {
-        //       resolve(. false);
-        //   }, 3000) |> ignore;
-        // }) ;
-        // BeforeUpload.promise(p);
       }}
+      // let p = Js.Promise.make((~resolve, ~reject) => {
+      //   Js.Global.setTimeout(() => {
+      //       resolve(. false);
+      //   }, 3000) |> ignore;
+      // }) ;
+      // BeforeUpload.promise(p);
       // _type=`select
       // action={Action.string(
       //   "https://www.mocky.io/v2/5cc8019d300000980a055e76",
       // )}
-      action=Action.make(f => {
+      action={Action.make(f => {
         expectUploadFile(f);
-        resolve("https://www.mocky.io/v2/5cc8019d300000980a055e76")
-      })
+        resolve("https://www.mocky.io/v2/5cc8019d300000980a055e76");
+      })}
       defaultFileList=[|
         File.make(
           ~name="file1",
@@ -80,32 +64,26 @@ let make = () => {
           ~uid="fileuid",
           ~size=322.0,
           ~status=Status.done_,
-          ()
-        )
+          (),
+        ),
       |]
-      onPreview={f => {
-        expectUploadFile(f);
-      }}
+      onPreview={f => expectUploadFile(f)}
       onRemove={f => {
         expectUploadFile(f);
-        true
+        true;
       }}
-      showUploadList={ShowUploadList.make(
-        ~showRemoveIcon=true,
-        ()
-      )}
+      showUploadList={ShowUploadList.make(~showRemoveIcon=true, ())}
       listType=`pictureCard
       multiple=true
       onChange={info => {
-        open File
+        open File;
         expectUploadFile(info##file);
         expectUploadFileArray(info##fileList);
 
         switch (info##event) {
-          | None => ()
-          | Some(e) =>
-            expectNumber(e##percent);
-        }
+        | None => ()
+        | Some(e) => expectNumber(e##percent)
+        };
 
         // Js.log2("onChange", info);
         if (info##file->statusGet != Some(Status.uploading)) {
@@ -117,7 +95,9 @@ let make = () => {
           )
           |> ignore;
         } else if (info##file->statusGet == Some(Status.error)) {
-          Message.error(string(info##file->nameGet ++ " file upload failed."))
+          Message.error(
+            string(info##file->nameGet ++ " file upload failed."),
+          )
           |> ignore;
         };
       }}

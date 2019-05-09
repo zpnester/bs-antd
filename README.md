@@ -10,10 +10,10 @@ BuckleScript 5 or newer is required
 npm i antd@3.16.6
 npm i reason-react@^0.7.0
 npm i bs-moment@^0.4.4
-npm i git+https://git@github.com/zpnester/bs-antd.git
+npm i @zpnester/bs-antd
 ```
 
-### Add dependencies to bsconfig.json
+### Add dependencies in bsconfig.json
 ```
 "bs-dependencies": [
   "reason-react",
