@@ -14,9 +14,9 @@ module Formatter = {
 };
 
 [@react.component] [@bs.module]
+// ***** BEGIN FORMAT *****
 external make:
   (
-    // ***** BEGIN FORMAT *****
     ~formatter: Formatter.t=?,
     ~decimalSeparator: string=?,
     ~groupSeparator: string=?,
@@ -39,32 +39,31 @@ external make:
   "antd/lib/statistic";
 
 module Countdown = {
-  
   [@react.component] [@bs.module]
+  // ***** BEGIN FORMAT *****
   external make:
     (
-      // ***** BEGIN FORMAT *****
-    ~formatter: Formatter.t=?,
-    ~decimalSeparator: string=?,
-    ~groupSeparator: string=?,
-    ~precision: int=?,
-    ~prefixCls: string=?,
-    // ***** END FORMAT *****
-    // ***** BEGIN STATISTIC *****
-    ~className: string=?,
-    ~style: ReactDOMRe.Style.t=?,
-    // ~value: string=?,
-    ~valueStyle: ReactDOMRe.Style.t=?,
-    ~valueRender: element => element=?,
-    ~title: element=?,
-    ~prefix: element=?,
-    ~suffix: element=?,
-    // ***** END STATISTIC *****
-    // ***** BEGIN COUNTDOWN *****
+      ~formatter: Formatter.t=?,
+      ~decimalSeparator: string=?,
+      ~groupSeparator: string=?,
+      ~precision: int=?,
+      ~prefixCls: string=?,
+      // ***** END FORMAT *****
+      // ***** BEGIN STATISTIC *****
+      ~className: string=?,
+      ~style: ReactDOMRe.Style.t=?,
+      // ~value: string=?,
+      ~valueStyle: ReactDOMRe.Style.t=?,
+      ~valueRender: element => element=?,
+      ~title: element=?,
+      ~prefix: element=?,
+      ~suffix: element=?,
+      // ***** END STATISTIC *****
+      // ***** BEGIN COUNTDOWN *****
       ~value: Moment.t=?,
       ~format: string=?,
       ~onFinish: unit => unit=?,
-    // ***** END COUNTDOWN *****
+      // ***** END COUNTDOWN *****
       unit
     ) =>
     element =

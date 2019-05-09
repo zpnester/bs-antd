@@ -22,8 +22,8 @@ module Direction = {
 type locale = {
   .
   "searchPlaceholder": string,
-    "itemUnit": string,
-    "itemsUnit": string,
+  "itemUnit": string,
+  "itemsUnit": string,
 };
 
 [@react.component] [@bs.module]
@@ -36,8 +36,19 @@ external make:
     ~targetKeys: array(string)=?,
     ~selectedKeys: array(string)=?,
     ~render: transferItem('data) => element, // requried
-    ~onChange: (~targetKeys: array(string), ~direction: Direction.t, ~moveKeys: array(string)) => unit=?,
-    ~onSelectChange: (~sourceSelectedKeys: array(string), ~targetSelectedKeys: array(string)) => unit=?,
+    ~onChange: (
+                 ~targetKeys: array(string),
+                 ~direction: Direction.t,
+                 ~moveKeys: array(string)
+               ) =>
+               unit
+                 =?,
+    ~onSelectChange: (
+                       ~sourceSelectedKeys: array(string),
+                       ~targetSelectedKeys: array(string)
+                     ) =>
+                     unit
+                       =?,
     ~style: ReactDOMRe.Style.t=?,
     ~listStyle: ReactDOMRe.Style.t=?,
     ~operationStyle: ReactDOMRe.Style.t=?,
@@ -46,13 +57,13 @@ external make:
     ~showSearch: bool=?,
     ~filterOption: (string, transferItem('data)) => bool=?,
     ~footer: Js.t({..}) => element=?,
-    ~body: Js.t({..})  => element=?,
+    ~body: Js.t({..}) => element=?,
     ~rowKey: transferItem('data) => string=?, // not required as key is required in 'data
     // onSearchChange deprecated
     // ~onSearchChange: (Direction.t, ReactEvent.Synthetic.t) => unit=?,
     ~onSearch: (Direction.t, string) => unit=?,
     ~_lazy: bool=?, // obj skipped
-    ~locale: locale=?, 
+    ~locale: locale=?,
     ~onScroll: (Direction.t, ReactEvent.Synthetic.t) => unit=?,
     unit
   ) =>

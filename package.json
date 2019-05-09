@@ -19,7 +19,7 @@
     "dev": "concurrently --raw npm:watch npm:dev-server",
     "webpack": "webpack",
     "next:dev": "next",
-    "next:bsbdev": "concurrently --raw npm:watch next",
+    "next:bsbdev": "concurrently --raw npm:watch npm:next:dev",
     "next:build": "next build",
     "next:start": "next start",
     "next:export": "next export"

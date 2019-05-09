@@ -17,7 +17,7 @@ external make:
                | `warning
              ]
                =?,
-    ~text: element=?, // website says string, TS says ReactNode
+    ~text: element=?,
     ~title: string=?,
     ~style: ReactDOMRe.Style.t=?,
     ~className: string=?,

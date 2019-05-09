@@ -7,11 +7,16 @@ type linkProps;
 
 module Status = {
   type t = string;
-  [@bs.inline] let error = "error";
-  [@bs.inline] let success = "success";
-  [@bs.inline] let done_ = "done";
-  [@bs.inline] let uploading = "uploading";
-  [@bs.inline] let removed = "removed";
+  [@bs.inline]
+  let error = "error";
+  [@bs.inline]
+  let success = "success";
+  [@bs.inline]
+  let done_ = "done";
+  [@bs.inline]
+  let uploading = "uploading";
+  [@bs.inline]
+  let removed = "removed";
 };
 
 module File = {
@@ -21,7 +26,7 @@ module File = {
     size: float,
     name: string,
     [@bs.optional]
-    fileName: string, 
+    fileName: string,
     [@bs.optional]
     lastModified: float,
     [@bs.optional]
@@ -37,18 +42,16 @@ module File = {
     [@bs.optional]
     originFileObj: file,
     [@bs.optional]
-    response: response,
+    response,
     [@bs.optional]
-    error: error,
+    error,
     [@bs.optional]
-    linkProps: linkProps,
+    linkProps,
     // required
     [@bs.as "type"]
-    type_: string
+    type_: string,
   };
-
 };
-
 
 module Action = {
   type t;
@@ -78,7 +81,6 @@ module ShowUploadList = {
     "";
 };
 
-
 module BeforeUpload = {
   type t;
 
@@ -89,13 +91,10 @@ module BeforeUpload = {
 [@react.component] [@bs.module]
 external make:
   (
-    ~_type: [@bs.string] [
-      | `drag
-      | `select
-    ]=?,
+    ~_type: [@bs.string] [ | `drag | `select]=?,
     ~name: string=?,
     ~defaultFileList: array(File.make)=?,
-    ~fileList: array(File.make)=?, 
+    ~fileList: array(File.make)=?,
     ~action: Action.t=?,
     ~directory: bool=?,
     ~data: File.make => Js.t({..})=?,

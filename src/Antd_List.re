@@ -59,7 +59,6 @@ module Pagination = {
     let both = "both";
   };
 
-  // copy-pasted from Antd_Pagination
   module ItemRenderType = Antd_Pagination.ItemRenderType;
   module ShowQuickJumper = Antd_Pagination.ShowQuickJumper;
   module Size = Antd_Pagination.Size;

@@ -8,8 +8,6 @@ type filterItem = {
   "children": array(filterItem),
 };
 
-
-
 module SortOrder = {
   type t = string;
 
@@ -19,13 +17,16 @@ module SortOrder = {
   let ascend: t = "ascend";
 };
 
-type sorterResult('a) = {
-  .
-  "column": Js.t({..}), // TODO
-  "order": SortOrder.t,
-  "field": string,
-  "columnKey": string
-} as 'a;
+// made every field of sorterResult optional after testing
+
+type sorterResult('a) =
+  {
+    .
+    "column": option(Js.t({..})), // TODO
+    "order": option(SortOrder.t),
+    "field": option(string),
+    "columnKey": option(string),
+  } as 'a;
 
 module Sorter = {
   type t('a);
@@ -128,9 +129,12 @@ module Locale = {
 
 module Position = {
   type t = string;
-  [@bs.inline] let top = "top";
-  [@bs.inline] let bottom = "bottom";
-  [@bs.inline] let both = "both";
+  [@bs.inline]
+  let top = "top";
+  [@bs.inline]
+  let bottom = "bottom";
+  [@bs.inline]
+  let both = "both";
 };
 
 module Pagination = {
@@ -143,10 +147,9 @@ module Pagination = {
   module Size = Antd_Pagination.Size;
 
   module Config = {
-
     [@bs.deriving abstract]
     type make = {
-        // ***** BEGIN PAGINATION *****
+      // ***** BEGIN PAGINATION *****
       [@bs.optional]
       current: int,
       [@bs.optional]
@@ -189,13 +192,11 @@ module Pagination = {
       role: string,
       // ***** END PAGINATION *****
       [@bs.optional]
-      position: Position.t
+      position: Position.t,
     };
-
   };
 
   external make: Config.make => t = "%identity";
-
 };
 
 module RowSelection = {
@@ -259,7 +260,7 @@ module Scroll = {
 
 type tableCurrentDataSource('record) = {
   .
-  "currentDataSource": array('record)
+  "currentDataSource": array('record),
 };
 
 [@react.component] [@bs.module]
@@ -267,7 +268,7 @@ external make:
   (
     ~bordered: bool=?,
     ~childrenColumnName: string=?, // array fails at runtime
-    ~columns: array(Column.t('record)), 
+    ~columns: array(Column.t('record)),
     ~className: string=?,
     ~style: ReactDOMRe.Style.t=?,
     ~children: element=?,
@@ -276,14 +277,7 @@ external make:
     ~defaultExpandAllRows: bool=?,
     ~defaultExpandedRowKeys: array(string)=?, // skipped: TS: string[] | number[]
     ~expandedRowKeys: array(string)=?, // skipped: TS: string[] | number[]
-    ~expandedRowRender: (
-                          'record,
-                          int,
-                          int,
-                          bool
-                        ) =>
-                        element
-                          =?,
+    ~expandedRowRender: ('record, int, int, bool) => element=?,
     ~expandIcon: expandIconProps('record) => element=?,
     ~expandRowByClick: bool=?,
     ~footer: array('record) => element=?,
@@ -303,7 +297,14 @@ external make:
     ~showHeader: bool=?,
     ~size: [@bs.string] [ | `default | `middle | `small]=?,
     ~title: array('record) => element=?,
-    ~onChange: (Pagination.Config.make, Js.Dict.t(array(string)), sorterResult('todo), tableCurrentDataSource('record)) => unit=?,
+    ~onChange: (
+                 Pagination.Config.make,
+                 Js.Dict.t(array(string)),
+                 sorterResult('todo),
+                 tableCurrentDataSource('record)
+               ) =>
+               unit
+                 =?,
     ~onExpand: (bool, 'record) => unit=?,
     ~onExpandedRowsChange: array(string) => unit=?, // num[] skipped
     ~onHeaderRow: (array(Column.t('record)), int) => Js.t({..})=?,

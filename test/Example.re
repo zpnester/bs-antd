@@ -62,11 +62,11 @@ let make = () => {
   </>;
 };
 
-  [@react.component]
-  let make = () => {
-   <> 
-   <TableExample />
+  // [@react.component]
+  // let make = () => {
+  //  <> 
+  //  <TableExample />
   
-    </>;
+  //   </>;
 
-  };
+  // };

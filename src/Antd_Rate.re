@@ -24,7 +24,7 @@ external make:
     ~onChange: float => unit=?,
     ~onFocus: unit => unit=?,
     ~onHoverChange: float => unit=?,
-    ~onKeyDown: ReactEvent.Keyboard.t => unit=?, 
+    ~onKeyDown: ReactEvent.Keyboard.t => unit=?,
     ~prefixCls: string=?,
     unit
   ) =>

@@ -1,6 +1,5 @@
-
-
 type reactElement('p) = {
-    .
-    "props": 'p
-}
+  .
+  "props": 'p,
+  "key": option(string),
+};

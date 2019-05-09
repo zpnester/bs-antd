@@ -57,13 +57,17 @@ let make = () => {
   |];
 
   let filterOption = (s, opt) => {
-    let key = opt##props->Option.keyGet->Belt.Option.getWithDefault("");
+    // try key and props.value
+    let key = switch (opt##props->Option.valueGet) {
+      | None => opt##key
+      | Some(x) => Some(x)
+    }
+    |. Belt.Option.getWithDefault("");
 
-    // Js.log3("filterOption", value, opt);
     expectString(s);
     expectReactElement(opt);
 
-    key |> Js.String.indexOf(value##key) >= 0;
+    key |> Js.String.indexOf(s) >= 0;
   };
 
   <>

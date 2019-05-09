@@ -1,7 +1,5 @@
 open React;
 
-
-
 type t;
 
 [@bs.send] external blur: t => unit = "blur";
@@ -23,11 +21,10 @@ type radioChangeEvent = {
   "nativeEvent": Dom.mouseEvent,
 };
 
-
 [@react.component] [@bs.module]
+// ***** BEGIN ABSTRACT CHECKBOX *****
 external make:
   (
-    // ***** BEGIN ABSTRACT CHECKBOX *****
     ~prefixCls: string=?,
     ~className: string=?,
     ~defaultChecked: bool=?,
@@ -58,17 +55,15 @@ external make:
   element =
   "antd/lib/radio/radio";
 
-
 type checkboxOption('a) = Antd_Checkbox.checkboxOption('a);
-
 
 module Group = {
   // TODO blur/focus and ref too?
 
   [@react.component] [@bs.module]
+  // ***** BEGIN ABSTRACT CHECKBOX GROUP ****
   external make:
     (
-      // ***** BEGIN ABSTRACT CHECKBOX GROUP ****
       ~prefixCls: string=?,
       ~className: string=?,
       ~options: array(checkboxOption('option))=?,
@@ -97,35 +92,35 @@ module Button = {
   // complete copy paste of radio
 
   [@react.component] [@bs.module]
+  // ***** BEGIN ABSTRACT CHECKBOX *****
   external make:
     (
-      // ***** BEGIN ABSTRACT CHECKBOX *****
-    ~prefixCls: string=?,
-    ~className: string=?,
-    ~defaultChecked: bool=?,
-    ~checked: bool=?,
-    ~style: ReactDOMRe.Style.t=?,
-    ~disabled: bool=?,
-    // replaced below
-    // ~onChange: checkboxChangeEvent => unit=?,
-    ~onClick: ReactEvent.Mouse.t => unit=?,
-    ~onMouseEnter: ReactEvent.Mouse.t => unit=?,
-    ~onMouseLeave: ReactEvent.Mouse.t => unit=?,
-    ~onKeyPress: ReactEvent.Keyboard.t => unit=?,
-    ~onKeyDown: ReactEvent.Keyboard.t => unit=?,
-    ~value: string, // value is required to ensure type on Group
-    ~tabIndex: int=?,
-    ~name: string=?,
-    ~children: element=?,
-    // ***** END ABSTRACT CHECKBOX *****
-    // ***** BEGIN ABSTRACT CHECKBOX ONCHANGE *****
-    ~onChange: radioChangeEvent => unit=?,
-    // ***** END ABSTRACT CHECKBOX ONCHANGE *****
-    // ***** BEGIN RADIO FROM WEBSITE *****
-    ~autoFocus: bool=?,
-    // ***** END RADIO FROM WEBSITE *****
-    ~ref: Ref.t(Js.nullable(t))=?,
-    unit
+      ~prefixCls: string=?,
+      ~className: string=?,
+      ~defaultChecked: bool=?,
+      ~checked: bool=?,
+      ~style: ReactDOMRe.Style.t=?,
+      ~disabled: bool=?,
+      // replaced below
+      // ~onChange: checkboxChangeEvent => unit=?,
+      ~onClick: ReactEvent.Mouse.t => unit=?,
+      ~onMouseEnter: ReactEvent.Mouse.t => unit=?,
+      ~onMouseLeave: ReactEvent.Mouse.t => unit=?,
+      ~onKeyPress: ReactEvent.Keyboard.t => unit=?,
+      ~onKeyDown: ReactEvent.Keyboard.t => unit=?,
+      ~value: string, // value is required to ensure type on Group
+      ~tabIndex: int=?,
+      ~name: string=?,
+      ~children: element=?,
+      // ***** END ABSTRACT CHECKBOX *****
+      // ***** BEGIN ABSTRACT CHECKBOX ONCHANGE *****
+      ~onChange: radioChangeEvent => unit=?,
+      // ***** END ABSTRACT CHECKBOX ONCHANGE *****
+      // ***** BEGIN RADIO FROM WEBSITE *****
+      ~autoFocus: bool=?,
+      // ***** END RADIO FROM WEBSITE *****
+      ~ref: Ref.t(Js.nullable(t))=?,
+      unit
     ) =>
     element =
     "antd/lib/radio/radioButton";

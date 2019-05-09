@@ -284,3 +284,12 @@ function(e) {
 }
 |}
 ];
+
+
+
+let expectMaybeObject = (x: option('a)) => {
+  switch (x) {
+    | None => ()
+    | Some(x) => expectObject(x)
+  }
+};

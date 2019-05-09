@@ -1,6 +1,5 @@
 open React;
 
-
 module Align = {
   [@bs.deriving abstract]
   type make = {

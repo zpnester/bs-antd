@@ -18,15 +18,13 @@ module Layout = {
   let vertical = "vertical";
 };
 
-// todo confirm ref 
-
 [@bs.deriving abstract]
 type makeProps = {
   // ***** BEGIN HTML *****
   [@bs.optional]
   key: string,
-  [@bs.optional]
-  ref: Js.nullable(Dom.element) => unit,
+  //  [@bs.optional]
+  //  ref: ReactDOMRe.domRef,
   [@bs.optional] [@bs.as "aria-details"]
   ariaDetails: string,
   [@bs.optional] [@bs.as "aria-disabled"]

@@ -2,8 +2,6 @@
 
 Ant Design bindings for BuckleScript
 
-Work In Progress
-
 ## Install
 
 ```
@@ -58,7 +56,7 @@ To avoid certain Next.js issues it is recommended to to add minimal `.babel.rc` 
 
 ### Change Antd version
 
-Changing Antd version is generally not recommended as imports sometimes break
+Changing Antd version is possible but not recommended
 
 ## Limitations
 
@@ -121,11 +119,6 @@ Changing Antd version is generally not recommended as imports sometimes break
 Suggestions cannot be created with plain strings, only with a dedicated function
 
 `data` property available in Make functor
-
-Testing of Mention component (version specified above) revealed several issues:
-
-* crash when server side rendered
-* crash when used as controlled input (value property instead of defaultValue)
 
 
 ## Implementation Details

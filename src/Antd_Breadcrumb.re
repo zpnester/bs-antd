@@ -1,10 +1,11 @@
 open React;
 
-type route('r) = {
-  ..
-  "path": string,
-  "breadcrumbName": string,
-} as 'r;
+type route('r) =
+  {
+    ..
+    "path": string,
+    "breadcrumbName": string,
+  } as 'r;
 
 module Item = {
   [@react.component] [@bs.module "antd/lib/breadcrumb"]
@@ -36,16 +37,19 @@ external make:
   element =
   "antd/lib/breadcrumb";
 
-type params('a) = Js.t({
-  ..
-}) as 'a;
+type params('a) = Js.t({..}) as 'a;
 
 module Routes = {
   [@react.component] [@bs.module]
   external make:
     (
       ~routes: array(route('r)),
-      ~itemRender: (route('r), params('params), array(route('r)), array(string)) =>
+      ~itemRender: (
+                     route('r),
+                     params('params),
+                     array(route('r)),
+                     array(string)
+                   ) =>
                    element,
       ~style: ReactDOMRe.Style.t=?,
       ~className: string=?,

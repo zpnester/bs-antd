@@ -38,13 +38,13 @@ type makeProps = {
   [@bs.optional]
   value: Js.null(MomentRe.Moment.t),
   [@bs.optional]
-  defaultValue: Js.null(MomentRe.Moment.t), 
+  defaultValue: Js.null(MomentRe.Moment.t),
   [@bs.optional] [@bs.as "open"]
   open_: bool,
   [@bs.optional]
   format: string,
-  [@bs.optional]  
-  onChange: (Js.null(MomentRe.Moment.t), string) => unit, 
+  [@bs.optional]
+  onChange: (Js.null(MomentRe.Moment.t), string) => unit,
   [@bs.optional]
   onOpenChange: bool => unit,
   [@bs.optional]

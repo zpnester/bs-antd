@@ -8,10 +8,11 @@ type t;
 type checkboxChangeEvent = {
   .
   // ideally target should be of makeProps type but recursion won't work here
-    "target": {. 
+  "target": {
+    .
     "checked": bool,
     "value": string, // any skipped, not optional ensured in other places
-    "name": option(string)
+    "name": option(string),
   },
   [@bs.meth] "stopPropagation": unit => unit,
   [@bs.meth] "preventDefault": unit => unit,
@@ -19,9 +20,9 @@ type checkboxChangeEvent = {
 };
 
 [@react.component] [@bs.module]
+// ***** BEGIN ABSTRACT CHECKBOX *****
 external make:
   (
-    // ***** BEGIN ABSTRACT CHECKBOX *****
     ~prefixCls: string=?,
     ~className: string=?,
     ~defaultChecked: bool=?,
@@ -51,7 +52,8 @@ external make:
   element =
   "antd/lib/checkbox";
 
-type checkboxOption('a) = {
+type checkboxOption('a) =
+  {
     ..
     "label": element,
     "value": string, // not optional ensured in other places
@@ -60,12 +62,10 @@ type checkboxOption('a) = {
   } as 'a;
 
 module Group = {
-  
-
   [@react.component] [@bs.module]
+  // ***** BEGIN ABSTRACT CHECKBOX GROUP ****
   external make:
     (
-      // ***** BEGIN ABSTRACT CHECKBOX GROUP ****
       ~prefixCls: string=?,
       ~className: string=?,
       ~options: array(checkboxOption('option))=?,

@@ -1,22 +1,24 @@
 open React;
 open Antd__;
 
-type clickParam('a) = {
-  .
-  "key": string, // no need to require key in Item
-  "keyPath": array(string),
-  "item": Js.t({..}), 
-  "domEvent": ReactEvent.Synthetic.t 
-} as 'a;
+type clickParam('a) =
+  {
+    .
+    "key": string, // no need to require key in Item
+    "keyPath": array(string),
+    "item": Js.t({..}),
+    "domEvent": ReactEvent.Synthetic.t,
+  } as 'a;
 
-type selectParam('a) = {
-  .
-  "key": string,
-  "keyPath": array(string),
-  "item": Js.t({..}), 
-  "domEvent": ReactEvent.Synthetic.t,
-  "selectedKeys": array(string),
-} as 'a;
+type selectParam('a) =
+  {
+    .
+    "key": string,
+    "keyPath": array(string),
+    "item": Js.t({..}),
+    "domEvent": ReactEvent.Synthetic.t,
+    "selectedKeys": array(string),
+  } as 'a;
 
 [@react.component] [@bs.module "antd/lib/menu"]
 external make:
@@ -53,8 +55,8 @@ external make:
     ~onMouseEnter: ReactEvent.Mouse.t => unit=?,
     ~prefixCls: string=?,
     ~className: string=?,
-    ~openTransitionName: 'todoOpenTransitionName=?, 
-    ~openAnimation: 'todoOpenAnimation=?, 
+    ~openTransitionName: 'todoOpenTransitionName=?,
+    ~openAnimation: 'todoOpenAnimation=?,
     ~id: string=?,
     unit
   ) =>
@@ -62,10 +64,10 @@ external make:
   "default";
 
 type mouseEvent = {
-                       .
-                       "key": string,
-                       "domEvent": ReactEvent.Mouse.t,
-                     };
+  .
+  "key": string,
+  "domEvent": ReactEvent.Mouse.t,
+};
 
 module Item = {
   [@react.component] [@bs.module]
@@ -80,12 +82,8 @@ module Item = {
       ~className: string=?,
       ~style: ReactDOMRe.Style.t=?,
       ~onClick: clickParam('clickParam) => unit=?,
-      ~onMouseEnter: mouseEvent =>
-                     unit
-                       =?,
-      ~onMouseLeave: mouseEvent =>
-                     unit
-                       =?,
+      ~onMouseEnter: mouseEvent => unit=?,
+      ~onMouseLeave: mouseEvent => unit=?,
       unit
     ) =>
     element =
@@ -93,10 +91,10 @@ module Item = {
 };
 
 type titleEvent = {
-    .
-    "key": string,
-    "domEvent": ReactEvent.Synthetic.t,
-  };
+  .
+  "key": string,
+  "domEvent": ReactEvent.Synthetic.t,
+};
 
 module SubMenu = {
   [@react.component] [@bs.module]
@@ -106,15 +104,9 @@ module SubMenu = {
       ~disabled: bool=?,
       ~key: string=?,
       ~title: element=?,
-      ~onTitleClick: titleEvent =>
-                     unit
-                       =?,
-      ~onTitleMouseEnter: titleEvent =>
-                          unit
-                            =?,
-      ~onTitleMouseLeave: titleEvent =>
-                          unit
-                            =?,
+      ~onTitleClick: titleEvent => unit=?,
+      ~onTitleMouseEnter: titleEvent => unit=?,
+      ~onTitleMouseLeave: titleEvent => unit=?,
       ~style: ReactDOMRe.Style.t=?,
       ~className: string=?,
       ~rootPrefixCls: string=?,

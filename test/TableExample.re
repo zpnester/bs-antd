@@ -34,12 +34,15 @@ let expectExpandIconPropsOfUser = (x: expandIconProps(user)) => {
 
 let expectSortOder = expectEnum([|SortOrder.ascend, SortOrder.descend|]);
 
+let expectMaybeSortOrder = expectOptionOf(expectSortOder);
+
 let expectSorterResult = sr => {
-  expectObject(sr##column);
-  expectSortOder(sr##order);
-  expectString(sr##field);
-  expectString(sr##columnKey);
+  expectMaybeObject(sr##column);
+  expectMaybeSortOrder(sr##order);
+  expectMaybeString(sr##field);
+  expectMaybeString(sr##columnKey);
 };
+
 
 
 let expectNullSortOrder = x => {
@@ -170,8 +173,6 @@ let make = () => {
       ~_type=`checkbox,
         ~onSelect=
           (record, selected, selectedRows, e) => {
-            [%debugger];
-
             expectUser(record);
             expectBool(selected);
             expectUserArray(selectedRows);

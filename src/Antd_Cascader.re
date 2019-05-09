@@ -5,21 +5,21 @@ type t;
 [@bs.send] external blur: t => unit = "blur";
 [@bs.send] external focus: t => unit = "focus";
 
-
-type cascaderOption('a) = {
-  ..
-  "value": string,
-  "label": element,
-  "disabled": bool,
-  "children": array(cascaderOption('a)),
-} as 'a;
+type cascaderOption('a) =
+  {
+    ..
+    "value": string,
+    "label": element,
+    "disabled": bool,
+    "children": array(cascaderOption('a)),
+  } as 'a;
 
 module Limit = {
   type t;
   external number: int => t = "%identity";
 
   // TODO inline when possible
-  let false_: t = [%raw {| (false) |}];
+  let false_: t = [%raw {| false |}];
 };
 
 module ShowSearch = {
@@ -37,7 +37,9 @@ module ShowSearch = {
   external make:
     (
       ~limit: Limit.t=?,
-      ~filter: (string, array(cascaderOption('option)), filledFieldNames) => bool=?,
+      ~filter: (string, array(cascaderOption('option)), filledFieldNames) =>
+               bool
+                 =?,
       ~render: (
                  string,
                  array(cascaderOption('option)),
@@ -71,7 +73,9 @@ external make:
     ~className: string=?,
     ~defaultValue: array(string)=?,
     ~disabled: bool=?,
-    ~displayRender: (array(string), array(cascaderOption('option))) => element=?,
+    ~displayRender: (array(string), array(cascaderOption('option))) =>
+                    element
+                      =?,
     ~expandTrigger: [@bs.string] [ | `click | `hover]=?,
     ~fieldNames: {
                    .
