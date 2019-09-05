@@ -501,7 +501,7 @@ type makeProps = {
   children: element,
 };
 
-[@bs.module "antd/lib/layout"] external make: component(makeProps) = "default";
+[@bs.module "antd/es/layout"] external make: component(makeProps) = "default";
 
 module Content = {
   // can't alias makeProps, so copy paste
@@ -1007,7 +1007,7 @@ module Content = {
     children: element,
   };
 
-  [@bs.module "antd/lib/layout"] [@bs.scope "default"]
+  [@bs.module "antd/es/layout"] [@bs.scope "default"]
   external make: component(makeProps) = "Content";
 };
 
@@ -1512,7 +1512,7 @@ module Header = {
     [@bs.optional]
     children: element,
   };
-  [@bs.module "antd/lib/layout"] [@bs.scope "default"]
+  [@bs.module "antd/es/layout"] [@bs.scope "default"]
   external make: component(makeProps) = "Header";
 };
 
@@ -2017,7 +2017,7 @@ module Footer = {
     [@bs.optional]
     children: element,
   };
-  [@bs.module "antd/lib/layout"] [@bs.scope "default"]
+  [@bs.module "antd/es/layout"] [@bs.scope "default"]
   external make: component(makeProps) = "Footer";
 };
 
@@ -2581,6 +2581,6 @@ module Sider = {
     children: element,
   };
 
-  [@bs.module "antd/lib/layout"] [@bs.scope "default"]
+  [@bs.module "antd/es/layout"] [@bs.scope "default"]
   external make: component(makeProps) = "Sider";
 };

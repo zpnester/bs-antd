@@ -26,7 +26,7 @@ type locale = {
   "itemsUnit": string,
 };
 
-[@react.component] [@bs.module "antd/lib/transfer"]
+[@react.component] [@bs.module "antd/es/transfer"]
 external make:
   (
     ~prefixCls: string=?,

@@ -1,6 +1,6 @@
 open React;
 
-[@react.component] [@bs.module "antd/lib/anchor"]
+[@react.component] [@bs.module "antd/es/anchor"]
 external make:
   (
     ~prefixCls: string=?,
@@ -28,7 +28,7 @@ external make:
   "default";
 
 module Link = {
-  [@react.component] [@bs.module "antd/lib/anchor"] [@bs.scope "default"]
+  [@react.component] [@bs.module "antd/es/anchor"] [@bs.scope "default"]
   external make:
     (
       ~prefixCls: string=?,

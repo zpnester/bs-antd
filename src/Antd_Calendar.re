@@ -9,7 +9,7 @@ module Mode = {
   let year = "year";
 };
 
-[@react.component] [@bs.module "antd/lib/calendar"]
+[@react.component] [@bs.module "antd/es/calendar"]
 external make:
   (
     ~prefixCls: string=?,

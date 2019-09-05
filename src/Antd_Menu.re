@@ -20,7 +20,7 @@ type selectParam('a) =
     "selectedKeys": array(string),
   } as 'a;
 
-[@react.component] [@bs.module "antd/lib/menu"]
+[@react.component] [@bs.module "antd/es/menu"]
 external make:
   (
     ~defaultOpenKeys: array(string)=?,
@@ -70,7 +70,7 @@ type mouseEvent = {
 };
 
 module Item = {
-  [@react.component] [@bs.module "antd/lib/menu/MenuItem"]
+  [@react.component] [@bs.module "antd/es/menu/MenuItem"]
   external make:
     (
       ~disabled: bool=?,
@@ -97,7 +97,7 @@ type titleEvent = {
 };
 
 module SubMenu = {
-  [@react.component] [@bs.module "antd/lib/menu/SubMenu"]
+  [@react.component] [@bs.module "antd/es/menu/SubMenu"]
   external make:
     (
       ~children: element=?,
@@ -117,7 +117,7 @@ module SubMenu = {
 };
 
 module ItemGroup = {
-  [@react.component] [@bs.module "antd/lib/menu"] [@bs.scope "default"]
+  [@react.component] [@bs.module "antd/es/menu"] [@bs.scope "default"]
   external make:
     (
       ~children: element=?,

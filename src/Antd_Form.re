@@ -530,10 +530,10 @@ type makeProps = {
   children: React.element,
 };
 
-[@bs.module "antd/lib/form"] external make: component(makeProps) = "default";
+[@bs.module "antd/es/form"] external make: component(makeProps) = "default";
 
 module Item = {
-  [@react.component] [@bs.module "antd/lib/form"] [@bs.scope "default"]
+  [@react.component] [@bs.module "antd/es/form"] [@bs.scope "default"]
   external make:
     (
       ~colon: bool=?,

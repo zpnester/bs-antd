@@ -1,6 +1,6 @@
 open React;
 
-[@react.component] [@bs.module "antd/lib/divider"]
+[@react.component] [@bs.module "antd/es/divider"]
 external make:
   (
     ~className: string=?,

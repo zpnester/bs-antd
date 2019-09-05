@@ -6,7 +6,7 @@ module Width = {
   external number: float => t = "%identity";
 };
 
-[@react.component] [@bs.module "antd/lib/modal"]
+[@react.component] [@bs.module "antd/es/modal"]
 external make:
   (
     ~afterClose: unit => unit=?,
@@ -100,13 +100,13 @@ module Dialog = {
   [@bs.send] external destroy: t => unit = "destroy";
 };
 
-[@bs.module "antd/lib/modal"] [@bs.scope "default"] external info: Config.t => Dialog.t = "info";
-[@bs.module "antd/lib/modal"] [@bs.scope "default"]
+[@bs.module "antd/es/modal"] [@bs.scope "default"] external info: Config.t => Dialog.t = "info";
+[@bs.module "antd/es/modal"] [@bs.scope "default"]
 external success: Config.t => Dialog.t = "success";
-[@bs.module "antd/lib/modal"] [@bs.scope "default"] external error: Config.t => Dialog.t = "error";
-[@bs.module "antd/lib/modal"] [@bs.scope "default"]
+[@bs.module "antd/es/modal"] [@bs.scope "default"] external error: Config.t => Dialog.t = "error";
+[@bs.module "antd/es/modal"] [@bs.scope "default"]
 external warning: Config.t => Dialog.t = "warning";
-[@bs.module "antd/lib/modal"] [@bs.scope "default"]
+[@bs.module "antd/es/modal"] [@bs.scope "default"]
 external confirm: Config.t => Dialog.t = "confirm";
 
-[@bs.module "antd/lib/modal"] [@bs.scope "default"] external destroyAll: unit => unit = "destroyAll";
+[@bs.module "antd/es/modal"] [@bs.scope "default"] external destroyAll: unit => unit = "destroyAll";

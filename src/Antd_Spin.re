@@ -34,4 +34,4 @@ type makeProps = {
   children: element,
 };
 
-[@bs.module "antd/lib/spin"] external make: component(makeProps) = "default";
+[@bs.module "antd/es/spin"] external make: component(makeProps) = "default";

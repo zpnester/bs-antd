@@ -19,7 +19,7 @@ type treeNodeProps = {
 type treeNode = Antd__.reactElement(treeNodeProps);
 
 module TreeNode = {
-  [@react.component] [@bs.module "antd/lib/tree"] [@bs.scope "default"]
+  [@react.component] [@bs.module "antd/es/tree"] [@bs.scope "default"]
   external make:
     (
       ~className: string=?,
@@ -91,7 +91,7 @@ module CheckStrictly = {
   let true_: t(strictCheck) = [%raw {| true |}];
 };
 
-[@react.component] [@bs.module "antd/lib/tree"]
+[@react.component] [@bs.module "antd/es/tree"]
 // ***** BEGIN TREE *****
 external make:
   (
@@ -144,7 +144,7 @@ module ExpandAction = {
 };
 
 module DirectoryTree = {
-  [@react.component] [@bs.module "antd/lib/tree/DirectoryTree"]
+  [@react.component] [@bs.module "antd/es/tree/DirectoryTree"]
   // ***** BEGIN TREE *****
   external make:
     (
@@ -219,7 +219,7 @@ module Make = (M: {type dataRef;}) => {
   type treeNode = Antd__.reactElement(treeNodeProps);
 
   module TreeNode = {
-    [@react.component] [@bs.module "antd/lib/tree"] [@bs.scope "default"]
+    [@react.component] [@bs.module "antd/es/tree"] [@bs.scope "default"]
     external make:
       (
         ~className: string=?,
@@ -292,7 +292,7 @@ module Make = (M: {type dataRef;}) => {
     let true_: t(strictCheck) = [%raw {| true |}];
   };
 
-  [@react.component] [@bs.module "antd/lib/tree"]
+  [@react.component] [@bs.module "antd/es/tree"]
   // ***** BEGIN TREE *****
   external make:
     (
@@ -346,7 +346,7 @@ module Make = (M: {type dataRef;}) => {
   };
 
   module DirectoryTree = {
-    [@react.component] [@bs.module "antd/lib/tree/DirectoryTree"]
+    [@react.component] [@bs.module "antd/es/tree/DirectoryTree"]
     // ***** BEGIN TREE *****
     external make:
       (

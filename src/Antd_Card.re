@@ -1,6 +1,6 @@
 open React;
 
-[@react.component] [@bs.module "antd/lib/card"]
+[@react.component] [@bs.module "antd/es/card"]
 external make:
   (
     ~prefixCls: string=?,

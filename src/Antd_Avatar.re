@@ -9,7 +9,7 @@ module Size = {
   external number: float => t = "%identity";
 };
 
-[@react.component] [@bs.module "antd/lib/avatar"]
+[@react.component] [@bs.module "antd/es/avatar"]
 external make:
   (
     ~shape: [@bs.string] [ | `circle | `square]=?,

@@ -1,6 +1,6 @@
 open React;
 
-[@react.component] [@bs.module "antd/lib/tag"]
+[@react.component] [@bs.module "antd/es/tag"]
 external make:
   (
     ~afterClose: unit => unit=?,
@@ -18,7 +18,7 @@ external make:
   "default";
 
 module CheckableTag = {
-  [@react.component] [@bs.module "antd/lib/tag/CheckableTag"]
+  [@react.component] [@bs.module "antd/es/tag/CheckableTag"]
   external make:
     (
       ~checked: bool=?,

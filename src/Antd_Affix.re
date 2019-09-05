@@ -1,6 +1,6 @@
 open React;
 
-[@react.component] [@bs.module  "antd/lib/affix"]
+[@react.component] [@bs.module  "antd/es/affix"]
 external make:
   (
     ~offsetTop: float=?,

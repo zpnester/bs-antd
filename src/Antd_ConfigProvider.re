@@ -2,7 +2,7 @@ open React;
 
 // TODO not tested at all
 
-[@react.component] [@bs.module "antd/lib/config-provider"]
+[@react.component] [@bs.module "antd/es/config-provider"]
 external make:
   (
     ~autoInsertSpaceInButton: bool=?,

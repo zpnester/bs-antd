@@ -8,7 +8,7 @@ type route('r) =
   } as 'r;
 
 module Item = {
-  [@react.component] [@bs.module "antd/lib/breadcrumb"] [@bs.scope "default"]
+  [@react.component] [@bs.module "antd/es/breadcrumb"] [@bs.scope "default"]
   external make:
     (
       ~prefixCls: string=?,
@@ -23,7 +23,7 @@ module Item = {
     "Item";
 };
 
-[@react.component] [@bs.module "antd/lib/breadcrumb"]
+[@react.component] [@bs.module "antd/es/breadcrumb"]
 external make:
   (
     ~style: ReactDOMRe.Style.t=?,
@@ -40,7 +40,7 @@ external make:
 type params('a) = Js.t({..}) as 'a;
 
 module Routes = {
-  [@react.component] [@bs.module "antd/lib/breadcrumb"]
+  [@react.component] [@bs.module "antd/es/breadcrumb"]
   external make:
     (
       ~routes: array(route('r)),

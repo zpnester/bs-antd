@@ -1,7 +1,7 @@
 open React;
 open Belt;
 
-[@react.component] [@bs.module "antd/lib/alert"]
+[@react.component] [@bs.module "antd/es/alert"]
 external make:
   (
     ~_type: [@bs.string] [ | `success | `info | `warning | `error]=?,

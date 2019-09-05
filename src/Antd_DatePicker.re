@@ -32,7 +32,7 @@ module Locale = {
 
 // used null even if TS says undefined, undefined is a lie
 
-[@react.component] [@bs.module "antd/lib/date-picker"]
+[@react.component] [@bs.module "antd/es/date-picker"]
 // ***** BEGIN PICKER *****
 external make:
   (
@@ -93,7 +93,7 @@ module MonthPicker = {
   [@bs.send] external blur: t => unit = "blur";
   [@bs.send] external focus: t => unit = "focus";
 
-  [@react.component] [@bs.module "antd/lib/date-picker"] [@bs.scope "default"]
+  [@react.component] [@bs.module "antd/es/date-picker"] [@bs.scope "default"]
   // ***** BEGIN PICKER *****
   external make:
     (
@@ -143,7 +143,7 @@ module WeekPicker = {
   [@bs.send] external blur: t => unit = "blur";
   [@bs.send] external focus: t => unit = "focus";
 
-  [@react.component] [@bs.module "antd/lib/date-picker"] [@bs.scope "default"]
+  [@react.component] [@bs.module "antd/es/date-picker"] [@bs.scope "default"]
   // begin common
   // ***** BEGIN PICKER *****
   external make:
@@ -208,7 +208,7 @@ module RangePicker = {
   // can be undef, m, [m, m]...
   type rangeDisableTimeCurrent;
 
-  [@react.component] [@bs.module "antd/lib/date-picker"] [@bs.scope "default"]
+  [@react.component] [@bs.module "antd/es/date-picker"] [@bs.scope "default"]
   // ***** BEGIN PICKER *****
   external make:
     (

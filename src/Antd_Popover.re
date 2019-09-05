@@ -40,7 +40,7 @@ module Align = {
     "";
 };
 
-[@react.component] [@bs.module "antd/lib/popover"]
+[@react.component] [@bs.module "antd/es/popover"]
 external make:
   (
     ~content: element=?,

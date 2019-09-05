@@ -1,6 +1,6 @@
 open React;
 
-[@react.component] [@bs.module "antd/lib/badge"]
+[@react.component] [@bs.module "antd/es/badge"]
 external make:
   (
     ~color: string=?,

@@ -263,7 +263,7 @@ type tableCurrentDataSource('record) = {
   "currentDataSource": array('record),
 };
 
-[@react.component] [@bs.module "antd/lib/table"]
+[@react.component] [@bs.module "antd/es/table"]
 external make:
   (
     ~bordered: bool=?,

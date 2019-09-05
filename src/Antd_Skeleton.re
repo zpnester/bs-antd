@@ -61,7 +61,7 @@ module Title = {
     "";
 };
 
-[@react.component] [@bs.module "antd/lib/skeleton"]
+[@react.component] [@bs.module "antd/es/skeleton"]
 external make:
   (
     ~active: bool=?,

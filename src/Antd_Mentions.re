@@ -21,12 +21,12 @@ module FilterOption = {
 
 module Option = {
 
-    [@react.component] [@bs.module "rc-mentions/lib/Option"]
+    [@react.component] [@bs.module "antd/es/mentions"] [@bs.scope "default"]
     external make: (
         ~value: string, // todo ensure non optional is OK
         ~children: element, // todo ensure non optional is OK
         unit
-    ) => element = "default";
+    ) => element = "Option";
 
 };
 
@@ -594,5 +594,5 @@ type makeProps('optionProps) = {
 };
 
 
-[@bs.module "antd/lib/mentions"]
+[@bs.module "antd/es/mentions"]
 external make: component(makeProps('optionProps)) = "default";

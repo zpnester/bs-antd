@@ -127,7 +127,7 @@ module Locale = {
   // don't do bs.obj for simple objects
 };
 
-[@react.component] [@bs.module "antd/lib/list"]
+[@react.component] [@bs.module "antd/es/list"]
 external make:
   (
     ~bordered: bool=?,
@@ -664,11 +664,11 @@ module Item = {
     // ***** END ITEM *****
   };
 
-  [@bs.module "antd/lib/list/Item"]
+  [@bs.module "antd/es/list/Item"]
   external make: component(makeProps) = "default";
 
   module Meta = {
-    [@react.component] [@bs.module "antd/lib/list/Item"] [@bs.scope "default"]
+    [@react.component] [@bs.module "antd/es/list/Item"] [@bs.scope "default"]
     external make:
       (
         ~avatar: element=?,

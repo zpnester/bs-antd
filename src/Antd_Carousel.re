@@ -7,7 +7,7 @@ type t;
 [@bs.send] external prev: t => unit = "prev";
 
 
-[@react.component] [@bs.module "antd/lib/carousel"]
+[@react.component] [@bs.module "antd/es/carousel"]
 external make:
   (
     ~ref: Ref.t(Js.Nullable.t(t))=?,

@@ -63,7 +63,7 @@ module ShowSearch = {
     "";
 };
 
-[@react.component] [@bs.module "antd/lib/cascader"]
+[@react.component] [@bs.module "antd/es/cascader"]
 external make:
   (
     ~ref: Ref.t(Js.Nullable.t(t))=?,

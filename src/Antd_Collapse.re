@@ -7,7 +7,7 @@ module Accordion = {
   let false_: t(array(string)) = [%raw {| (false) |}];
 };
 
-[@react.component] [@bs.module "antd/lib/collapse"]
+[@react.component] [@bs.module "antd/es/collapse"]
 // ***** BEGIN COLLAPSE *****
 external make:
   (
@@ -30,7 +30,7 @@ external make:
   "default";
 
 module Panel = {
-  [@react.component] [@bs.module "antd/lib/collapse/CollapsePanel"]
+  [@react.component] [@bs.module "antd/es/collapse/CollapsePanel"]
   // ***** BEGIN Panel *****
   external make:
     (

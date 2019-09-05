@@ -1,6 +1,6 @@
 open React;
 
-[@react.component] [@bs.module "antd/lib/popconfirm"]
+[@react.component] [@bs.module "antd/es/popconfirm"]
 external make:
   (
     ~cancelText: element=?,

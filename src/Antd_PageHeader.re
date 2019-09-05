@@ -1,6 +1,6 @@
 open React;
 
-[@react.component] [@bs.module "antd/lib/page-header"]
+[@react.component] [@bs.module "antd/es/page-header"]
 external make:
   (
     ~title: element=?,

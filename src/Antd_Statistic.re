@@ -13,7 +13,7 @@ module Formatter = {
   external make: (string => element) => t = "%identity";
 };
 
-[@react.component] [@bs.module "antd/lib/statistic"]
+[@react.component] [@bs.module "antd/es/statistic"]
 // ***** BEGIN FORMAT *****
 external make:
   (
@@ -39,7 +39,7 @@ external make:
   "default";
 
 module Countdown = {
-  [@react.component] [@bs.module "antd/lib/statistic/Countdown"]
+  [@react.component] [@bs.module "antd/es/statistic/Countdown"]
   // ***** BEGIN FORMAT *****
   external make:
     (

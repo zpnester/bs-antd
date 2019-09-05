@@ -32,7 +32,7 @@ module Align = {
     "";
 };
 
-[@react.component] [@bs.module "antd/lib/tooltip"]
+[@react.component] [@bs.module "antd/es/tooltip"]
 external make:
   (
     ~arrowPointAtCenter: bool=?,

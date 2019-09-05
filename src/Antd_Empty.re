@@ -1,11 +1,11 @@
 open React;
 
-[@bs.module "antd/lib/empty"]
+[@bs.module "antd/es/empty"]
 external presentedImageDefault: element = "PRESENTED_IMAGE_DEFAULT";
-[@bs.module "antd/lib/empty"]
+[@bs.module "antd/es/empty"]
 external presentedImageSimple: element = "PRESENTED_IMAGE_SIMPLE";
 
-[@react.component] [@bs.module "antd/lib/empty"]
+[@react.component] [@bs.module "antd/es/empty"]
 external make:
   (
     ~description: element=?,

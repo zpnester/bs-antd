@@ -1,6 +1,6 @@
 open React;
 
-[@react.component] [@bs.module "antd/lib/comment"]
+[@react.component] [@bs.module "antd/es/comment"]
 external make:
   (
     ~actions: array(element)=?,

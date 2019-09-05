@@ -1,6 +1,6 @@
 open React;
 
-[@react.component] [@bs.module "antd/lib/drawer"]
+[@react.component] [@bs.module "antd/es/drawer"]
 external make:
   (
     ~closable: bool=?,

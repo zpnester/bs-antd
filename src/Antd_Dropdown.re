@@ -24,7 +24,7 @@ module Align = {
   };
 };
 
-[@react.component] [@bs.module "antd/lib/dropdown"]
+[@react.component] [@bs.module "antd/es/dropdown"]
 // ***** BEGIN DROPDOWN *****
 external make:
   (
@@ -61,7 +61,7 @@ external make:
   "default";
 
 module Button = {
-  [@react.component] [@bs.module "antd/lib/dropdown/dropdown-button"]
+  [@react.component] [@bs.module "antd/es/dropdown/dropdown-button"]
   // ***** BEGIN DROPDOWN BUTTON *****
   external make:
     (

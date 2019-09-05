@@ -557,4 +557,4 @@ type makeProps = {
   children: element,
 };
 
-[@bs.module "antd/lib/button"] external make: component(makeProps) = "default";
+[@bs.module "antd/es/button"] external make: component(makeProps) = "default";

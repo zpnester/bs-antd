@@ -6,14 +6,14 @@ type message = {. "promise": Js.Promise.t(unit)};
 // duration and onClose skipped, use open_ for those
 // returned promise should cover onClose use cases
 
-[@bs.module "antd/lib/message"] [@bs.scope "default"]
+[@bs.module "antd/es/message"] [@bs.scope "default"]
 external success: element => message = "success";
-[@bs.module "antd/lib/message"] [@bs.scope "default"] external error: element => message = "error";
-[@bs.module "antd/lib/message"] [@bs.scope "default"] external info: element => message = "info";
-[@bs.module "antd/lib/message"] [@bs.scope "default"]
+[@bs.module "antd/es/message"] [@bs.scope "default"] external error: element => message = "error";
+[@bs.module "antd/es/message"] [@bs.scope "default"] external info: element => message = "info";
+[@bs.module "antd/es/message"] [@bs.scope "default"]
 external warning: element => message = "warning";
-[@bs.module "antd/lib/message"] [@bs.scope "default"] external warn: element => message = "warn";
-[@bs.module "antd/lib/message"] [@bs.scope "default"]
+[@bs.module "antd/es/message"] [@bs.scope "default"] external warn: element => message = "warn";
+[@bs.module "antd/es/message"] [@bs.scope "default"]
 external loading: element => message = "loading";
 
 module GlobalConfig = {
@@ -52,9 +52,9 @@ module Config = {
     "";
 };
 
-[@bs.module "antd/lib/message"] [@bs.scope "default"] external open_: Config.t => message = "open";
+[@bs.module "antd/es/message"] [@bs.scope "default"] external open_: Config.t => message = "open";
 
-[@bs.module "antd/lib/message"] [@bs.scope "default"]
+[@bs.module "antd/es/message"] [@bs.scope "default"]
 external config: GlobalConfig.t => unit = "config";
 
-[@bs.module "antd/lib/message"] [@bs.scope "default"] external destroy: unit => unit = "destroy";
+[@bs.module "antd/es/message"] [@bs.scope "default"] external destroy: unit => unit = "destroy";

@@ -5,7 +5,7 @@ type t;
 [@bs.send] external blur: t => unit = "blur";
 [@bs.send] external focus: t => unit = "focus";
 
-[@react.component] [@bs.module "antd/lib/rate"]
+[@react.component] [@bs.module "antd/es/rate"]
 external make:
   (
     ~ref: Ref.t(Js.nullable(t))=?,

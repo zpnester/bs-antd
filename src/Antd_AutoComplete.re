@@ -11,7 +11,7 @@ type t;
 [@bs.send] external blur: t => unit = "blur";
 [@bs.send] external focus: t => unit = "focus";
 
-[@react.component] [@bs.module "antd/lib/auto-complete"]
+[@react.component] [@bs.module "antd/es/auto-complete"]
 // ***** BEGIN ABSTRACT SELECT *****
 external make:
   (
