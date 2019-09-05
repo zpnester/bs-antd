@@ -91,23 +91,3 @@ Or with LESS
 ### Statistic.Countdown
 
 `value` property can only be a MomentRe.Moment.t
-
-### Mention
-
-Suggestions cannot be created with plain strings, only with a dedicated function
-
-`data` property available in Make functor
-
-
-## Implementation Details
-
-### HTML props
-
-Some components (Col, Row, Form, Input, etc.) have bloated sources because they extend HTML props (copied from [https://github.com/reasonml/reason-react/blob/master/src/ReactDOMRe.re](https://github.com/reasonml/reason-react/blob/master/src/ReactDOMRe.re))
-
-It does not have impact on generated JavaScript or runtime performance
-
-Note that you should never alias or curry any ReasonReact `makeProps`, if you do - it affects runtime performance and generates lots of JavaScript
-
-HTML props require `[@bs.deriving abstract]` instead of `[@react.component]` or `[@bs.obj]`
-
