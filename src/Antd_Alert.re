@@ -1,7 +1,7 @@
 open React;
 open Belt;
 
-[@react.component] [@bs.module]
+[@react.component] [@bs.module "antd/lib/alert"]
 external make:
   (
     ~_type: [@bs.string] [ | `success | `info | `warning | `error]=?,
@@ -12,7 +12,7 @@ external make:
     ~onClose: ReactEvent.Mouse.t => unit=?,
     ~afterClose: unit => unit=?,
     ~showIcon: bool=?,
-    ~iconType: Antd_IconType.t=?,
+//    ~iconType: Antd_IconType.t=?, iconType is deprecated
     ~style: ReactDOMRe.Style.t=?,
     ~prefixCls: string=?,
     ~className: string=?,
@@ -22,4 +22,4 @@ external make:
     unit
   ) =>
   element =
-  "antd/lib/alert";
+  "default";

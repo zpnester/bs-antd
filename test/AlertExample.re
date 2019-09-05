@@ -27,7 +27,7 @@ let make = () => {
       _type=`error
       closable=false
       showIcon=true
-      iconType=Icon.Type.pieChart
+      icon=<Icon _type=Icon.Type.pieChart />
     />
     <Alert
       message={string("Alert 3")}

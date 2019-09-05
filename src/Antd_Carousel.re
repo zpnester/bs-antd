@@ -6,13 +6,8 @@ type t;
 [@bs.send] external next: t => unit = "next";
 [@bs.send] external prev: t => unit = "prev";
 
-// module Effect = {
-//     type t = string;
-//     [@bs.inline] let scrollx = "scrollx";
-//     [@bs.inline] let fade = "fade";
-// };
 
-[@react.component] [@bs.module]
+[@react.component] [@bs.module "antd/lib/carousel"]
 external make:
   (
     ~ref: Ref.t(Js.Nullable.t(t))=?,
@@ -27,4 +22,4 @@ external make:
     unit
   ) =>
   element =
-  "antd/lib/carousel";
+  "default";

@@ -6,7 +6,7 @@ open React;
 let make = () => {
 
   <>
-    <h1 id="button-example"> {string("Button Exampl")} </h1>
+    <h1 id="button-example"> {string("Button Example")} </h1>
     <Button
       shape=Shape.round
       type_=Type.primary

@@ -40,7 +40,7 @@ module Align = {
     "";
 };
 
-[@react.component] [@bs.module]
+[@react.component] [@bs.module "antd/lib/popover"]
 external make:
   (
     ~content: element=?,
@@ -83,4 +83,4 @@ external make:
     unit
   ) =>
   element =
-  "antd/lib/popover";
+  "default";

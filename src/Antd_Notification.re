@@ -54,19 +54,19 @@ module Config = {
     "";
 };
 
-[@bs.module "antd/lib/notification"]
+[@bs.module "antd/lib/notification"] [@bs.scope "default"]
 external success: Config.t => unit = "success";
-[@bs.module "antd/lib/notification"]
+[@bs.module "antd/lib/notification"] [@bs.scope "default"]
 external error: Config.t => unit = "error";
-[@bs.module "antd/lib/notification"] external info: Config.t => unit = "info";
-[@bs.module "antd/lib/notification"]
+[@bs.module "antd/lib/notification"] [@bs.scope "default"] external info: Config.t => unit = "info";
+[@bs.module "antd/lib/notification"] [@bs.scope "default"]
 external warning: Config.t => unit = "warning";
-[@bs.module "antd/lib/notification"] external warn: Config.t => unit = "warn";
-[@bs.module "antd/lib/notification"] external open_: Config.t => unit = "open";
+[@bs.module "antd/lib/notification"] [@bs.scope "default"] external warn: Config.t => unit = "warn";
+[@bs.module "antd/lib/notification"] [@bs.scope "default"] external open_: Config.t => unit = "open";
 
-[@bs.module "antd/lib/notification"] external close: string => unit = "close";
-[@bs.module "antd/lib/notification"]
+[@bs.module "antd/lib/notification"] [@bs.scope "default"] external close: string => unit = "close";
+[@bs.module "antd/lib/notification"] [@bs.scope "default"]
 external destroy: unit => unit = "destroy";
 
-[@bs.module "antd/lib/notification"]
+[@bs.module "antd/lib/notification"] [@bs.scope "default"]
 external config: GlobalConfig.t => unit = "config";

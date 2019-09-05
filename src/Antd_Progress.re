@@ -20,7 +20,7 @@ module StrokeColor = {
   external makeUnsafe: {.. "direction": string} => t = "%identity";
 };
 
-[@react.component] [@bs.module]
+[@react.component] [@bs.module "antd/lib/progress"]
 external make:
   (
     ~_type: [@bs.string] [ | `line | `circle | `dashboard]=?,
@@ -49,4 +49,4 @@ external make:
     unit
   ) =>
   element =
-  "antd/lib/progress";
+  "default";

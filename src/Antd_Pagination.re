@@ -75,4 +75,4 @@ type makeProps = {
   // ***** END PAGINATION *****
 };
 
-[@bs.module] external make: component(makeProps) = "antd/lib/pagination";
+[@bs.module "antd/lib/pagination"] external make: component(makeProps) = "default";

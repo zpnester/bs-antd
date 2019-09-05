@@ -1,6 +1,6 @@
 open React;
 
-[@react.component] [@bs.module]
+[@react.component] [@bs.module "antd/lib/popconfirm"]
 external make:
   (
     ~cancelText: element=?,
@@ -18,4 +18,4 @@ external make:
     unit
   ) =>
   element =
-  "antd/lib/popconfirm";
+  "default";

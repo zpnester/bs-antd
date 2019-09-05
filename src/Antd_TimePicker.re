@@ -110,6 +110,5 @@ type makeProps = {
   key: string,
 };
 
-// using default is fragile, antd change exports sometimes
 [@bs.module "antd/lib/time-picker"]
 external make: component(makeProps) = "default";

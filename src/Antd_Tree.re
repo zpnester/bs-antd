@@ -19,7 +19,7 @@ type treeNodeProps = {
 type treeNode = Antd__.reactElement(treeNodeProps);
 
 module TreeNode = {
-  [@react.component] [@bs.module "antd/lib/tree"]
+  [@react.component] [@bs.module "antd/lib/tree"] [@bs.scope "default"]
   external make:
     (
       ~className: string=?,
@@ -91,7 +91,7 @@ module CheckStrictly = {
   let true_: t(strictCheck) = [%raw {| true |}];
 };
 
-[@react.component] [@bs.module]
+[@react.component] [@bs.module "antd/lib/tree"]
 // ***** BEGIN TREE *****
 external make:
   (
@@ -133,7 +133,7 @@ external make:
     unit
   ) =>
   element =
-  "antd/lib/tree";
+  "default";
 
 module ExpandAction = {
   type t;
@@ -144,7 +144,7 @@ module ExpandAction = {
 };
 
 module DirectoryTree = {
-  [@react.component] [@bs.module]
+  [@react.component] [@bs.module "antd/lib/tree/DirectoryTree"]
   // ***** BEGIN TREE *****
   external make:
     (
@@ -190,7 +190,7 @@ module DirectoryTree = {
       unit
     ) =>
     element =
-    "antd/lib/tree/DirectoryTree";
+    "default";
 };
 
 // ********** copy paste + dataRef prop
@@ -219,7 +219,7 @@ module Make = (M: {type dataRef;}) => {
   type treeNode = Antd__.reactElement(treeNodeProps);
 
   module TreeNode = {
-    [@react.component] [@bs.module "antd/lib/tree"]
+    [@react.component] [@bs.module "antd/lib/tree"] [@bs.scope "default"]
     external make:
       (
         ~className: string=?,
@@ -292,7 +292,7 @@ module Make = (M: {type dataRef;}) => {
     let true_: t(strictCheck) = [%raw {| true |}];
   };
 
-  [@react.component] [@bs.module]
+  [@react.component] [@bs.module "antd/lib/tree"]
   // ***** BEGIN TREE *****
   external make:
     (
@@ -335,7 +335,7 @@ module Make = (M: {type dataRef;}) => {
       unit
     ) =>
     element =
-    "antd/lib/tree";
+    "default";
 
   module ExpandAction = {
     type t;
@@ -346,7 +346,7 @@ module Make = (M: {type dataRef;}) => {
   };
 
   module DirectoryTree = {
-    [@react.component] [@bs.module]
+    [@react.component] [@bs.module "antd/lib/tree/DirectoryTree"]
     // ***** BEGIN TREE *****
     external make:
       (
@@ -393,6 +393,6 @@ module Make = (M: {type dataRef;}) => {
         unit
       ) =>
       element =
-      "antd/lib/tree/DirectoryTree";
+      "default";
   };
 };

@@ -1,6 +1,6 @@
 open React;
 
-[@react.component] [@bs.module]
+[@react.component] [@bs.module "antd/lib/comment"]
 external make:
   (
     ~actions: array(element)=?,
@@ -15,4 +15,4 @@ external make:
     unit
   ) =>
   element =
-  "antd/lib/comment";
+  "default";

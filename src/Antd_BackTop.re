@@ -1,6 +1,6 @@
 open React;
 
-[@react.component] [@bs.module]
+[@react.component] [@bs.module "antd/lib/back-top"]
 external make:
   (
     ~target: unit => Dom.htmlElement=?,
@@ -13,4 +13,4 @@ external make:
     unit
   ) =>
   element =
-  "antd/lib/back-top";
+  "default";

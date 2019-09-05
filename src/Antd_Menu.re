@@ -70,7 +70,7 @@ type mouseEvent = {
 };
 
 module Item = {
-  [@react.component] [@bs.module]
+  [@react.component] [@bs.module "antd/lib/menu/MenuItem"]
   external make:
     (
       ~disabled: bool=?,
@@ -87,7 +87,7 @@ module Item = {
       unit
     ) =>
     element =
-    "antd/lib/menu/MenuItem";
+    "default";
 };
 
 type titleEvent = {
@@ -97,7 +97,7 @@ type titleEvent = {
 };
 
 module SubMenu = {
-  [@react.component] [@bs.module]
+  [@react.component] [@bs.module "antd/lib/menu/SubMenu"]
   external make:
     (
       ~children: element=?,
@@ -113,11 +113,10 @@ module SubMenu = {
       unit
     ) =>
     element =
-    "antd/lib/menu/SubMenu";
+    "default";
 };
 
 module ItemGroup = {
-  // default: potential problem
   [@react.component] [@bs.module "antd/lib/menu"] [@bs.scope "default"]
   external make:
     (

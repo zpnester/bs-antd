@@ -23,7 +23,7 @@ module ProgressDot = {
     "%identity";
 };
 
-[@react.component] [@bs.module]
+[@react.component] [@bs.module "antd/lib/steps"]
 external make:
   (
     ~className: string=?,
@@ -40,10 +40,10 @@ external make:
     unit
   ) =>
   element =
-  "antd/lib/steps";
+  "default";
 
 module Step = {
-  [@react.component] [@bs.module "antd/lib/steps"]
+  [@react.component] [@bs.module "antd/lib/steps"] [@bs.scope "default"]
   external make:
     (
       ~description: element=?,

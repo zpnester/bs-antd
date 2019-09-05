@@ -4,10 +4,7 @@ Ant Design bindings for BuckleScript
 
 ## Install
 
-BuckleScript 5 or newer is required
-
 ```
-npm i antd@3.16.6
 npm i reason-react@^0.7.0
 npm i bs-moment@^0.4.4
 npm i @zpnester/bs-antd
@@ -21,8 +18,6 @@ npm i @zpnester/bs-antd
   "@zpnester/bs-antd"
 ]
 ```
-
-### [Configure JSX](https://reasonml.github.io/reason-react/docs/en/jsx#migrating-from-version-2-to-version-3)
 
 ### Add Antd styles
 
@@ -40,29 +35,6 @@ Or with LESS
 {| require("antd/dist/antd.less"); |};
 ```
 
-Appropriate CSS/LESS setup is required (see `webpack.config.js` or `next.config.js` for CSS example)
-
-
-`babel-plugin-import` recommended in [https://ant.design/docs/react/getting-started](https://ant.design/docs/react/getting-started) is not supported
-
-
-## Usage
-
-### ES6
-
-These bindings should work with both ES6 and CommonJS although have been tested primarily with CommonJS
-
-### Next.js
-
-CommonJS is required for Next.js
-
-[BuckleScript configuration](https://bucklescript.github.io/docs/en/build-configuration.html#package-specs)
-
-To avoid certain Next.js issues it is recommended to to add minimal `.babel.rc` or `babel.config.js` if you don't have one
-
-### Change Antd version
-
-Changing Antd version is possible but not recommended
 
 ## Limitations
 
@@ -138,12 +110,4 @@ It does not have impact on generated JavaScript or runtime performance
 Note that you should never alias or curry any ReasonReact `makeProps`, if you do - it affects runtime performance and generates lots of JavaScript
 
 HTML props require `[@bs.deriving abstract]` instead of `[@react.component]` or `[@bs.obj]`
-
-### String enums
-
-Polymorphic variants are used when `[@bs.obj]` or `[@react.component]` is used for makeProps
-
-Local modules with Identity External are used when `[@bs.deriving abstract]` is used for makeProps
-
-
 

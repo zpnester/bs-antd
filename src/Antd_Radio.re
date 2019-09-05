@@ -21,7 +21,7 @@ type radioChangeEvent = {
   "nativeEvent": Dom.mouseEvent,
 };
 
-[@react.component] [@bs.module]
+[@react.component] [@bs.module "antd/lib/radio/radio"]
 // ***** BEGIN ABSTRACT CHECKBOX *****
 external make:
   (
@@ -53,14 +53,14 @@ external make:
     unit
   ) =>
   element =
-  "antd/lib/radio/radio";
+  "default";
 
 type checkboxOption('a) = Antd_Checkbox.checkboxOption('a);
 
 module Group = {
   // TODO blur/focus and ref too?
 
-  [@react.component] [@bs.module]
+  [@react.component] [@bs.module "antd/lib/radio/group"]
   // ***** BEGIN ABSTRACT CHECKBOX GROUP ****
   external make:
     (
@@ -85,13 +85,13 @@ module Group = {
       unit
     ) =>
     element =
-    "antd/lib/radio/group";
+    "default";
 };
 
 module Button = {
   // complete copy paste of radio
 
-  [@react.component] [@bs.module]
+  [@react.component] [@bs.module "antd/lib/radio/radioButton"]
   // ***** BEGIN ABSTRACT CHECKBOX *****
   external make:
     (
@@ -123,5 +123,5 @@ module Button = {
       unit
     ) =>
     element =
-    "antd/lib/radio/radioButton";
+    "default";
 };

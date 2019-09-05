@@ -6,7 +6,7 @@ module Width = {
   external number: float => t = "%identity";
 };
 
-[@react.component] [@bs.module]
+[@react.component] [@bs.module "antd/lib/modal"]
 external make:
   (
     ~afterClose: unit => unit=?,
@@ -39,7 +39,7 @@ external make:
     unit
   ) =>
   element =
-  "antd/lib/modal";
+  "default";
 
 module AutoFocusButton = {
   type t = Js.null(string);
@@ -100,13 +100,13 @@ module Dialog = {
   [@bs.send] external destroy: t => unit = "destroy";
 };
 
-[@bs.module "antd/lib/modal"] external info: Config.t => Dialog.t = "info";
-[@bs.module "antd/lib/modal"]
+[@bs.module "antd/lib/modal"] [@bs.scope "default"] external info: Config.t => Dialog.t = "info";
+[@bs.module "antd/lib/modal"] [@bs.scope "default"]
 external success: Config.t => Dialog.t = "success";
-[@bs.module "antd/lib/modal"] external error: Config.t => Dialog.t = "error";
-[@bs.module "antd/lib/modal"]
+[@bs.module "antd/lib/modal"] [@bs.scope "default"] external error: Config.t => Dialog.t = "error";
+[@bs.module "antd/lib/modal"] [@bs.scope "default"]
 external warning: Config.t => Dialog.t = "warning";
-[@bs.module "antd/lib/modal"]
+[@bs.module "antd/lib/modal"] [@bs.scope "default"]
 external confirm: Config.t => Dialog.t = "confirm";
 
-[@bs.module "antd/lib/modal"] external destroyAll: unit => unit = "destroyAll";
+[@bs.module "antd/lib/modal"] [@bs.scope "default"] external destroyAll: unit => unit = "destroyAll";

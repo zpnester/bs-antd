@@ -524,7 +524,7 @@ type makeProps = {
   // **** END ANTD INPUT *****
 };
 
-[@bs.module] external make: component(makeProps) = "antd/lib/input";
+[@bs.module "antd/lib/input"] external make: component(makeProps) = "default";
 
 module TextArea = {
   module AutoSize = {
@@ -1036,8 +1036,8 @@ module TextArea = {
     // ***** END ANTD TEXT AREA *****
   };
 
-  [@bs.module]
-  external make: component(makeProps) = "antd/lib/input/TextArea";
+  [@bs.module "antd/lib/input/TextArea"]
+  external make: component(makeProps) = "default";
 };
 
 module Search = {
@@ -1568,11 +1568,11 @@ module Search = {
     // ***** END ANTD SEARCH ****
   };
 
-  [@bs.module] external make: component(makeProps) = "antd/lib/input/Search";
+  [@bs.module "antd/lib/input/Search"] external make: component(makeProps) = "default";
 };
 
 module Group = {
-  [@react.component] [@bs.module]
+  [@react.component] [@bs.module "antd/lib/input/Group"]
   external make:
     (
       ~className: string=?,
@@ -1588,7 +1588,7 @@ module Group = {
       unit
     ) =>
     element =
-    "antd/lib/input/Group";
+    "default";
 };
 
 module Password = {
@@ -2114,6 +2114,6 @@ module Password = {
     // ***** END ANTD PASSWORD *****
   };
 
-  [@bs.module]
-  external make: component(makeProps) = "antd/lib/input/Password";
+  [@bs.module "antd/lib/input/Password"]
+  external make: component(makeProps) = "default";
 };

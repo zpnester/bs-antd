@@ -28,7 +28,5 @@ lib/bs
 node_modules
 lib
 *.bs.js
-.next
-/out
-/test_dist
 .idea
+build

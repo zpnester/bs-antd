@@ -28,14 +28,9 @@ lib/bs
 node_modules
 lib
 *.bs.js
-.next
-/out
-/test_dist
+build
 .idea
 /test
-/test_dist
 /test_static
-.babelrc
-next.config.js
 webpack.config.js
-/pages
+webpack.2.config.js

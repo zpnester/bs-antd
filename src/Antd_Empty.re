@@ -5,7 +5,7 @@ external presentedImageDefault: element = "PRESENTED_IMAGE_DEFAULT";
 [@bs.module "antd/lib/empty"]
 external presentedImageSimple: element = "PRESENTED_IMAGE_SIMPLE";
 
-[@react.component] [@bs.module]
+[@react.component] [@bs.module "antd/lib/empty"]
 external make:
   (
     ~description: element=?,
@@ -19,4 +19,4 @@ external make:
     unit
   ) =>
   element =
-  "antd/lib/empty";
+  "default";

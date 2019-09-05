@@ -1,6 +1,6 @@
 open React;
 
-[@react.component] [@bs.module]
+[@react.component] [@bs.module "antd/lib/badge"]
 external make:
   (
     ~color: string=?,
@@ -25,4 +25,4 @@ external make:
     unit
   ) =>
   element =
-  "antd/lib/badge";
+  "default";

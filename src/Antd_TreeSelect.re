@@ -62,7 +62,7 @@ module Multiple = {
   let false_: t(option(labeledValue)) = [%raw {| false |}];
 };
 
-[@react.component] [@bs.module]
+[@react.component] [@bs.module "antd/lib/tree-select"]
 // ***** BEGIN ABSTRACT SELECT *****
 external make:
   (
@@ -139,10 +139,10 @@ external make:
     unit
   ) =>
   element =
-  "antd/lib/tree-select";
+  "default";
 
 module TreeNode = {
-  [@react.component] [@bs.module "antd/lib/tree-select"]
+  [@react.component] [@bs.module "antd/lib/tree-select"] [@bs.scope "default"]
   external make:
     (
       ~selectable: bool=?,

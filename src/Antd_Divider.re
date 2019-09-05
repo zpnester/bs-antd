@@ -1,6 +1,6 @@
 open React;
 
-[@react.component] [@bs.module]
+[@react.component] [@bs.module "antd/lib/divider"]
 external make:
   (
     ~className: string=?,
@@ -13,4 +13,4 @@ external make:
     unit
   ) =>
   element =
-  "antd/lib/divider";
+  "default";

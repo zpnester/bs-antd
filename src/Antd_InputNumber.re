@@ -563,4 +563,4 @@ type makeProps = {
   ref: Ref.t(Js.nullable(t)),
 };
 
-[@bs.module] external make: component(makeProps) = "antd/lib/input-number";
+[@bs.module "antd/lib/input-number"] external make: component(makeProps) = "default";

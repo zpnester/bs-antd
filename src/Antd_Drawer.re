@@ -1,6 +1,6 @@
 open React;
 
-[@react.component] [@bs.module]
+[@react.component] [@bs.module "antd/lib/drawer"]
 external make:
   (
     ~closable: bool=?,
@@ -28,4 +28,4 @@ external make:
     unit
   ) =>
   element =
-  "antd/lib/drawer";
+  "default";

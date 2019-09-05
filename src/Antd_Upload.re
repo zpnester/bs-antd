@@ -88,7 +88,7 @@ module BeforeUpload = {
   external promise: Js.Promise.t(unit) => t = "%identity"; // unit, not bool
 };
 
-[@react.component] [@bs.module]
+[@react.component] [@bs.module "antd/lib/upload"]
 external make:
   (
     ~_type: [@bs.string] [ | `drag | `select]=?,
@@ -133,4 +133,4 @@ external make:
     unit
   ) =>
   element =
-  "antd/lib/upload";
+  "default";

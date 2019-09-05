@@ -18,7 +18,7 @@ module Marks = {
   external makeUnsafe: Js.t({..}) => t = "%identity";
 };
 
-[@react.component] [@bs.module]
+[@react.component] [@bs.module "antd/lib/slider"]
 external make:
   (
     ~range: Range.t('value), // required
@@ -46,4 +46,4 @@ external make:
     unit
   ) =>
   element =
-  "antd/lib/slider";
+  "default";

@@ -127,7 +127,7 @@ module Locale = {
   // don't do bs.obj for simple objects
 };
 
-[@react.component] [@bs.module]
+[@react.component] [@bs.module "antd/lib/list"]
 external make:
   (
     ~bordered: bool=?,
@@ -152,7 +152,7 @@ external make:
     unit
   ) =>
   element =
-  "antd/lib/list";
+  "default";
 
 module Item = {
   [@bs.deriving abstract]
@@ -665,10 +665,9 @@ module Item = {
   };
 
   [@bs.module "antd/lib/list/Item"]
-  external make: component(makeProps) = "default"; // default - potential problem
+  external make: component(makeProps) = "default";
 
   module Meta = {
-    // default - potential problem
     [@react.component] [@bs.module "antd/lib/list/Item"] [@bs.scope "default"]
     external make:
       (

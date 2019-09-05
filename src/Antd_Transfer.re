@@ -26,7 +26,7 @@ type locale = {
   "itemsUnit": string,
 };
 
-[@react.component] [@bs.module]
+[@react.component] [@bs.module "antd/lib/transfer"]
 external make:
   (
     ~prefixCls: string=?,
@@ -68,4 +68,4 @@ external make:
     unit
   ) =>
   element =
-  "antd/lib/transfer";
+  "default";

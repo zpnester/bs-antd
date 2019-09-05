@@ -19,7 +19,7 @@ type checkboxChangeEvent = {
   "nativeEvent": Dom.mouseEvent,
 };
 
-[@react.component] [@bs.module]
+[@react.component] [@bs.module "antd/lib/checkbox"]
 // ***** BEGIN ABSTRACT CHECKBOX *****
 external make:
   (
@@ -50,7 +50,7 @@ external make:
     unit
   ) =>
   element =
-  "antd/lib/checkbox";
+  "default";
 
 type checkboxOption('a) =
   {
@@ -62,7 +62,7 @@ type checkboxOption('a) =
   } as 'a;
 
 module Group = {
-  [@react.component] [@bs.module]
+  [@react.component] [@bs.module "antd/lib/checkbox/Group"]
   // ***** BEGIN ABSTRACT CHECKBOX GROUP ****
   external make:
     (
@@ -82,5 +82,5 @@ module Group = {
       unit
     ) =>
     element =
-    "antd/lib/checkbox/Group";
+    "default";
 };

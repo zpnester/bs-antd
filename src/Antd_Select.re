@@ -23,7 +23,7 @@ module Option = {
     children: React.element,
   };
 
-  [@bs.module "antd/lib/select"]
+  [@bs.module "antd/lib/select"] [@bs.scope "default"]
   external make: component(makeProps) = "Option";
 };
 
@@ -71,7 +71,7 @@ module LabelInValue = {
   let true_: t = [%raw {| (true) |}];
 };
 
-[@react.component] [@bs.module]
+[@react.component] [@bs.module "antd/lib/select"]
 // ***** BEGIN ABSTRACT SELECT *****
 external make:
   (
@@ -142,10 +142,10 @@ external make:
     unit
   ) =>
   element =
-  "antd/lib/select";
+  "default";
 
 module OptGroup = {
-  [@react.component] [@bs.module "antd/lib/select"]
+  [@react.component] [@bs.module "antd/lib/select"] [@bs.scope "default"]
   external make:
     (~label: element=?, ~key: string=?, ~children: element=?, unit) => element =
     "OptGroup";

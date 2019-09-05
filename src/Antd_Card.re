@@ -1,6 +1,6 @@
 open React;
 
-[@react.component] [@bs.module]
+[@react.component] [@bs.module "antd/lib/card"]
 external make:
   (
     ~prefixCls: string=?,
@@ -33,4 +33,4 @@ external make:
     unit
   ) =>
   element =
-  "antd/lib/card";
+  "default";

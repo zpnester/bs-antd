@@ -32,7 +32,7 @@ module Align = {
     "";
 };
 
-[@react.component] [@bs.module]
+[@react.component] [@bs.module "antd/lib/tooltip"]
 external make:
   (
     ~arrowPointAtCenter: bool=?,
@@ -74,4 +74,4 @@ external make:
     unit
   ) =>
   element =
-  "antd/lib/tooltip";
+  "default";

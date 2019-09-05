@@ -1,6 +1,6 @@
 open React;
 
-[@react.component] [@bs.module]
+[@react.component] [@bs.module  "antd/lib/affix"]
 external make:
   (
     ~offsetTop: float=?,
@@ -14,5 +14,5 @@ external make:
     ~children: element=?,
     unit
   ) =>
-  React.element =
-  "antd/lib/affix";
+  React.element = "default"
+ ;

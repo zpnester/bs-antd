@@ -38,7 +38,7 @@ module Ellipsis = {
 };
 
 module Text = {
-  [@react.component] [@bs.module]
+  [@react.component] [@bs.module "antd/lib/typography/Text"]
   external make:
     (
       ~code: bool=?,
@@ -61,11 +61,11 @@ module Text = {
       unit
     ) =>
     element =
-    "antd/lib/typography/Text";
+    "default";
 };
 
 module Title = {
-  [@react.component] [@bs.module]
+  [@react.component] [@bs.module "antd/lib/typography/Title"]
   external make:
     (
       ~onChange: string => unit=?, // not in TS
@@ -96,11 +96,11 @@ module Title = {
       unit
     ) =>
     element =
-    "antd/lib/typography/Title";
+    "default";
 };
 
 module Paragraph = {
-  [@react.component] [@bs.module]
+  [@react.component] [@bs.module "antd/lib/typography/Paragraph"]
   external make:
     (
       ~onChange: string => unit=?, // not in TS
@@ -125,5 +125,5 @@ module Paragraph = {
       unit
     ) =>
     element =
-    "antd/lib/typography/Paragraph";
+    "default";
 };

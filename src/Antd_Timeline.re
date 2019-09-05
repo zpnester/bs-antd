@@ -1,6 +1,6 @@
 open React;
 
-[@react.component] [@bs.module]
+[@react.component] [@bs.module "antd/lib/timeline"]
 external make:
   (
     ~pending: element=?,
@@ -14,10 +14,10 @@ external make:
     unit
   ) =>
   element =
-  "antd/lib/timeline";
+  "default";
 
 module Item = {
-  [@react.component] [@bs.module]
+  [@react.component] [@bs.module "antd/lib/timeline/TimelineItem"]
   external make:
     (
       ~color: string=?,
@@ -30,5 +30,5 @@ module Item = {
       unit
     ) =>
     element =
-    "antd/lib/timeline/TimelineItem";
+    "default";
 };

@@ -540,7 +540,7 @@ module Col = {
     children: React.element,
   };
 
-  [@bs.module] external make: component(makeProps) = "antd/lib/grid/col";
+  [@bs.module "antd/lib/grid/col"] external make: component(makeProps) = "default";
 };
 
 module Row = {
@@ -1100,5 +1100,5 @@ module Row = {
     children: element,
   };
 
-  [@bs.module] external make: component(makeProps) = "antd/lib/grid/row";
+  [@bs.module "antd/lib/grid/row"] external make: component(makeProps) = "default";
 };

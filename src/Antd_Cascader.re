@@ -63,7 +63,7 @@ module ShowSearch = {
     "";
 };
 
-[@react.component] [@bs.module]
+[@react.component] [@bs.module "antd/lib/cascader"]
 external make:
   (
     ~ref: Ref.t(Js.Nullable.t(t))=?,
@@ -108,4 +108,4 @@ external make:
     unit
   ) =>
   element =
-  "antd/lib/cascader";
+  "default";

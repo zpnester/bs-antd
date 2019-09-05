@@ -2,7 +2,7 @@ open React;
 
 module Type = Antd_IconType;
 
-[@react.component] [@bs.module]
+[@react.component] [@bs.module "antd/lib/icon"]
 // ~children: element=?, // no need for children
 // ~ref // no ref, functional
 external make:
@@ -25,4 +25,4 @@ external make:
     unit
   ) =>
   element =
-  "antd/lib/icon";
+  "default";

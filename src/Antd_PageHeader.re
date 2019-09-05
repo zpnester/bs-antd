@@ -1,6 +1,6 @@
 open React;
 
-[@react.component] [@bs.module]
+[@react.component] [@bs.module "antd/lib/page-header"]
 external make:
   (
     ~title: element=?,
@@ -16,4 +16,4 @@ external make:
     unit
   ) =>
   element =
-  "antd/lib/page-header";
+  "default";

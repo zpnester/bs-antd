@@ -1,7 +1,7 @@
 {
   "name": "@zpnester/bs-antd",
   "description": "Ant Design bindings for BuckleScript",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "repository": {
     "type": "git",
     "url": "https://github.com/zpnester/bs-antd.git"
@@ -12,36 +12,36 @@
     "url": "https://github.com/zpnester"
   },
   "scripts": {
-    "clean": "bsb -clean-world",
-    "build": "bsb -make-world",
-    "watch": "bsb -make-world -w",
+    "bsc": "bsb -clean-world",
+    "bsb": "bsb -make-world",
+    "bsw": "bsb -make-world -w",
     "dev-server": "webpack-dev-server",
-    "dev": "concurrently --raw npm:watch npm:dev-server",
-    "webpack": "webpack",
-    "next:dev": "next",
-    "next:bsbdev": "concurrently --raw npm:watch npm:next:dev",
-    "next:build": "next build",
-    "next:start": "next start",
-    "next:export": "next export"
+    "dev": "concurrently --raw npm:bsw npm:dev-server",
+    "wb": "webpack",
+    "wb:bundle": "webpack --config webpack.2.config.js",
+    "ww": "webpack -w",
+    "ww:bundle": "webpack -w  --config webpack.2.config.js",
+    "wb:prod": "webpack -p",
+    "wb:bundle:prod": "webpack -p  --config webpack.2.config.js"
   },
   "keywords": [
     "BuckleScript",
     "antd"
   ],
   "license": "MIT",
+  "dependencies": {
+    "antd": "^3.23.1"
+  },
   "devDependencies": {
-    "@zeit/next-css": "^1.0.1",
-    "antd": "^3.16.6",
     "bs-moment": "^0.4.4",
-    "bs-platform": "^5.0.2",
+    "bs-platform": "^5.1.0",
     "concurrently": "^4.1.0",
     "copy-webpack-plugin": "^4.6.0",
-    "css-loader": "1.0.1",
+    "css-loader": "^2.1.1",
     "expect": "^23.6.0",
     "html-webpack-plugin": "^3.2.0",
-    "next": "^8.1.0",
     "reason-react": "^0.7.0",
-    "style-loader": "^0.23.1",
+    "style-loader": "^1.0.0",
     "webpack": "^4.28.1",
     "webpack-cli": "^3.1.2",
     "webpack-dev-server": "^3.1.14"

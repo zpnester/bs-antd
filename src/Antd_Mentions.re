@@ -1,66 +1,73 @@
 open React;
 
-module Loading = {
-  type t;
-  external bool: bool => t = "%identity";
+type t;
 
-  [@bs.obj] external make: (~delay: float) => t = "";
+[@bs.send] external blur: t => unit = "blur";
+[@bs.send] external focus: t => unit = "focus";
+
+type optionProps('a) = {
+                                                    ..
+                                                    "value": string
+                                                } as 'a;
+
+module FilterOption = {
+    type t;
+    let false_: t = [%raw {| (false) |}];
+    external make: ((string, optionProps('a)) => bool) => t = "%identity";
 };
 
-module Shape = {
-  type t = string;
-  [@bs.inline]
-  let round = "round";
-  [@bs.inline]
-  let circle = "circle";
-  [@bs.inline]
-  let circleOutline = "circle-outline";
+
+// TODO test filterOption
+
+module Option = {
+
+    [@react.component] [@bs.module "rc-mentions/lib/Option"]
+    external make: (
+        ~value: string, // todo ensure non optional is OK
+        ~children: element, // todo ensure non optional is OK
+        unit
+    ) => element = "default";
+
 };
 
-module Size = {
-  type t = string;
-  [@bs.inline]
-  let small = "small";
-  [@bs.inline]
-  let default = "default";
-  [@bs.inline]
-  let large = "large";
-};
+module Placement = {
+    type t = string;
 
-module Type = {
-  type t = string;
-  [@bs.inline]
-  let primary = "primary";
-  [@bs.inline]
-  let ghost = "ghost";
-  [@bs.inline]
-  let dashed = "dashed";
-  [@bs.inline]
-  let danger = "danger";
+    [@bs.inline] let top: t = "top";
+    [@bs.inline] let bottom: t = "bottom";
+
 };
 
 [@bs.deriving abstract]
-type makeProps = {
-  // ***** BEGIN HTML *****
+type makeProps('optionProps) = {
+  // ***** BEGIN HTML (omit 'prefix' | 'onChange' | 'onSelect') *****
   [@bs.optional]
   key: string,
-  // not dom
-  // [@bs.optional]
-  // ref: ReactDOMRe.domRef,
+//  [@bs.optional]
+//  ref: domRef,
+  /* accessibility */
+  /* https://www.w3.org/TR/wai-aria-1.1/ */
+  /* https://accessibilityresources.org/<aria-tag> is a great resource for these */
+  /* [@bs.optional] [@bs.as "aria-current"] ariaCurrent: page|step|location|date|time|true|false, */
   [@bs.optional] [@bs.as "aria-details"]
   ariaDetails: string,
   [@bs.optional] [@bs.as "aria-disabled"]
   ariaDisabled: bool,
   [@bs.optional] [@bs.as "aria-hidden"]
   ariaHidden: bool,
+  /* [@bs.optional] [@bs.as "aria-invalid"] ariaInvalid: grammar|false|spelling|true, */
   [@bs.optional] [@bs.as "aria-keyshortcuts"]
   ariaKeyshortcuts: string,
   [@bs.optional] [@bs.as "aria-label"]
   ariaLabel: string,
   [@bs.optional] [@bs.as "aria-roledescription"]
   ariaRoledescription: string,
+  /* Widget Attributes */
+  /* [@bs.optional] [@bs.as "aria-autocomplete"] ariaAutocomplete: inline|list|both|none, */
+  /* [@bs.optional] [@bs.as "aria-checked"] ariaChecked: true|false|mixed, /* https://www.w3.org/TR/wai-aria-1.1/#valuetype_tristate */ */
   [@bs.optional] [@bs.as "aria-expanded"]
   ariaExpanded: bool,
+  /* [@bs.optional] [@bs.as "aria-haspopup"] ariaHaspopup: false|true|menu|listbox|tree|grid|dialog, */
   [@bs.optional] [@bs.as "aria-level"]
   ariaLevel: int,
   [@bs.optional] [@bs.as "aria-modal"]
@@ -69,8 +76,10 @@ type makeProps = {
   ariaMultiline: bool,
   [@bs.optional] [@bs.as "aria-multiselectable"]
   ariaMultiselectable: bool,
+  /* [@bs.optional] [@bs.as "aria-orientation"] ariaOrientation: horizontal|vertical|undefined, */
   [@bs.optional] [@bs.as "aria-placeholder"]
   ariaPlaceholder: string,
+  /* [@bs.optional] [@bs.as "aria-pressed"] ariaPressed: true|false|mixed, /* https://www.w3.org/TR/wai-aria-1.1/#valuetype_tristate */ */
   [@bs.optional] [@bs.as "aria-readonly"]
   ariaReadonly: bool,
   [@bs.optional] [@bs.as "aria-required"]
@@ -87,12 +96,16 @@ type makeProps = {
   ariaValuenow: float,
   [@bs.optional] [@bs.as "aria-valuetext"]
   ariaValuetext: string,
+  /* Live Region Attributes */
   [@bs.optional] [@bs.as "aria-atomic"]
   ariaAtomic: bool,
   [@bs.optional] [@bs.as "aria-busy"]
   ariaBusy: bool,
+  /* [@bs.optional] [@bs.as "aria-live"] ariaLive: off|polite|assertive|rude, */
   [@bs.optional] [@bs.as "aria-relevant"]
   ariaRelevant: string,
+  /* Drag-and-Drop Attributes */
+  /* [@bs.optional] [@bs.as "aria-dropeffect"] ariaDropeffect: copy|move|link|execute|popup|none, */
   [@bs.optional] [@bs.as "aria-grabbed"]
   ariaGrabbed: bool,
   /* Relationship Attributes */
@@ -246,8 +259,8 @@ type makeProps = {
   htmlFor: string, /* substitute for "for" */
   [@bs.optional]
   httpEquiv: string, /* has a fixed set of possible values */
-  // [@bs.optional]
-  // icon: string, /* uri? */
+  [@bs.optional]
+  icon: string, /* uri? */
   [@bs.optional]
   inputMode: string, /* "verbatim", "latin", "numeric", etc. */
   [@bs.optional]
@@ -327,10 +340,10 @@ type makeProps = {
   /* seamless - supported by React, but removed from the html5 spec */
   [@bs.optional]
   selected: bool,
-  // [@bs.optional]
-  // shape: string,
-  // [@bs.optional]
-  // size: int,
+  [@bs.optional]
+  shape: string,
+  [@bs.optional]
+  size: int,
   [@bs.optional]
   sizes: string,
   [@bs.optional]
@@ -351,8 +364,8 @@ type makeProps = {
   summary: string, /* deprecated */
   [@bs.optional]
   target: string,
-  // [@bs.optional] [@bs.as "type"]
-  // type_: string, /* has a fixed but large-ish set of possible values */ /* use this one. Previous one is deprecated */
+  [@bs.optional] [@bs.as "type"]
+  type_: string, /* has a fixed but large-ish set of possible values */ /* use this one. Previous one is deprecated */
   [@bs.optional]
   useMap: string,
   [@bs.optional]
@@ -388,8 +401,8 @@ type makeProps = {
   [@bs.optional]
   onBlur: ReactEvent.Focus.t => unit,
   /* Form events */
-  [@bs.optional]
-  onChange: ReactEvent.Form.t => unit,
+//  [@bs.optional]
+//  onChange: ReactEvent.Form.t => unit,
   [@bs.optional]
   onInput: ReactEvent.Form.t => unit,
   [@bs.optional]
@@ -432,8 +445,8 @@ type makeProps = {
   [@bs.optional]
   onMouseUp: ReactEvent.Mouse.t => unit,
   /* Selection events */
-  [@bs.optional]
-  onSelect: ReactEvent.Selection.t => unit,
+//  [@bs.optional]
+//  onSelect: ReactEvent.Selection.t => unit,
   /* Touch events */
   [@bs.optional]
   onTouchCancel: ReactEvent.Touch.t => unit,
@@ -515,8 +528,8 @@ type makeProps = {
   datatype: string,
   [@bs.optional]
   inlist: string,
-  [@bs.optional]
-  prefix: string,
+//  [@bs.optional]
+//  prefix: string,
   [@bs.optional]
   property: string,
   [@bs.optional]
@@ -531,30 +544,55 @@ type makeProps = {
   [@bs.optional]
   suppressContentEditableWarning: bool,
   // ***** END HTML *****
-  // ***** BEGIN NATIVE BUTTON *****
+  // ***** BEGIN RC MENTIONS ****
+//  [@bs.optional]
+//  autoFocus: bool, // html
+//  [@bs.optional]
+//  className: string, // html
+//  [@bs.optional]
+//  defaultValue: string, // html
   [@bs.optional]
-  htmlType: string,
-  // *** BEGIN BASE BUTTON ***
-  [@bs.optional] [@bs.as "type"]
-  type_: Type.t,
+  notFoundContent: element,
   [@bs.optional]
-  icon: Antd_Icon.Type.t,
+  split: string,
+//  [@bs.optional]
+//  style: ReactDOMRe.Style.t, // html
   [@bs.optional]
-  shape: Shape.t,
+  transitionName: string,
   [@bs.optional]
-  size: Size.t,
-  [@bs.optional]
-  loading: Loading.t,
+  placement: Placement.t,
+  [@bs.optional] prefix: array(string), // single string skipped
   [@bs.optional]
   prefixCls: string,
+//  [@bs.optional]
+//  value: string, // html
   [@bs.optional]
-  ghost: bool,
+  filterOption: FilterOption.t,
   [@bs.optional]
-  block: bool,
-  // *** END BASE BUTTON ***
-  // ***** END NATIVE BUTTON *****
+  validateSearch: (string, makeProps('optionProps)) => bool,
   [@bs.optional]
-  children: element,
+  onChange: string => unit,
+  [@bs.optional]
+  onSelect: (optionProps('optionProps), ~prefix: string) => unit,
+  [@bs.optional]
+  onSearch: (string, ~prefix: string) => unit,
+//  [@bs.optional]
+//  onFocus: ReactEvent.Focus.t => unit, // html
+//  [@bs.optional]
+//  onBlur: ReactEvent.Focus.t => unit, // html
+  [@bs.optional]
+  getPopupContainer: unit => Dom.htmlElement,
+  // ***** END RC MENTIONS *****
+  // ***** BEGIN MENTIONS *****
+  [@bs.optional]
+  loading: bool,
+  // ***** END MENTIONS *****
+   [@bs.optional]
+   children: element,
+   [@bs.optional]
+   ref: Ref.t(Js.nullable(t))
 };
 
-[@bs.module "antd/lib/button"] external make: component(makeProps) = "default";
+
+[@bs.module "antd/lib/mentions"]
+external make: component(makeProps('optionProps)) = "default";

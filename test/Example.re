@@ -57,7 +57,6 @@ let make = () => {
     <TypographyExample />
     <UploadExample />
     <MentionExample />
-    <LocaleProviderExample />
     <ListExample />
   </>;
 };
