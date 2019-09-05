@@ -22,7 +22,7 @@
     "ww": "webpack -w",
     "ww:bundle": "webpack -w  --config webpack.2.config.js",
     "wb:prod": "webpack -p",
-    "wb:bundle:prod": "webpack -p  --config webpack.2.config.js"
+    "wb:bundle:prod": "webpack -p --config webpack.2.config.js"
   },
   "keywords": [
     "BuckleScript",
